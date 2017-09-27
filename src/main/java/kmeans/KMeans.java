@@ -1,6 +1,9 @@
 package kmeans;
 
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 //import kmeans.Point;
@@ -9,9 +12,9 @@ import java.util.List;
  */
 public class KMeans {
     //Number of Clusters. This metric should be related to the number of points
-    private int NUM_CLUSTERS = 100;
+    private int NUM_CLUSTERS = 5;
     //Number of Points
-    private int NUM_POINTS = 100000;
+    private int NUM_POINTS = 20;
     //Min and Max X and Y
     private static final int MIN_COORDINATE = 0;
     private static final int MAX_COORDINATE = 10;
@@ -32,6 +35,24 @@ public class KMeans {
         long finalTime = System.currentTimeMillis();
         long elapsed= finalTime-startTime;
         System.out.println("TIME ELAPSED: "+elapsed+ " ms");
+        kmeans.end();
+
+    }
+    public void end(){
+        for (int i = 0; i < clusters.size(); i++) {
+            try {
+                PrintWriter writer = new PrintWriter(String.valueOf(clusters.get(i).id) , "UTF-8") ;
+                for (int j = 0; j < clusters.get(i).getPoints().size(); j++) {
+                    writer.write(String.valueOf(clusters.get(i).getPoints().get(j))); //print();
+                }
+                writer.close();
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     //Initializes the process

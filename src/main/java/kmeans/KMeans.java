@@ -9,14 +9,14 @@ import java.util.List;
  */
 public class KMeans {
     //Number of Clusters. This metric should be related to the number of points
-    private int NUM_CLUSTERS = 3;
+    private int NUM_CLUSTERS = 100;
     //Number of Points
-    private int NUM_POINTS = 15;
+    private int NUM_POINTS = 100000;
     //Min and Max X and Y
     private static final int MIN_COORDINATE = 0;
     private static final int MAX_COORDINATE = 10;
 
-    private List<Point> points;
+    private List<Point> points;         // Todo: distribute it
     private List<Cluster> clusters;
 
     public KMeans() {
@@ -25,10 +25,13 @@ public class KMeans {
     }
 
     public static void main(String[] args) {
-
+        long startTime = System.currentTimeMillis();
         KMeans kmeans = new KMeans();
         kmeans.init();
         kmeans.calculate();
+        long finalTime = System.currentTimeMillis();
+        long elapsed= finalTime-startTime;
+        System.out.println("TIME ELAPSED: "+elapsed+ " ms");
     }
 
     //Initializes the process
@@ -46,7 +49,7 @@ public class KMeans {
         }
 
         //Print Initial state
-        plotClusters();
+        //plotClusters();
     }
 
     private void plotClusters() {
@@ -83,11 +86,12 @@ public class KMeans {
             for(int i = 0; i < lastCentroids.size(); i++) {
                 distance += Point.distance(lastCentroids.get(i),currentCentroids.get(i));
             }
+            /*
             System.out.println("#################");
             System.out.println("Iteration: " + iteration);
             System.out.println("Centroid distances: " + distance);
             plotClusters();
-
+            */
             if(distance == 0) {
                 finish = true;
             }

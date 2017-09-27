@@ -54,9 +54,9 @@ public class Point {
     }
 
     protected static List createRandomPoints(int min, int max, int number) {
-        List points = new ArrayList(number);
+        List points = new ArrayList(number);        //Todo: distribute it
         for(int i = 0; i<number; i++) {
-            points.add(createRandomPoint(min,max));
+            points.add(createRandomPoint(min,max)); //Todo: parallelize it
         }
         return points;
     }

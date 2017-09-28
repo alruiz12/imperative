@@ -15,12 +15,11 @@ public class Main {
         List<Point> points = point.createRandomPoints(0,100,5);
         cluster.setPoints(points);
         cluster.plotCluster();
-        String a = "hola";
         String s = null;
         String[] cmd = {
                 "/bin/bash",
                 "-c",
-                "python /home/alvaro/imperative/src/main/java/kmeans/script.py 5 "
+                "python /home/alvaro/imperative/src/main/java/kmeans/script.py 5 0 1 2 3 4"
         };
         try {
             Process p = Runtime.getRuntime().exec(cmd);

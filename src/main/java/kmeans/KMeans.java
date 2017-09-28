@@ -1,9 +1,7 @@
 package kmeans;
 
 
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 //import kmeans.Point;
@@ -12,12 +10,12 @@ import java.util.List;
  */
 public class KMeans {
     //Number of Clusters. This metric should be related to the number of points
-    private int NUM_CLUSTERS = 5;
+    private int NUM_CLUSTERS = 1000;
     //Number of Points
-    private int NUM_POINTS = 20;
+    private int NUM_POINTS = 1000000;
     //Min and Max X and Y
     private static final int MIN_COORDINATE = 0;
-    private static final int MAX_COORDINATE = 10;
+    private static final int MAX_COORDINATE = 1000000;
 
     private List<Point> points;         // Todo: distribute it
     private List<Cluster> clusters;
@@ -35,14 +33,15 @@ public class KMeans {
         long finalTime = System.currentTimeMillis();
         long elapsed= finalTime-startTime;
         System.out.println("TIME ELAPSED: "+elapsed+ " ms");
-        kmeans.end();
+        //kmeans.end();
 
     }
     public void end(){
         for (int i = 0; i < clusters.size(); i++) {
             try {
+                System.out.println(clusters.get(i).id);
                 PrintWriter writer = new PrintWriter(String.valueOf(clusters.get(i).id) , "UTF-8") ;
-                for (int j = 0; j < clusters.get(i).getPoints().size(); j++) {
+                for (int j = 0; j < clusters.get(i).getPoints().size()/100; j++) {
                     writer.write(String.valueOf(clusters.get(i).getPoints().get(j))); //print();
                 }
                 writer.close();
@@ -53,6 +52,30 @@ public class KMeans {
                 e.printStackTrace();
             }
         }
+
+        String s = null;
+        String[] cmd = {
+                "/bin/bash",
+                "-c",
+                "python /home/alvaro/imperative/src/main/java/kmeans/script.py "+NUM_CLUSTERS
+        };
+        try {
+            Process p = Runtime.getRuntime().exec(cmd);
+            BufferedReader stdInput = new BufferedReader(new
+                    InputStreamReader(p.getInputStream()));
+
+            BufferedReader stdError = new BufferedReader(new
+                    InputStreamReader(p.getErrorStream()));
+
+            // read the output from the command
+            System.out.println("Here is the standard output of the command:\n");
+            while ((s = stdInput.readLine()) != null) {
+                System.out.println(s);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     //Initializes the process

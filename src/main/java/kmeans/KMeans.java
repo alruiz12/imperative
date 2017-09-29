@@ -127,7 +127,7 @@ public class KMeans {
 
             //Calculates total distance between new and old Centroids
             double distance = 0;
-            for(int i = 0; i < lastCentroids.size(); i++) {
+            for(int i = 0; i < lastCentroids.size(); i++) {         // Todo: can be divided in n processes
                 distance += Point.distance(lastCentroids.get(i),currentCentroids.get(i));
             }
             /*
@@ -166,7 +166,7 @@ public class KMeans {
 
         for(Point point : points) {
             min = max;
-            for(int i = 0; i < NUM_CLUSTERS; i++) {
+            for(int i = 0; i < NUM_CLUSTERS; i++) {             // Todo: parallelize inner for's
                 Cluster c = (Cluster) clusters.get(i);
                 distance = Point.distance(point, c.getCentroid());
                 if(distance < min){
@@ -180,13 +180,13 @@ public class KMeans {
     }
 
     private void calculateCentroids() {
-        for(Cluster cluster : clusters) {
+        for(Cluster cluster : clusters) {           // Todo: parallelize it
             double sumX = 0;
             double sumY = 0;
             List<Point> list = cluster.getPoints();
             int n_points = list.size();
 
-            for(Point point : list) {
+            for(Point point : list) {               // Todo: can be divided in n processes
                 sumX += point.getX();
                 sumY += point.getY();
             }

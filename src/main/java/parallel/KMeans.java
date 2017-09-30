@@ -19,15 +19,15 @@ public class KMeans {
     private static final int MAX_COORDINATE = 10000;
 
     private List<Point> points;         // Todo: distribute it
-    private List<Cluster> clusters;
+    //private List<Cluster> clusters;
 
     public KMeans() {
         this.points = new ArrayList();
-        this.clusters = new ArrayList();
+        //this.clusters = new ArrayList();
     }
 
 
-    public void end(){
+    public static void end(List<Cluster> clusters){
         for (int i = 0; i < clusters.size(); i++) {
             try {
                 System.out.println(clusters.get(i).id);
@@ -70,13 +70,11 @@ public class KMeans {
     }
 
     //Initializes the process
-    public List<Cluster> init() {
-        //Create Points
-        points = Point.createRandomPoints(MIN_COORDINATE,MAX_COORDINATE,NUM_POINTS);
-
+    public static List<Cluster> init( int numClusters) {
         //Create Clusters
+        List<Cluster> clusters = new ArrayList();
         //Set Random Centroids
-        for (int i = 0; i < NUM_CLUSTERS; i++) {
+        for (int i = 0; i < numClusters; i++) {
             Cluster cluster = new Cluster(i);
             Point centroid = Point.createRandomPoint(MIN_COORDINATE,MAX_COORDINATE);
             cluster.setCentroid(centroid);
@@ -95,26 +93,26 @@ public class KMeans {
     }
 
     //The process to calculate the K Means, with iterating method.
-    public void calculate(List<Cluster> clusters) {
+    public static void calculate(List<Cluster> clusters, List<Point> points) {
         boolean finish = false;
         int iteration = 0;
 
         // Add in new data, one at a time, recalculating centroids with each new one.
         while(!finish) {
             //Clear cluster state
-            clearClusters();
+            clearClusters(clusters);
 
-            List<Point> lastCentroids = getCentroids();
+            List<Point> lastCentroids = getCentroids(clusters);
 
             //Assign points to the closer cluster
-            assignCluster();
+            assignCluster(clusters, points);
 
             //Calculate new centroids.
-            calculateCentroids();
+            calculateCentroids(clusters);
 
             iteration++;
 
-            List<Point> currentCentroids = getCentroids();
+            List<Point> currentCentroids = getCentroids(clusters);
 
             //Calculates total distance between new and old Centroids
             double distance = 0;
@@ -133,14 +131,14 @@ public class KMeans {
         }
     }
 
-    private void clearClusters() {
+    private static void clearClusters(List<Cluster> clusters) {
         for(Cluster cluster : clusters) {
             cluster.clear();
         }
     }
 
-    private List<Point> getCentroids() {
-        List<Point> centroids = new ArrayList(NUM_CLUSTERS);
+    private static List<Point> getCentroids(List<Cluster> clusters) {
+        List<Point> centroids = new ArrayList(clusters.size());
         for(Cluster cluster : clusters) {
             Point aux = cluster.getCentroid();
             Point point = new Point(aux.getX(),aux.getY());
@@ -149,7 +147,7 @@ public class KMeans {
         return centroids;
     }
 
-    private void assignCluster() {
+    private static void assignCluster(List<Cluster> clusters, List<Point> points) {
         double max = Double.MAX_VALUE;
         double min = max;
         int cluster = 0;
@@ -157,7 +155,7 @@ public class KMeans {
 
         for(Point point : points) {
             min = max;
-            for(int i = 0; i < NUM_CLUSTERS; i++) {             // Todo: parallelize inner for's
+            for(int i = 0; i < clusters.size(); i++) {             // Todo: parallelize inner for's
                 Cluster c = (Cluster) clusters.get(i);
                 distance = Point.distance(point, c.getCentroid());
                 if(distance < min){
@@ -170,7 +168,7 @@ public class KMeans {
         }
     }
 
-    private void calculateCentroids() {
+    private static void calculateCentroids(List<Cluster> clusters) {
         //for(Cluster cluster : clusters) {           // Todo: parallelize it
             clusters.stream().parallel().forEach((Cluster cluster) -> {
                 double sumX = 0;
@@ -196,14 +194,16 @@ public class KMeans {
 
     public static void run(int numClusters, int num_points, int minCoordinate, int maxCoordinate) {
         long startTime = System.currentTimeMillis();
-        KMeans kmeans = new KMeans();
-        List<Cluster>clusters=kmeans.init();
-        kmeans.calculate(clusters);
+        List<Point> points = Point.createRandomPoints(MIN_COORDINATE,MAX_COORDINATE,num_points);
+        List<Cluster>clusters=init(numClusters);
+        calculate(clusters, points);
         long finalTime = System.currentTimeMillis();
         long elapsed = finalTime - startTime;
         System.out.println("TIME ELAPSED: " + elapsed + " ms");
-        //end();
+        end(clusters);
     }
 
     }
+
+
 

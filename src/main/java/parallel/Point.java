@@ -1,7 +1,8 @@
-package kmeans;
+package parallel;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 /**
  * Created by alvaro on 27/09/17.
  */

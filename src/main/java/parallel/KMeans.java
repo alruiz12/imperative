@@ -1,21 +1,22 @@
-package kmeans;
+package parallel;
 
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-//import kmeans.Point;
+//import kmeansOO.Point;
+
 /**
  * Created by alvaro on 27/09/17.
  */
 public class KMeans {
     //Number of Clusters. This metric should be related to the number of points
-    private int NUM_CLUSTERS = 1000;
+    private int NUM_CLUSTERS = 100;
     //Number of Points
     private int NUM_POINTS = 1000000;
     //Min and Max X and Y
     private static final int MIN_COORDINATE = 0;
-    private static final int MAX_COORDINATE = 1000000;
+    private static final int MAX_COORDINATE = 10000;
 
     private List<Point> points;         // Todo: distribute it
     private List<Cluster> clusters;
@@ -25,23 +26,13 @@ public class KMeans {
         this.clusters = new ArrayList();
     }
 
-    public static void main(String[] args) {
-        long startTime = System.currentTimeMillis();
-        KMeans kmeans = new KMeans();
-        kmeans.init();
-        kmeans.calculate();
-        long finalTime = System.currentTimeMillis();
-        long elapsed= finalTime-startTime;
-        System.out.println("TIME ELAPSED: "+elapsed+ " ms");
-        //kmeans.end();
 
-    }
     public void end(){
         for (int i = 0; i < clusters.size(); i++) {
             try {
                 System.out.println(clusters.get(i).id);
                 PrintWriter writer = new PrintWriter(String.valueOf(clusters.get(i).id) , "UTF-8") ;
-                for (int j = 0; j < clusters.get(i).getPoints().size()/100; j++) {
+                for (int j = 0; j < clusters.get(i).getPoints().size(); j++) {
                     writer.write(String.valueOf(clusters.get(i).getPoints().get(j))); //print();
                 }
                 writer.close();
@@ -57,7 +48,7 @@ public class KMeans {
         String[] cmd = {
                 "/bin/bash",
                 "-c",
-                "python /home/alvaro/imperative/src/main/java/kmeans/script.py "+NUM_CLUSTERS
+                "python /home/alvaro/imperative/src/main/java/kmeansOO/script.py "+NUM_CLUSTERS
         };
         try {
             Process p = Runtime.getRuntime().exec(cmd);
@@ -79,7 +70,7 @@ public class KMeans {
     }
 
     //Initializes the process
-    public void init() {
+    public List<Cluster> init() {
         //Create Points
         points = Point.createRandomPoints(MIN_COORDINATE,MAX_COORDINATE,NUM_POINTS);
 
@@ -91,7 +82,7 @@ public class KMeans {
             cluster.setCentroid(centroid);
             clusters.add(cluster);
         }
-
+        return clusters;
         //Print Initial state
         //plotClusters();
     }
@@ -104,7 +95,7 @@ public class KMeans {
     }
 
     //The process to calculate the K Means, with iterating method.
-    public void calculate() {
+    public void calculate(List<Cluster> clusters) {
         boolean finish = false;
         int iteration = 0;
 
@@ -180,24 +171,39 @@ public class KMeans {
     }
 
     private void calculateCentroids() {
-        for(Cluster cluster : clusters) {           // Todo: parallelize it
-            double sumX = 0;
-            double sumY = 0;
-            List<Point> list = cluster.getPoints();
-            int n_points = list.size();
+        //for(Cluster cluster : clusters) {           // Todo: parallelize it
+            clusters.stream().parallel().forEach((Cluster cluster) -> {
+                double sumX = 0;
+                double sumY = 0;
+                List<Point> list = cluster.getPoints();
+                int n_points = list.size();
 
-            for(Point point : list) {               // Todo: can be divided in n processes
-                sumX += point.getX();
-                sumY += point.getY();
-            }
+                for(Point point : list) {               // Todo: can be divided in n processes
+                    sumX += point.getX();
+                    sumY += point.getY();
+                }
 
-            Point centroid = cluster.getCentroid();
-            if(n_points > 0) {
-                double newX = sumX / n_points;
-                double newY = sumY / n_points;
-                centroid.setX(newX);
-                centroid.setY(newY);
-            }
+                Point centroid = cluster.getCentroid();
+                if(n_points > 0) {
+                    double newX = sumX / n_points;
+                    double newY = sumY / n_points;
+                    centroid.setX(newX);
+                    centroid.setY(newY);
+                }
+            });
+
         }
+
+    public static void run(int numClusters, int num_points, int minCoordinate, int maxCoordinate) {
+        long startTime = System.currentTimeMillis();
+        KMeans kmeans = new KMeans();
+        List<Cluster>clusters=kmeans.init();
+        kmeans.calculate(clusters);
+        long finalTime = System.currentTimeMillis();
+        long elapsed = finalTime - startTime;
+        System.out.println("TIME ELAPSED: " + elapsed + " ms");
+        //end();
     }
-}
+
+    }
+

@@ -10,6 +10,7 @@ import java.util.List;
  * Created by alvaro on 27/09/17.
  */
 public class KMeans {
+    /*
     //Number of Clusters. This metric should be related to the number of points
     private int NUM_CLUSTERS = 100;
     //Number of Points
@@ -17,7 +18,7 @@ public class KMeans {
     //Min and Max X and Y
     private static final int MIN_COORDINATE = 0;
     private static final int MAX_COORDINATE = 10000;
-
+*/
     private List<Point> points;         // Todo: distribute it
     //private List<Cluster> clusters;
 
@@ -48,7 +49,7 @@ public class KMeans {
         String[] cmd = {
                 "/bin/bash",
                 "-c",
-                "python /home/alvaro/imperative/src/main/java/kmeansOO/script.py "+NUM_CLUSTERS
+                "python /home/alvaro/imperative/src/main/java/kmeansOO/script.py "+clusters.size()
         };
         try {
             Process p = Runtime.getRuntime().exec(cmd);
@@ -70,13 +71,13 @@ public class KMeans {
     }
 
     //Initializes the process
-    public static List<Cluster> init( int numClusters) {
+    public static List<Cluster> init(int numClusters, int minCoordinate, int maxCoordinate) {
         //Create Clusters
         List<Cluster> clusters = new ArrayList();
         //Set Random Centroids
         for (int i = 0; i < numClusters; i++) {
             Cluster cluster = new Cluster(i);
-            Point centroid = Point.createRandomPoint(MIN_COORDINATE,MAX_COORDINATE);
+            Point centroid = Point.createRandomPoint(minCoordinate,maxCoordinate);
             cluster.setCentroid(centroid);
             clusters.add(cluster);
         }
@@ -84,14 +85,14 @@ public class KMeans {
         //Print Initial state
         //plotClusters();
     }
-
+/*
     private void plotClusters() {
         for (int i = 0; i < NUM_CLUSTERS; i++) {
             Cluster c = clusters.get(i);
             c.plotCluster();
         }
     }
-
+*/
     //The process to calculate the K Means, with iterating method.
     public static void calculate(List<Cluster> clusters, List<Point> points) {
         boolean finish = false;
@@ -194,8 +195,8 @@ public class KMeans {
 
     public static void run(int numClusters, int num_points, int minCoordinate, int maxCoordinate) {
         long startTime = System.currentTimeMillis();
-        List<Point> points = Point.createRandomPoints(MIN_COORDINATE,MAX_COORDINATE,num_points);
-        List<Cluster>clusters=init(numClusters);
+        List<Point> points = Point.createRandomPoints(minCoordinate,maxCoordinate,num_points);
+        List<Cluster>clusters=init(numClusters, minCoordinate, maxCoordinate);
         calculate(clusters, points);
         long finalTime = System.currentTimeMillis();
         long elapsed = finalTime - startTime;

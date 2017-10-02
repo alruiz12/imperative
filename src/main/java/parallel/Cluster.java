@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Created by alvaro on 27/09/17.
  */
-public class Cluster {
+public class Cluster implements java.io.Serializable{
     public List<Point> points;
     public Point centroid;
     public int id;

@@ -170,7 +170,7 @@ public class KMeans {
     }
 
     private static void calculateCentroids(List<Cluster> clusters) {
-        //for(Cluster cluster : clusters) {           // Todo: parallelize it
+        //for(Cluster cluster : clusters) {           // parallelized
             clusters.stream().parallel().forEach((Cluster cluster) -> {
                 double sumX = 0;
                 double sumY = 0;
@@ -193,15 +193,46 @@ public class KMeans {
 
         }
 
-    public static void run(int numClusters, int num_points, int minCoordinate, int maxCoordinate) {
-        long startTime = System.currentTimeMillis();
-        List<Point> points = Point.createRandomPoints(minCoordinate,maxCoordinate,num_points);
-        List<Cluster>clusters=init(numClusters, minCoordinate, maxCoordinate);
-        calculate(clusters, points);
-        long finalTime = System.currentTimeMillis();
-        long elapsed = finalTime - startTime;
-        System.out.println("TIME ELAPSED: " + elapsed + " ms");
-        end(clusters);
+    public static void run(int numClusters, int num_points, int minCoordinate, int maxCoordinate, int numIter) {
+        long startTime;
+        long finalTime;
+
+        long parallelTime=0;
+        long imperativeTime=0;
+
+        for (int i = 0; i <numIter ; i++) {
+
+            List<Point> points = Point.createRandomPoints(minCoordinate, maxCoordinate, num_points);
+            List<Cluster> clusters = init(numClusters, minCoordinate, maxCoordinate);
+
+            List<Cluster> clustersOriginal = (List<Cluster>) DeepCopy.copy(clusters);
+            List<Point> pointsOriginal = (List<Point>) DeepCopy.copy(points);
+/*
+            System.out.println(clusters);
+            System.out.println(clustersOriginal);
+
+            clusters.remove(0);
+            System.out.println(clusters);
+            System.out.println(clustersOriginal);
+*/
+            startTime = System.currentTimeMillis();
+            calculate(clusters, points);
+            finalTime = System.currentTimeMillis();
+            System.out.println(finalTime-startTime);
+            parallelTime += (finalTime - startTime);
+
+            startTime = System.currentTimeMillis();
+            imperative.KMeans.calculate(clustersOriginal, pointsOriginal);
+            finalTime = System.currentTimeMillis();
+            System.out.println(finalTime-startTime);
+            imperativeTime += (finalTime - startTime);
+
+            end(clusters);
+        }
+
+        System.out.println("Parallel time: "+parallelTime/numIter + " ms");
+        System.out.println("Imperative time: "+imperativeTime/numIter + " ms");
+
     }
 
     }

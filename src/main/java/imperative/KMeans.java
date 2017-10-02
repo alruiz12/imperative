@@ -95,26 +95,26 @@ public class KMeans {
     }
 
     //The process to calculate the K Means, with iterating method.
-    public void calculate() {
+    public static void calculate(List<parallel.Cluster> clusters, List<parallel.Point> points) {
         boolean finish = false;
         int iteration = 0;
 
         // Add in new data, one at a time, recalculating centroids with each new one.
         while (!finish) {
             //Clear cluster state
-            clearClusters();
+            clearClusters(clusters);
 
-            List<Point> lastCentroids = getCentroids();
+            List<parallel.Point> lastCentroids = getCentroids(clusters);
 
             //Assign points to the closer cluster
-            assignCluster();
+            assignCluster(clusters, points);
 
             //Calculate new centroids.
-            calculateCentroids();
+            calculateCentroids(clusters);
 
             iteration++;
 
-            List<Point> currentCentroids = getCentroids();
+            List<parallel.Point> currentCentroids = getCentroids(clusters);
 
             //Calculates total distance between new and old Centroids
             double distance = 0;
@@ -133,32 +133,32 @@ public class KMeans {
         }
     }
 
-    private void clearClusters() {
-        for (Cluster cluster : clusters) {
+    private static void clearClusters(List<parallel.Cluster> clusters) {
+        for (parallel.Cluster cluster : clusters) {
             cluster.clear();
         }
     }
 
-    private List<Point> getCentroids() {
-        List<Point> centroids = new ArrayList(NUM_CLUSTERS);
-        for (Cluster cluster : clusters) {
-            Point aux = cluster.getCentroid();
-            Point point = new Point(aux.getX(), aux.getY());
+    private static List<parallel.Point> getCentroids(List<parallel.Cluster> clusters) {
+        List<parallel.Point> centroids = new ArrayList(clusters.size());
+        for (parallel.Cluster cluster : clusters) {
+            parallel.Point aux = cluster.getCentroid();
+            parallel.Point point = new parallel.Point(aux.getX(), aux.getY());
             centroids.add(point);
         }
         return centroids;
     }
 
-    private void assignCluster() {
+    private static void assignCluster(List<parallel.Cluster> clusters, List<parallel.Point> points) {
         double max = Double.MAX_VALUE;
         double min = max;
         int cluster = 0;
         double distance = 0.0;
 
-        for (Point point : points) {
+        for (parallel.Point point : points) {
             min = max;
-            for (int i = 0; i < NUM_CLUSTERS; i++) {             // Todo: parallelize inner for's
-                Cluster c = (Cluster) clusters.get(i);
+            for (int i = 0; i < clusters.size(); i++) {             // Todo: parallelize inner for's
+                parallel.Cluster c = (parallel.Cluster) clusters.get(i);
                 distance = Point.distance(point, c.getCentroid());
                 if (distance < min) {
                     min = distance;
@@ -170,19 +170,19 @@ public class KMeans {
         }
     }
 
-    private void calculateCentroids() {
-        for (Cluster cluster : clusters) {           // Todo: parallelize it
+    private static void calculateCentroids(List<parallel.Cluster> clusters) {
+        for (parallel.Cluster cluster : clusters) {           // Todo: parallelize it
             double sumX = 0;
             double sumY = 0;
-            List<Point> list = cluster.getPoints();
+            List<parallel.Point> list = cluster.getPoints();
             int n_points = list.size();
 
-            for (Point point : list) {               // Todo: can be divided in n processes
+            for (parallel.Point point : list) {               // Todo: can be divided in n processes
                 sumX += point.getX();
                 sumY += point.getY();
             }
 
-            Point centroid = cluster.getCentroid();
+            parallel.Point centroid = cluster.getCentroid();
             if (n_points > 0) {
                 double newX = sumX / n_points;
                 double newY = sumY / n_points;
@@ -192,15 +192,15 @@ public class KMeans {
         }
     }
 
-
+/*
     public static void run(int numClusters, int num_points, int minCoordinate, int maxCoordinate) {
         long startTime = System.currentTimeMillis();
         KMeans kmeans = new KMeans();
         kmeans.init();
-        kmeans.calculate();
+        kmeans.calculate(clusters, points);
         long finalTime = System.currentTimeMillis();
         long elapsed = finalTime - startTime;
         System.out.println("TIME ELAPSED: " + elapsed + " ms");
         //end();
-    }
+    }*/
 }

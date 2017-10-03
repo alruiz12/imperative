@@ -1,9 +1,13 @@
 package parallel;
 
 
+import com.google.common.util.concurrent.AtomicDouble;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+
+
 //import kmeansOO.Point;
 
 /**
@@ -116,17 +120,24 @@ public class KMeans {
             List<Point> currentCentroids = getCentroids(clusters);
 
             //Calculates total distance between new and old Centroids
-            double distance = 0;
+            AtomicDouble distance = new AtomicDouble();
             for(int i = 0; i < lastCentroids.size(); i++) {         // Todo: can be divided in n processes
-                distance += Point.distance(lastCentroids.get(i),currentCentroids.get(i));
+                distance.getAndAdd(Point.distance(lastCentroids.get(i),currentCentroids.get(i)));
             }
+            /*int i =0;
+            lastCentroids.stream().parallel().forEach((Point lastCentroid) -> {
+                distance.getAndAdd(Point.distance(lastCentroid, currentCentroids.get(i)));
+                    i++;
+            });
+            */
             /*
             System.out.println("#################");
             System.out.println("Iteration: " + iteration);
             System.out.println("Centroid distances: " + distance);
             plotClusters();
             */
-            if(distance == 0) {
+
+            if (distance.compareAndSet(0.0,0.0)){
                 finish = true;
             }
         }
@@ -172,22 +183,41 @@ public class KMeans {
     private static void calculateCentroids(List<Cluster> clusters) {
         //for(Cluster cluster : clusters) {           // parallelized
             clusters.stream().parallel().forEach((Cluster cluster) -> {
-                double sumX = 0;
-                double sumY = 0;
+                /*double sumX = 0;
+                double sumY = 0;*/
+                AtomicDouble sumX2 = new AtomicDouble();
+                AtomicDouble sumY2 = new AtomicDouble();
+
                 List<Point> list = cluster.getPoints();
                 int n_points = list.size();
 
-                for(Point point : list) {               // Todo: can be divided in n processes
+                /*for(Point point : list) {               // Todo: can be divided in n processes
                     sumX += point.getX();
                     sumY += point.getY();
-                }
-
+                }*/
+                list.stream().parallel().forEach((Point point) -> {
+                    sumX2.getAndAdd(point.getX());
+                    sumY2.getAndAdd(point.getY());
+                });
+                /*System.out.println(sumX);
+                System.out.println(sumX2);
+                System.out.println(sumY);
+                System.out.println(sumY2);
+                */
                 Point centroid = cluster.getCentroid();
                 if(n_points > 0) {
-                    double newX = sumX / n_points;
-                    double newY = sumY / n_points;
-                    centroid.setX(newX);
-                    centroid.setY(newY);
+                    /*double newX = sumX / n_points;
+                    double newY = sumY / n_points;*/
+                    AtomicDouble newX2 = new AtomicDouble();
+                    AtomicDouble newY2 = new AtomicDouble();
+                    newX2.set(sumX2.doubleValue()/n_points);
+                    newY2.set(sumY2.doubleValue()/n_points);
+                    /*System.out.println("newX  "+newX);
+                    System.out.println("newX2 "+newX2);
+                    System.out.println("newY  "+newY);
+                    System.out.println("newY2 "+newY2);*/
+                    centroid.setX(newX2.doubleValue());
+                    centroid.setY(newY2.doubleValue());
                 }
             });
 
@@ -227,7 +257,7 @@ public class KMeans {
             System.out.println(finalTime-startTime);
             imperativeTime += (finalTime - startTime);
 
-            end(clusters);
+            //end(clusters);
         }
 
         System.out.println("Parallel time: "+parallelTime/numIter + " ms");

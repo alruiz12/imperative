@@ -1,6 +1,7 @@
 package parallelDistributed;
-import java.util.ArrayList;
-import java.util.List;
+import com.hazelcast.core.HazelcastInstance;
+
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -54,10 +55,10 @@ public class Point implements java.io.Serializable{
         return new Point(x,y);
     }
 
-    protected static List createRandomPoints(int min, int max, int number) {
-        List points = new ArrayList(number);        //Todo: distribute it
+    protected static Map createRandomPoints(int min, int max, int number, HazelcastInstance instance) {
+        Map<Integer,Point> points=instance.getMap("points");
         for(int i = 0; i<number; i++) {
-            points.add(createRandomPoint(min,max)); //Todo: parallelize it
+            points.put(i,createRandomPoint(min,max));
         }
         return points;
     }

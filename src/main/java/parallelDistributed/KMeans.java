@@ -5,11 +5,11 @@ import com.google.common.util.concurrent.AtomicDouble;
 import com.hazelcast.config.Config;
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
-import com.hazelcast.core.IList;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
 //import kmeansOO.Point;
@@ -205,11 +205,9 @@ public class KMeans {
 
         Config cfg = new Config();
         HazelcastInstance instance = Hazelcast.newHazelcastInstance();
-        IList<Point> distPoints = instance.getList("distPoints");
-        //distPoints= (IList<Point>) Point.createRandomPoints(minCoordinate, maxCoordinate, num_points);
-        Point p = new Point(2,1);
-        distPoints.add(p);
-        System.out.println(distPoints.toString());
+        Map points = Point.createRandomPoints(minCoordinate, maxCoordinate, num_points, instance);
+
+        System.out.println(points.size());
         System.out.println("run");
         /*
         List<Point> points = Point.createRandomPoints(minCoordinate, maxCoordinate, num_points);
@@ -238,10 +236,10 @@ public class KMeans {
 
         long parallelTime=0;
         HazelcastInstance instance = Hazelcast.newHazelcastInstance();
-        IList<Point> distPoints = instance.getList("distPoints");
+        Map points = instance.getMap("points");
         System.out.println("2ond!!!!!!!!!!!");
 
-        System.out.println(distPoints.size());
+        System.out.println(points.size());
         //instance.
         /*
         List<Point> points = Point.createRandomPoints(minCoordinate, maxCoordinate, num_points);

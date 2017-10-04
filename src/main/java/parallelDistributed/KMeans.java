@@ -1,7 +1,11 @@
-package parallel;
+package parallelDistributed;
 
 
 import com.google.common.util.concurrent.AtomicDouble;
+import com.hazelcast.config.Config;
+import com.hazelcast.core.Hazelcast;
+import com.hazelcast.core.HazelcastInstance;
+import com.hazelcast.core.IList;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -124,18 +128,6 @@ public class KMeans {
             for(int i = 0; i < lastCentroids.size(); i++) {         // Todo: can be divided in n processes
                 distance.getAndAdd(Point.distance(lastCentroids.get(i),currentCentroids.get(i)));
             }
-            /*int i =0;
-            lastCentroids.stream().parallel().forEach((Point lastCentroid) -> {
-                distance.getAndAdd(Point.distance(lastCentroid, currentCentroids.get(i)));
-                    i++;
-            });
-            */
-            /*
-            System.out.println("#################");
-            System.out.println("Iteration: " + iteration);
-            System.out.println("Centroid distances: " + distance);
-            plotClusters();
-            */
 
             if (distance.compareAndSet(0.0,0.0)){
                 finish = true;
@@ -181,45 +173,27 @@ public class KMeans {
     }
 
     private static void calculateCentroids(List<Cluster> clusters) {
-        //for(Cluster cluster : clusters) {           // parallelized
-            clusters.stream().parallel().forEach((Cluster cluster) -> {
-                /*double sumX = 0;
-                double sumY = 0;*/
-                AtomicDouble sumX2 = new AtomicDouble();
-                AtomicDouble sumY2 = new AtomicDouble();
+        for(Cluster cluster : clusters) {           // parallelized
+            double sumX = 0;
+            double sumY = 0;
 
-                List<Point> list = cluster.getPoints();
-                int n_points = list.size();
+            List<Point> list = cluster.getPoints();
+            int n_points = list.size();
 
-                /*for(Point point : list) {               // Todo: can be divided in n processes
-                    sumX += point.getX();
-                    sumY += point.getY();
-                }*/
-                list.stream().parallel().forEach((Point point) -> {
-                    sumX2.getAndAdd(point.getX());
-                    sumY2.getAndAdd(point.getY());
-                });
-                /*System.out.println(sumX);
-                System.out.println(sumX2);
-                System.out.println(sumY);
-                System.out.println(sumY2);
-                */
-                Point centroid = cluster.getCentroid();
-                if(n_points > 0) {
-                    /*double newX = sumX / n_points;
-                    double newY = sumY / n_points;*/
-                    AtomicDouble newX2 = new AtomicDouble();
-                    AtomicDouble newY2 = new AtomicDouble();
-                    newX2.set(sumX2.doubleValue()/n_points);
-                    newY2.set(sumY2.doubleValue()/n_points);
-                    /*System.out.println("newX  "+newX);
-                    System.out.println("newX2 "+newX2);
-                    System.out.println("newY  "+newY);
-                    System.out.println("newY2 "+newY2);*/
-                    centroid.setX(newX2.doubleValue());
-                    centroid.setY(newY2.doubleValue());
-                }
-            });
+            for(Point point : list) {               // Todo: can be divided in n processes
+                sumX += point.getX();
+                sumY += point.getY();
+            }
+
+            Point centroid = cluster.getCentroid();
+            if(n_points > 0) {
+                double newX = sumX / n_points;
+                double newY = sumY / n_points;
+
+                centroid.setX(newX);
+                centroid.setY(newY);
+            }
+            };
 
         }
 
@@ -228,36 +202,66 @@ public class KMeans {
         long finalTime;
 
         long parallelTime=0;
-        long imperativeTime=0;
 
-        for (int i = 0; i <numIter ; i++) {
+        Config cfg = new Config();
+        HazelcastInstance instance = Hazelcast.newHazelcastInstance();
+        IList<Point> distPoints = instance.getList("distPoints");
+        //distPoints= (IList<Point>) Point.createRandomPoints(minCoordinate, maxCoordinate, num_points);
+        Point p = new Point(2,1);
+        distPoints.add(p);
+        System.out.println(distPoints.toString());
+        System.out.println("run");
+        /*
+        List<Point> points = Point.createRandomPoints(minCoordinate, maxCoordinate, num_points);
+        List<Cluster> clusters = init(numClusters, minCoordinate, maxCoordinate);
 
-            List<Point> points = Point.createRandomPoints(minCoordinate, maxCoordinate, num_points);
-            List<Cluster> clusters = init(numClusters, minCoordinate, maxCoordinate);
-
-            List<Cluster> clustersOriginal = (List<Cluster>) DeepCopy.copy(clusters);
-            List<Point> pointsOriginal = (List<Point>) DeepCopy.copy(points);
+        List<Cluster> clustersOriginal = (List<Cluster>) DeepCopy.copy(clusters);
+        List<Point> pointsOriginal = (List<Point>) DeepCopy.copy(points);
 
 
+        startTime = System.currentTimeMillis();
+        calculate(clusters, points);
+        finalTime = System.currentTimeMillis();
+        System.out.println(finalTime-startTime);
+        parallelTime += (finalTime - startTime);
 
-            startTime = System.currentTimeMillis();
-            calculate(clusters, points);
-            finalTime = System.currentTimeMillis();
-            System.out.println(finalTime-startTime);
-            parallelTime += (finalTime - startTime);
+        //end(clusters);
 
-            startTime = System.currentTimeMillis();
-            imperative.KMeans.calculate(clustersOriginal, pointsOriginal);
-            finalTime = System.currentTimeMillis();
-            System.out.println(finalTime-startTime);
-            imperativeTime += (finalTime - startTime);
 
-            //end(clusters);
-        }
+        System.out.println("Parallel time: "+parallelTime + " ms");
+        */
+    }
 
-        System.out.println("Parallel time: "+parallelTime/numIter + " ms");
-        System.out.println("Imperative time: "+imperativeTime/numIter + " ms");
+    public static void runSecondary(int numClusters, int num_points, int minCoordinate, int maxCoordinate, int numIter) {
+        long startTime;
+        long finalTime;
 
+        long parallelTime=0;
+        HazelcastInstance instance = Hazelcast.newHazelcastInstance();
+        IList<Point> distPoints = instance.getList("distPoints");
+        System.out.println("2ond!!!!!!!!!!!");
+
+        System.out.println(distPoints.size());
+        //instance.
+        /*
+        List<Point> points = Point.createRandomPoints(minCoordinate, maxCoordinate, num_points);
+        List<Cluster> clusters = init(numClusters, minCoordinate, maxCoordinate);
+
+        List<Cluster> clustersOriginal = (List<Cluster>) DeepCopy.copy(clusters);
+        List<Point> pointsOriginal = (List<Point>) DeepCopy.copy(points);
+
+
+        startTime = System.currentTimeMillis();
+        calculate(clusters, points);
+        finalTime = System.currentTimeMillis();
+        System.out.println(finalTime-startTime);
+        parallelTime += (finalTime - startTime);
+
+        //end(clusters);
+
+
+        System.out.println("Parallel time: "+parallelTime + " ms");
+        */
     }
 
     }

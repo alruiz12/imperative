@@ -15,6 +15,13 @@
             <version>23.1-jre</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.hazelcast</groupId>
+            <artifactId>hazelcast</artifactId>
+            <version>3.8.6</version>
+        </dependency>
+
+
 
     </dependencies>
 

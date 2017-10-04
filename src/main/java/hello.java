@@ -3,9 +3,9 @@
  */
 public class hello {
     public static void main(String[] args) {
-        final int NUM_CLUSTERS = 200;
+        final int NUM_CLUSTERS = 20;
         //Number of Points
-        final int NUM_POINTS = 500000;
+        final int NUM_POINTS = 40;
         //Min and Max X and Y
         final int MIN_COORDINATE = 0;
         final int MAX_COORDINATE = 10000;

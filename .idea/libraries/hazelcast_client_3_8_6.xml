@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="hazelcast-client-3.8.6">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/Downloads/hazelcast-3.8.6/lib/hazelcast-client-3.8.6.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

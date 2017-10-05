@@ -11,7 +11,7 @@ public class main2 {
         final int MAX_COORDINATE = 10000;
 
         final int NUM_ITER = 1;
-
+        final int NUM_NODES = 1;
         long startTime;
         long finalTime;
 
@@ -19,8 +19,7 @@ public class main2 {
 
 
         startTime=System.currentTimeMillis();
-        //parallelDistributed.KMeans.run(NUM_CLUSTERS,NUM_POINTS,MIN_COORDINATE,MAX_COORDINATE, NUM_ITER);
-        parallelDistributed.KMeans.runSecondary(NUM_CLUSTERS,NUM_POINTS,MIN_COORDINATE,MAX_COORDINATE, NUM_ITER);
+        parallelDistributed.KMeans.runSecondary(NUM_CLUSTERS,NUM_POINTS,MIN_COORDINATE,MAX_COORDINATE, NUM_ITER, NUM_NODES);
 
         finalTime=System.currentTimeMillis();
         parallelTime += (finalTime-startTime);

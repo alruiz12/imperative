@@ -56,7 +56,7 @@ public class Point implements java.io.Serializable{
     }
 
     protected static Map createRandomPoints(int min, int max, int number, HazelcastInstance instance) {
-        Map<Integer,Point> points=instance.getMap("points");
+        Map<Integer,Point> points = instance.getMap("points");
         for(int i = 0; i<number; i++) {
             points.put(i,createRandomPoint(min,max));
         }

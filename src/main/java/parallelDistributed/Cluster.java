@@ -1,18 +1,21 @@
 package parallelDistributed;
 
+import com.hazelcast.core.HazelcastInstance;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by alvaro on 27/09/17.
  */
-public class Cluster implements java.io.Serializable{
+public class Cluster implements Serializable {
     public List<Point> points;
     public Point centroid;
     public int id;
 
     //Creates a new Cluster
-    public Cluster(int id) {
+    public Cluster(int id, HazelcastInstance instance) {
         this.id = id;
         this.points = new ArrayList();
         this.centroid = null;

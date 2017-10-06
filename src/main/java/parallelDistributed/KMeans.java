@@ -78,35 +78,38 @@ public class KMeans {
     }
 
     //Initializes the process
-    public static Map init(int numClusters, int minCoordinate, int maxCoordinate, HazelcastInstance instance) {
+    public static Map init(int numClusters, int minCoordinate, int maxCoordinate, HazelcastInstance instance, Map<Integer, Integer> clearIter) {
         //Create Clusters
         Map<Integer, Cluster> clusters = instance.getMap("clusters");
         //Set Random Centroids
         for (int i = 0; i < numClusters; i++) {
-            Cluster cluster = new Cluster(i);
+            Cluster cluster = new Cluster(i, instance);
+            //cluster.clearIter=instance.getAtomicLong("clearIter");
             Point centroid = Point.createRandomPoint(minCoordinate,maxCoordinate);
             cluster.setCentroid(centroid);
             clusters.put(i, cluster);
+            clearIter.put(i,0);
         }
         return clusters;
 
     }
 
     //The process to calculate the K Means, with iterating method.
-    public static void calculate(Map clusters, Map points, int clustersPart, int pointsPart, long localCount) {
+    public static void calculate(Map clusters, Map points, int clustersPart, int pointsPart, long localCount, int numNodes, Map<Integer, Integer> clearIter) {
         boolean finish = false;
-        int iteration = 0;
+        long iteration = 1;
+
 
         // Add in new data, one at a time, recalculating centroids with each new one.
         while(!finish) {
             //Clear cluster state
-            clearClusters(clusters, clustersPart, localCount);
-/*
-            List<Point> lastCentroids = getCentroids(clusters);
+            clearClusters(clusters, clustersPart, localCount, numNodes, iteration, clearIter);
+
+            //List<Point> lastCentroids = getCentroids(clusters, clustersPart, localCount, numNodes);
 
             //Assign points to the closer cluster
-            assignCluster(clusters, points);
-
+            //assignCluster(clusters, points, pointsPart, localCount, numNodes, iteration);
+/*
             //Calculate new centroids.
             calculateCentroids(clusters);
 
@@ -129,36 +132,128 @@ public class KMeans {
 
     }
 
-    private static void clearClusters(Map clusters, int clustersPart, long localCount) {
+    private static void clearClusters(Map clusters, int clustersPart, long localCount, int numNodes, long iteration, Map<Integer, Integer> clearIter) {
+        if (clustersPart < numNodes-1){ // if it's not last node
+            int clusterIter=0;
+            System.out.println("Thread: "+localCount+" clear cluster: "+localCount*numNodes+" ; "+ clustersPart*numNodes + clustersPart);
+            for (int i = (int) (localCount*numNodes); i <clustersPart*numNodes + clustersPart ; i++) {
+                // walk through its part
+                Cluster c = (Cluster) clusters.get(i);
+                clusterIter = clearIter.get(i);
+                if (clusterIter < iteration){
+                    c.clear();
+                    clearIter.replace(i, clusterIter+1) ;
+                }
+            }
 
-        for (int i = 0; i <clustersPart ; i++) {
-            Cluster c = (Cluster) clusters.get(i);
-            c.clear();
+        } else {
+            int clusterIter=0;
+            int module = clusters.size()%numNodes;
+            for (int i = (int) (localCount*numNodes); i <clustersPart*numNodes + clustersPart  + module; i++) {
+                // walk through its part (including module)
+                Cluster c = (Cluster) clusters.get(i);
+                clusterIter = clearIter.get(i);
+                if (clusterIter < iteration){
+                    c.clear();
+                    clearIter.replace(i, clusterIter+1) ;
+                }
+
+            }
 
         }
-/*
-        for(Cluster cluster : clusters) {
-            cluster.clear();
-        }
-*/
+
     }
 
-    private static List<Point> getCentroids(List<Cluster> clusters) {
+    private static List<Point> getCentroids(Map clusters, int clustersPart, long localCount, int numNodes) {
         List<Point> centroids = new ArrayList(clusters.size());
-        for(Cluster cluster : clusters) {
-            Point aux = cluster.getCentroid();
-            Point point = new Point(aux.getX(),aux.getY());
-            centroids.add(point);
+
+        if (clustersPart < numNodes-1){ // if it's not last node
+
+            for (int i = (int) (localCount*numNodes); i <clustersPart*numNodes + clustersPart ; i++) {
+                // walk through its part
+                Cluster c = (Cluster) clusters.get(i);
+                Point point = new Point(c.getCentroid().getX(), c.getCentroid().getY());
+                centroids.add(point);
+            }
+
+        } else {
+
+            int module = clusters.size()%numNodes;
+            for (int i = (int) (localCount*numNodes); i <clustersPart*numNodes + clustersPart  + module; i++) {
+                // walk through its part (including module)
+                Cluster c = (Cluster) clusters.get(i);
+                Point point = new Point(c.getCentroid().getX(), c.getCentroid().getY());
+                centroids.add(point);
+
+            }
+
         }
+
         return centroids;
     }
 
-    private static void assignCluster(List<Cluster> clusters, List<Point> points) {
+
+    private static void assignCluster(Map clusters, Map points, int pointsPart, long localCount, int numNodes, long iteration) {
         double max = Double.MAX_VALUE;
         double min = max;
         int cluster = 0;
         double distance = 0.0;
 
+        if (pointsPart < numNodes-1){ // if it's not last node
+
+            for (int i = (int) (localCount*numNodes); i <pointsPart*numNodes + pointsPart ; i++) {
+                // walk through its part
+                Point point = (Point) points.get(i);
+                for (int j = 0; j < clusters.size(); j++) {
+                    Cluster c = (Cluster) clusters.get(j);
+                   /* if (c.clearIter.get() == iteration ){
+                        distance = Point.distance(point, c.getCentroid());
+                        if(distance < min){
+                            min = distance;
+                            cluster = i;
+                        }
+                    } else{
+                        // clean and update clearIter
+                    }*/
+
+                }
+                if (distance<max) { // if any point is ready
+                    point.setCluster(cluster);
+                    Cluster aux = (Cluster) clusters.get(cluster);
+                    aux.addPoint(point);
+                }
+
+            }
+
+        } else {
+
+            int module = clusters.size()%numNodes;
+            for (int i = (int) (localCount*numNodes); i <pointsPart*numNodes + pointsPart  + module; i++) {
+                // walk through its part
+                Point point = (Point) points.get(i);
+                for (int j = 0; j < clusters.size(); j++) {
+                    Cluster c = (Cluster) clusters.get(j);
+                   /* if (c.clearIter.get() == iteration ){
+                        distance = Point.distance(point, c.getCentroid());
+                        if(distance < min){
+                            min = distance;
+                            cluster = i;
+                        }
+                    } else{
+                        // clean and update clearIter
+                    } */
+
+                }
+                if (distance<max) { // if any point is ready
+                    point.setCluster(cluster);
+                    Cluster aux = (Cluster) clusters.get(cluster);
+                    aux.addPoint(point);
+                }
+
+            }
+
+        }
+        /*
         for(Point point : points) {
             min = max;
             for(int i = 0; i < clusters.size(); i++) {             // Todo: parallelize inner for's
@@ -172,6 +267,7 @@ public class KMeans {
             point.setCluster(cluster);
             clusters.get(cluster).addPoint(point);
         }
+        */
     }
 
     private static void calculateCentroids(List<Cluster> clusters) {
@@ -207,19 +303,23 @@ public class KMeans {
 
         HazelcastInstance instance = Hazelcast.newHazelcastInstance();
         Map points = Point.createRandomPoints(minCoordinate, maxCoordinate, num_points, instance);
-        Map clusters = init(numClusters, minCoordinate, maxCoordinate, instance);
+        Map<Integer,Integer> clearIter = instance.getMap("clearIter");
+
+        Map clusters = init(numClusters, minCoordinate, maxCoordinate, instance, clearIter);
 
         IAtomicLong count = instance.getAtomicLong("count");
         long localCount = count.incrementAndGet();
         if (localCount>numNodes){
             // Todo: create distributed long for numNodes and update it as needed
             System.out.println("number of nodes increased");
+            return;
         }
 
         int pointsPart = points.size()/numNodes;
         int clustersPart = clusters.size()/numNodes;
         System.out.println(pointsPart+" "+clustersPart);
-        calculate(clusters, points, clustersPart, pointsPart, localCount);
+
+        calculate(clusters, points, clustersPart, pointsPart, localCount, numNodes, clearIter);
         /*
         List<Cluster> clustersOriginal = (List<Cluster>) DeepCopy.copy(clusters);
         List<Point> pointsOriginal = (List<Point>) DeepCopy.copy(points);
@@ -253,7 +353,10 @@ public class KMeans {
 
         int pointsPart = points.size()/numNodes;
         int clustersPart = clusters.size()/numNodes;
-        calculate(clusters, points, clustersPart, pointsPart, localCount);
+
+
+
+        //calculate(clusters, points, clustersPart, pointsPart, localCount, numNodes);
 
         // Todo: when calling clear, do from end to beggining, or even clearer from x to y, what happens when is and odd number?
 

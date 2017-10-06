@@ -176,7 +176,7 @@ public class KMeans {
                 }
             }
             point.setCluster(cluster);
-            clusters.get(cluster).addPoint(point);
+            //clusters.get(cluster).addPoint(point);
         }
     }
 
@@ -252,7 +252,7 @@ public class KMeans {
             System.out.println(finalTime-startTime);
             imperativeTime += (finalTime - startTime);
 
-            //end(clusters);
+            end(clusters);
         }
 
         System.out.println("Parallel time: "+parallelTime/numIter + " ms");

@@ -4,11 +4,13 @@ package parallelDistributed;
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.IAtomicLong;
+import com.hazelcast.core.IMap;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentMap;
 
 
 //import kmeansOO.Point;
@@ -78,12 +80,13 @@ public class KMeans {
     }
 
     //Initializes the process
-    public static Map init(int numClusters, int minCoordinate, int maxCoordinate, HazelcastInstance instance, Map<Integer, Integer> clearIter) {
+    public static IMap init(int numClusters, int minCoordinate, int maxCoordinate, HazelcastInstance instance, Map<Integer, Integer> clearIter) {
         //Create Clusters
-        Map<Integer, Cluster> clusters = instance.getMap("clusters");
+        IMap<Integer, Cluster> clusters = instance.getMap("clusters");
         //Set Random Centroids
         for (int i = 0; i < numClusters; i++) {
-            Cluster cluster = new Cluster(i, instance);
+            Cluster cluster = new Cluster();
+            cluster.setID(i);
             //cluster.clearIter=instance.getAtomicLong("clearIter");
             Point centroid = Point.createRandomPoint(minCoordinate,maxCoordinate);
             cluster.setCentroid(centroid);
@@ -95,7 +98,7 @@ public class KMeans {
     }
 
     //The process to calculate the K Means, with iterating method.
-    public static void calculate(Map clusters, Map points, int clustersPart, int pointsPart, long localCount, int numNodes, Map<Integer, Integer> clearIter) {
+    public static void calculate(IMap clusters, ConcurrentMap points, int clustersPart, int pointsPart, long localCount, int numNodes, Map<Integer, Integer> clearIter) {
         boolean finish = false;
         long iteration = 1;
 
@@ -108,7 +111,7 @@ public class KMeans {
             //List<Point> lastCentroids = getCentroids(clusters, clustersPart, localCount, numNodes);
 
             //Assign points to the closer cluster
-            //assignCluster(clusters, points, pointsPart, localCount, numNodes, iteration);
+            assignCluster(clusters, points, pointsPart, localCount, numNodes, iteration, clearIter); // Todo now!!!!!!!!!!!!
 /*
             //Calculate new centroids.
             calculateCentroids(clusters);
@@ -151,6 +154,7 @@ public class KMeans {
             int module = clusters.size()%numNodes;
             for (int i = (int) (localCount*numNodes); i <clustersPart*numNodes + clustersPart  + module; i++) {
                 // walk through its part (including module)
+                System.out.println("nullPointer exception "+i+ " ; size: "+clusters.size());
                 Cluster c = (Cluster) clusters.get(i);
                 clusterIter = clearIter.get(i);
                 if (clusterIter < iteration){
@@ -172,7 +176,9 @@ public class KMeans {
             for (int i = (int) (localCount*numNodes); i <clustersPart*numNodes + clustersPart ; i++) {
                 // walk through its part
                 Cluster c = (Cluster) clusters.get(i);
-                Point point = new Point(c.getCentroid().getX(), c.getCentroid().getY());
+                Point point = new Point();
+                point.setX(c.getCentroid().getX());
+                point.setY(c.getCentroid().getY());
                 centroids.add(point);
             }
 
@@ -182,8 +188,9 @@ public class KMeans {
             for (int i = (int) (localCount*numNodes); i <clustersPart*numNodes + clustersPart  + module; i++) {
                 // walk through its part (including module)
                 Cluster c = (Cluster) clusters.get(i);
-                Point point = new Point(c.getCentroid().getX(), c.getCentroid().getY());
-                centroids.add(point);
+                Point point = new Point();
+                point.setX(c.getCentroid().getX());
+                point.setY(c.getCentroid().getY());                centroids.add(point);
 
             }
 
@@ -193,7 +200,7 @@ public class KMeans {
     }
 
 
-    private static void assignCluster(Map clusters, Map points, int pointsPart, long localCount, int numNodes, long iteration) {
+    private static void assignCluster(Map clusters, Map points, int pointsPart, long localCount, int numNodes, long iteration, Map<Integer, Integer> clearIter) {
         double max = Double.MAX_VALUE;
         double min = max;
         int cluster = 0;
@@ -206,6 +213,7 @@ public class KMeans {
                 Point point = (Point) points.get(i);
                 for (int j = 0; j < clusters.size(); j++) {
                     Cluster c = (Cluster) clusters.get(j);
+                    System.out.println("assignCluster, clear iter of "+ j +""+clearIter.get(j));
                    /* if (c.clearIter.get() == iteration ){
                         distance = Point.distance(point, c.getCentroid());
                         if(distance < min){
@@ -302,10 +310,10 @@ public class KMeans {
         long parallelTime=0;
 
         HazelcastInstance instance = Hazelcast.newHazelcastInstance();
-        Map points = Point.createRandomPoints(minCoordinate, maxCoordinate, num_points, instance);
-        Map<Integer,Integer> clearIter = instance.getMap("clearIter");
+        ConcurrentMap points = Point.createRandomPoints(minCoordinate, maxCoordinate, num_points, instance);
+        IMap<Integer,Integer> clearIter = instance.getMap("clearIter");
 
-        Map clusters = init(numClusters, minCoordinate, maxCoordinate, instance, clearIter);
+        IMap clusters = init(numClusters, minCoordinate, maxCoordinate, instance, clearIter);
 
         IAtomicLong count = instance.getAtomicLong("count");
         long localCount = count.incrementAndGet();

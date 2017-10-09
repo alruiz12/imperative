@@ -25,7 +25,7 @@ public class hello {
             imperativeTime += (finalTime-startTime);
 */
             startTime=System.currentTimeMillis();
-            parallel.KMeans.run(NUM_CLUSTERS,NUM_POINTS,MIN_COORDINATE,MAX_COORDINATE, NUM_ITER);
+            //parallel.KMeans.run(NUM_CLUSTERS,NUM_POINTS,MIN_COORDINATE,MAX_COORDINATE, NUM_ITER);
             finalTime=System.currentTimeMillis();
             parallelTime += (finalTime-startTime);
         }

@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.TimeUnit;
 
 
 //import kmeansOO.Point;
@@ -141,19 +140,8 @@ public class KMeans {
     private static void clearClusters(Map clusters, int clustersPart, long localCount, int numNodes, long iteration, ConcurrentMap<Integer, Integer> clearIter, HazelcastInstance instance) {
         if (localCount < numNodes){ // if it's not last node
             int clusterIter=0;
-            int once = 0;
             for (int i = (int) ((localCount-1)*clustersPart); i <((localCount-1)*clustersPart) + clustersPart ; i++) {
                 // walk through its part
-                if (localCount==2 && once==0){
-                    once=1;
-                    try {
-                        System.out.println("ABOUT TO SLEEP!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-                        TimeUnit.SECONDS.sleep(30);
-                        System.out.println("SLEPT??????????????????????????????????????????????????????????????????????????????????");
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
                 Cluster c = (Cluster) clusters.get(i);
                 clusterIter = clearIter.get(i);
                 if (clusterIter < iteration){

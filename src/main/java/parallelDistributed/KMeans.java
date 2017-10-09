@@ -18,22 +18,208 @@ import java.util.concurrent.ConcurrentMap;
  * Created by alvaro on 27/09/17.
  */
 public class KMeans {
-    /*
-    //Number of Clusters. This metric should be related to the number of points
-    private int NUM_CLUSTERS = 100;
-    //Number of Points
-    private int NUM_POINTS = 1000000;
-    //Min and Max X and Y
-    private static final int MIN_COORDINATE = 0;
-    private static final int MAX_COORDINATE = 10000;
-*/
-    private List<Point> points;         // Todo: distribute it
-    //private List<Cluster> clusters;
 
-    public KMeans() {
-        this.points = new ArrayList();
-        //this.clusters = new ArrayList();
+    public KMeans() {}
+
+
+    // Initializes the process
+    public static ConcurrentMap<Integer, Cluster> init(int numClusters, int minCoordinate, int maxCoordinate, HazelcastInstance instance, Map<Integer, Integer> clearIter) {
+        // Create Clusters
+        ConcurrentMap<Integer, Cluster> clusters = instance.getMap("clusters");
+        for (int i = 0; i < numClusters; i++) {
+            // Create and initialize new cluster
+            Cluster cluster = new Cluster();
+            cluster.setID(i);
+
+            // Set Random Centroids
+            Point centroid = Point.createRandomPoint(minCoordinate,maxCoordinate);
+            cluster.setCentroid(centroid);
+            clusters.put(i, cluster);
+
+            // Fills up clearIter entry
+            clearIter.put(i,0);
+        }
+        return clusters;
+
     }
+
+    //The process to calculate the K Means, with iterating method.
+    public static void calculate(ConcurrentMap clusters, ConcurrentMap points, int clustersPart, int pointsPart, long localCount, int numNodes, ConcurrentMap<Integer, Integer> clearIter, HazelcastInstance instance) {
+        boolean finish = false;
+        long iteration = 1;
+
+
+        // Add in new data, one at a time, recalculating centroids with each new one.
+        while(!finish) {
+            //Clear cluster state
+            clearClusters(clusters, clustersPart, localCount, numNodes, iteration, clearIter, instance);
+
+            //Assign points to the closest cluster
+            assignCluster(clusters, points, pointsPart, localCount, numNodes, iteration, clearIter);
+            System.out.println("calculate end (localcount: "+localCount+" )");
+
+            //Calculate new centroids.
+            calculateCentroids(clusters, clustersPart, localCount, numNodes, iteration, clearIter, instance); // Todo now!!!!!!!!!!!!
+/*
+
+            List<Point> currentCentroids = getCentroids(clusters);
+
+            //Calculates total distance between new and old Centroids
+            AtomicDouble distance = new AtomicDouble();
+            for(int i = 0; i < lastCentroids.size(); i++) {
+                distance.getAndAdd(Point.distance(lastCentroids.get(i),currentCentroids.get(i)));
+            }
+
+            if (distance.compareAndSet(0.0,0.0)){
+                finish = true;
+            }
+            */
+            iteration++;
+            finish=true;
+        }
+
+    }
+
+    private static void clearClusters(Map clusters, int clustersPart, long localCount, int numNodes, long iteration, ConcurrentMap<Integer, Integer> clearIter, HazelcastInstance instance) {
+        int module = 0;
+        int clusterIter=0;
+
+        if (localCount == numNodes) { // if it's last node
+            module=clusters.size()%numNodes;
+        }
+
+        for (int i = (int) ((localCount-1)*clustersPart); i <((localCount-1)*clustersPart) + clustersPart + module; i++) {
+            // walk through its part
+            Cluster c = (Cluster) clusters.get(i);
+            clusterIter = clearIter.get(i);
+            if (clusterIter < iteration){   // if cluster needs to be cleared
+                c.clear();
+                clearIter.replace(i, clusterIter+1) ;
+            }
+        }
+
+    }
+
+    private static void assignCluster(Map clusters, Map points, int pointsPart, long localCount, int numNodes, long iteration, Map<Integer, Integer> clearIter) {
+        double max = Double.MAX_VALUE;
+        double min = max;
+        int cluster = 0;
+        double distance = 0.0;
+        int repetitionMax;
+        final int REPETITION_LIMIT = 10;
+        int module = 0;
+        List<Integer> delays = new ArrayList<>();
+
+        if (localCount == numNodes) { // if it's last node
+            module = points.size() % numNodes;
+        }
+        for (int i = (int) ((localCount - 1) * pointsPart); i < (localCount - 1) * pointsPart + pointsPart + module; i++) {
+            // walk through its part
+            Point point = (Point) points.get(i);
+
+            for (int j = 0; j < clusters.size(); j++) {
+                Cluster c = (Cluster) clusters.get(j);
+
+                if (clearIter.get(j) == iteration) {    // if cluster has been cleared
+                    System.out.println(clearIter.get(j) + " == " + iteration);
+                    distance = Point.distance(point, c.getCentroid());
+                    if (distance < min) {
+                        min = distance;
+                        cluster = j;
+                    }
+                } else {    // add to delayed list, and rerun
+                    delays.add(j);
+                }
+            }
+
+            repetitionMax = REPETITION_LIMIT;
+
+            for (int j = 0; j < delays.size(); j++) {
+                if (repetitionMax <= 0) {
+                    System.out.println("WARNING: cluster " + j + " is taking too long to clear");
+                    // Todo: decide what to do when cluster takes too long to clear
+                }
+
+                Cluster c = (Cluster) clusters.get(j);
+
+                if (clearIter.get(j) == iteration) { // // if cluster has been cleared
+                    repetitionMax = REPETITION_LIMIT;
+                    distance = Point.distance(point, c.getCentroid());
+                    if (distance < min) {
+                        min = distance;
+                        cluster = j;
+                    }
+                } else {    // retry same cluster
+                    j--;
+                    repetitionMax--;
+                }
+            }
+            if (distance < max) { // if any point is ready
+                point.setCluster(cluster);
+                Cluster aux = (Cluster) clusters.get(cluster);
+                aux.addPoint(point);
+            }
+
+        }
+
+
+    }
+
+    private static void calculateCentroids(ConcurrentMap clusters, int clustersPart, long localCount, int numNodes, long iteration, ConcurrentMap<Integer, Integer> clearIter, HazelcastInstance instance) {
+
+        if (localCount < numNodes){ // if it's not last node
+            int clusterIter=0;
+            for (int i = (int) ((localCount-1)*clustersPart); i <((localCount-1)*clustersPart) + clustersPart ; i++) {
+                // walk through its part
+                Cluster c = (Cluster) clusters.get(i);
+                clusterIter = clearIter.get(i);
+                if (clusterIter < iteration){
+                    c.clear();
+                    clearIter.replace(i, clusterIter+1) ;
+                }
+            }
+
+        } else {
+            int clusterIter=0;
+            int module = clusters.size()%numNodes;
+            for (int i = (int) ((localCount-1)*clustersPart); i <((localCount-1)*clustersPart) + clustersPart + module; i++) {
+                // walk through its part (including module)
+                Cluster c = (Cluster) clusters.get(i);
+                clusterIter =  clearIter.get(i);
+                if (clusterIter < iteration){
+                    c.clear();
+                    clearIter.replace(i, clusterIter+1) ;
+                }
+
+            }
+
+        }
+
+        //----------------------------------------------------------------
+        /*
+        for(Cluster cluster : clusters) {           // parallelized
+            double sumX = 0;
+            double sumY = 0;
+
+            List<Point> list = cluster.getPoints();
+            int n_points = list.size();
+
+            for(Point point : list) {               // Todo: can be divided in n processes
+                sumX += point.getX();
+                sumY += point.getY();
+            }
+
+            Point centroid = cluster.getCentroid();
+            if(n_points > 0) {
+                double newX = sumX / n_points;
+                double newY = sumY / n_points;
+
+                centroid.setX(newX);
+                centroid.setY(newY);
+            }
+            };
+            */
+        }
 
 
     public static void end(List<Cluster> clusters){
@@ -78,273 +264,15 @@ public class KMeans {
 
     }
 
-    //Initializes the process
-    public static ConcurrentMap<Integer, Cluster> init(int numClusters, int minCoordinate, int maxCoordinate, HazelcastInstance instance, Map<Integer, Integer> clearIter) {
-        //Create Clusters
-        ConcurrentMap<Integer, Cluster> clusters = instance.getMap("clusters");
-        //Set Random Centroids
-        for (int i = 0; i < numClusters; i++) {
-            Cluster cluster = new Cluster();
-            cluster.setID(i);
-            //cluster.clearIter=instance.getAtomicLong("clearIter");
-            Point centroid = Point.createRandomPoint(minCoordinate,maxCoordinate);
-            cluster.setCentroid(centroid);
-            clusters.put(i, cluster);
-            System.out.println("init clusters: key: "+i+" ; value: "+clusters.get(i));
-            clearIter.put(i,0);
-        }
-        return clusters;
-
-    }
-
-    //The process to calculate the K Means, with iterating method.
-    public static void calculate(ConcurrentMap clusters, ConcurrentMap points, int clustersPart, int pointsPart, long localCount, int numNodes, ConcurrentMap<Integer, Integer> clearIter, HazelcastInstance instance) {
-        boolean finish = false;
-        long iteration = 1;
-
-
-        // Add in new data, one at a time, recalculating centroids with each new one.
-        while(!finish) {
-            //Clear cluster state
-            clearClusters(clusters, clustersPart, localCount, numNodes, iteration, clearIter, instance);
-
-            //List<Point> lastCentroids = getCentroids(clusters, clustersPart, localCount, numNodes);
-
-            //Assign points to the closer cluster
-            assignCluster(clusters, points, pointsPart, localCount, numNodes, iteration, clearIter); // Todo now!!!!!!!!!!!!
-            System.out.println("calculate end (localcount: "+localCount+" )");
-/*
-            //Calculate new centroids.
-            calculateCentroids(clusters);
-
-            iteration++;
-
-            List<Point> currentCentroids = getCentroids(clusters);
-
-            //Calculates total distance between new and old Centroids
-            AtomicDouble distance = new AtomicDouble();
-            for(int i = 0; i < lastCentroids.size(); i++) {         // Todo: can be divided in n processes
-                distance.getAndAdd(Point.distance(lastCentroids.get(i),currentCentroids.get(i)));
-            }
-
-            if (distance.compareAndSet(0.0,0.0)){
-                finish = true;
-            }
-            */
-            iteration++;
-            finish=true;
-        }
-
-    }
-
-    private static void clearClusters(Map clusters, int clustersPart, long localCount, int numNodes, long iteration, ConcurrentMap<Integer, Integer> clearIter, HazelcastInstance instance) {
-        if (localCount < numNodes){ // if it's not last node
-            int clusterIter=0;
-            for (int i = (int) ((localCount-1)*clustersPart); i <((localCount-1)*clustersPart) + clustersPart ; i++) {
-                // walk through its part
-                Cluster c = (Cluster) clusters.get(i);
-                clusterIter = clearIter.get(i);
-                if (clusterIter < iteration){
-                    c.clear();
-                    clearIter.replace(i, clusterIter+1) ;
-                }
-            }
-
-        } else {
-            int clusterIter=0;
-            int module = clusters.size()%numNodes;
-            for (int i = (int) ((localCount-1)*clustersPart); i <((localCount-1)*clustersPart) + clustersPart + module; i++) {
-                // walk through its part (including module)
-                Cluster c = (Cluster) clusters.get(i);
-                clusterIter =  clearIter.get(i);
-                if (clusterIter < iteration){
-                    c.clear();
-                    clearIter.replace(i, clusterIter+1) ;
-                }
-
-            }
-
-        }
-
-    }
-
-    private static List<Point> getCentroids(Map clusters, int clustersPart, long localCount, int numNodes) {
-        List<Point> centroids = new ArrayList(clusters.size());
-
-        if (clustersPart < numNodes-1){ // if it's not last node
-
-            for (int i = (int) (localCount*numNodes); i <clustersPart*numNodes + clustersPart ; i++) {
-                // walk through its part
-                Cluster c = (Cluster) clusters.get(i);
-                Point point = new Point();
-                point.setX(c.getCentroid().getX());
-                point.setY(c.getCentroid().getY());
-                centroids.add(point);
-            }
-
-        } else {
-
-            int module = clusters.size()%numNodes;
-            for (int i = (int) (localCount*numNodes); i <clustersPart*numNodes + clustersPart  + module; i++) {
-                // walk through its part (including module)
-                Cluster c = (Cluster) clusters.get(i);
-                Point point = new Point();
-                point.setX(c.getCentroid().getX());
-                point.setY(c.getCentroid().getY());                centroids.add(point);
-
-            }
-
-        }
-
-        return centroids;
-    }
-
-
-    private static void assignCluster(Map clusters, Map points, int pointsPart, long localCount, int numNodes, long iteration, Map<Integer, Integer> clearIter) {
-        double max = Double.MAX_VALUE;
-        double min = max;
-        int cluster = 0;
-        double distance = 0.0;
-        int repetitionMax;
-        final int REPETITION_LIMIT = 10;
-        List<Integer> delays = new ArrayList<>();
-        if (localCount < numNodes) { // if it's not last node
-
-            for (int i = (int) ((localCount - 1) * pointsPart); i < (localCount - 1) * pointsPart + pointsPart; i++) {
-                // walk through its part
-                Point point = (Point) points.get(i);
-                repetitionMax = REPETITION_LIMIT;
-                for (int j = 0; j < clusters.size(); j++) {
-
-                    Cluster c = (Cluster) clusters.get(j);
-                    System.out.println("assignCluster, clear iter of cluster " + j + " is " + clearIter.get(j));
-                    if (clearIter.get(j) == iteration) {
-                        System.out.println(clearIter.get(j) + " == " + iteration);
-                        distance = Point.distance(point, c.getCentroid());
-                        if (distance < min) {
-                            min = distance;
-                            cluster = j;
-                        }
-                    } else {
-                        delays.add(j);
-                        repetitionMax--;
-                    }
-                }
-                for (int j = 0; j < delays.size(); j++) {
-                    if (repetitionMax <= 0) {
-                        System.out.println("WARNING: cluster " + j + " is taking too long to clear");
-                    }
-                    Cluster c = (Cluster) clusters.get(j);
-                    System.out.println("assignCluster, clear iter of cluster " + j + " is " + clearIter.get(j));
-                    if (clearIter.get(j) == iteration) {
-                        repetitionMax = REPETITION_LIMIT;
-                        System.out.println(clearIter.get(j) + " == " + iteration);
-                        distance = Point.distance(point, c.getCentroid());
-                        if (distance < min) {
-                            min = distance;
-                            cluster = j;
-                        }
-                    } else {
-                        j--;
-                        repetitionMax--;
-                    }
-                }
-                if (distance < max) { // if any point is ready
-                    System.out.println(point);
-                    point.setCluster(cluster);
-                    Cluster aux = (Cluster) clusters.get(cluster);
-                    aux.addPoint(point);
-                }
-
-            }
-
-        } else {
-
-            int module = points.size() % numNodes;
-            for (int i = (int) ((localCount - 1) * pointsPart); i < (localCount - 1) * pointsPart + pointsPart + module; i++) {
-                // walk through its part
-                Point point = (Point) points.get(i);
-                repetitionMax = REPETITION_LIMIT;
-                for (int j = 0; j < clusters.size(); j++) {
-
-                    Cluster c = (Cluster) clusters.get(j);
-                    System.out.println("assignCluster, clear iter of cluster " + j + " is " + clearIter.get(j));
-                    if (clearIter.get(j) == iteration) {
-                        System.out.println(clearIter.get(j) + " == " + iteration);
-                        distance = Point.distance(point, c.getCentroid());
-                        if (distance < min) {
-                            min = distance;
-                            cluster = j;
-                        }
-                    } else {
-                        delays.add(j);
-                        repetitionMax--;
-                    }
-                }
-                for (int j = 0; j < delays.size(); j++) {
-                    if (repetitionMax <= 0) {
-                        System.out.println("WARNING: cluster " + j + " is taking too long to clear");
-                    }
-                    Cluster c = (Cluster) clusters.get(j);
-                    System.out.println("assignCluster, clear iter of cluster " + j + " is " + clearIter.get(j));
-                    if (clearIter.get(j) == iteration) {
-                        repetitionMax = REPETITION_LIMIT;
-                        System.out.println(clearIter.get(j) + " == " + iteration);
-                        distance = Point.distance(point, c.getCentroid());
-                        if (distance < min) {
-                            min = distance;
-                            cluster = j;
-                        }
-                    } else {
-                        j--;
-                        repetitionMax--;
-                    }
-                }
-                if (distance < max) { // if any point is ready
-                    System.out.println(cluster);
-                    point.setCluster(cluster);
-                    Cluster aux = (Cluster) clusters.get(cluster);
-                    aux.addPoint(point);
-                }
-            }
-
-        }
-    }
-
-    private static void calculateCentroids(List<Cluster> clusters) {
-        for(Cluster cluster : clusters) {           // parallelized
-            double sumX = 0;
-            double sumY = 0;
-
-            List<Point> list = cluster.getPoints();
-            int n_points = list.size();
-
-            for(Point point : list) {               // Todo: can be divided in n processes
-                sumX += point.getX();
-                sumY += point.getY();
-            }
-
-            Point centroid = cluster.getCentroid();
-            if(n_points > 0) {
-                double newX = sumX / n_points;
-                double newY = sumY / n_points;
-
-                centroid.setX(newX);
-                centroid.setY(newY);
-            }
-            };
-
-        }
-
     public static void run(int numClusters, int num_points, int minCoordinate, int maxCoordinate, int numIter, int numNodes) {
         HazelcastInstance instance = Hazelcast.newHazelcastInstance();
 
         ConcurrentMap points = Point.createRandomPoints(minCoordinate, maxCoordinate, num_points, instance);
-        ConcurrentMap<Integer,Integer> clearIter = instance.getMap("clearIter");
+        ConcurrentMap<Integer,Integer> clearIter = instance.getMap("clearIter");        // Keeps track of the number of "clear" iterations of each cluster
         ConcurrentMap clusters = init(numClusters, minCoordinate, maxCoordinate, instance, clearIter);
 
         IAtomicLong count = instance.getAtomicLong("count");
-        long localCount = count.incrementAndGet();
+        long localCount = count.incrementAndGet();      // As new processes run, they increment a counter and keep the local copy as their ID
         if (localCount>numNodes){
             // Todo: create distributed long for numNodes and update it as needed
             System.out.println("number of nodes increased");
@@ -355,22 +283,9 @@ public class KMeans {
         int clustersPart = clusters.size()/numNodes;
 
         calculate(clusters, points, clustersPart, pointsPart, localCount, numNodes, clearIter, instance);
-        /*
-        List<Cluster> clustersOriginal = (List<Cluster>) DeepCopy.copy(clusters);
-        List<Point> pointsOriginal = (List<Point>) DeepCopy.copy(points);
-
-
-        startTime = System.currentTimeMillis();
-        calculate(clusters, points);
-        finalTime = System.currentTimeMillis();
-        System.out.println(finalTime-startTime);
-        parallelTime += (finalTime - startTime);
 
         //end(clusters);
 
-
-        System.out.println("Parallel time: "+parallelTime + " ms");
-        */
     }
 
     public static void runSecondary(int numClusters, int num_points, int minCoordinate, int maxCoordinate, int numIter, int numNodes) {
@@ -393,28 +308,9 @@ public class KMeans {
 
         calculate(clusters, points, clustersPart, pointsPart, localCount, numNodes, clearIter, instance);
 
-        // Todo: when calling clear, do from end to beggining, or even clearer from x to y, what happens when is and odd number?
-
-        //instance.
-        /*
-        List<Point> points = Point.createRandomPoints(minCoordinate, maxCoordinate, num_points);
-        List<Cluster> clusters = init(numClusters, minCoordinate, maxCoordinate);
-
-        List<Cluster> clustersOriginal = (List<Cluster>) DeepCopy.copy(clusters);
-        List<Point> pointsOriginal = (List<Point>) DeepCopy.copy(points);
-
-
-        startTime = System.currentTimeMillis();
-        calculate(clusters, points);
-        finalTime = System.currentTimeMillis();
-        System.out.println(finalTime-startTime);
-        parallelTime += (finalTime - startTime);
-
         //end(clusters);
 
 
-        System.out.println("Parallel time: "+parallelTime + " ms");
-        */
     }
 
     }

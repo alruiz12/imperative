@@ -234,13 +234,13 @@ public class KMeans {
 
         } else {
 
-            int module = clusters.size()%numNodes;
+            int module = points.size()%numNodes;
             for (int i = (int) ((localCount-1)*pointsPart); i <(localCount-1)*pointsPart + pointsPart + module; i++) {
                 // walk through its part
                 Point point = (Point) points.get(i);
                 for (int j = 0; j < clusters.size(); j++) {
                     Cluster c = (Cluster) clusters.get(j);
-                    System.out.println("assignCluster, clear iter of cluster "+ j +" is "+clearIter.get(j));
+                    System.out.println("(last)assignCluster, clear iter of cluster "+ j +" is "+clearIter.get(j));
 
 
                    /* if (c.clearIter.get() == iteration ){
@@ -306,11 +306,6 @@ public class KMeans {
         }
 
     public static void run(int numClusters, int num_points, int minCoordinate, int maxCoordinate, int numIter, int numNodes) {
-        long startTime;
-        long finalTime;
-
-        long parallelTime=0;
-
         HazelcastInstance instance = Hazelcast.newHazelcastInstance();
 
         ConcurrentMap points = Point.createRandomPoints(minCoordinate, maxCoordinate, num_points, instance);
@@ -327,7 +322,6 @@ public class KMeans {
 
         int pointsPart = points.size()/numNodes;
         int clustersPart = clusters.size()/numNodes;
-        System.out.println(pointsPart+" "+clustersPart);
 
         calculate(clusters, points, clustersPart, pointsPart, localCount, numNodes, clearIter, instance);
         /*
@@ -349,10 +343,6 @@ public class KMeans {
     }
 
     public static void runSecondary(int numClusters, int num_points, int minCoordinate, int maxCoordinate, int numIter, int numNodes) {
-        long startTime;
-        long finalTime;
-
-        long parallelTime=0;
         HazelcastInstance instance = Hazelcast.newHazelcastInstance();
 
         ConcurrentMap points = instance.getMap("points");
@@ -369,8 +359,6 @@ public class KMeans {
 
         int pointsPart = points.size()/numNodes;
         int clustersPart = clusters.size()/numNodes;
-
-
 
         calculate(clusters, points, clustersPart, pointsPart, localCount, numNodes, clearIter, instance);
 

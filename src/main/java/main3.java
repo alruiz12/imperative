@@ -1,7 +1,7 @@
 /**
  * Created by alvaro on 26/09/17.
  */
-public class main2 {
+public class main3 {
     public static void main(String[] args) {
         final int NUM_CLUSTERS = 30;
         //Number of Points
@@ -12,7 +12,9 @@ public class main2 {
 
         final int NUM_ITER = 1;
         final int NUM_NODES = 10;
+        for (int i = 0; i < NUM_NODES - 2; i++) {
+            parallelDistributed.KMeans.runSecondary(NUM_CLUSTERS,NUM_POINTS,MIN_COORDINATE,MAX_COORDINATE, NUM_ITER, NUM_NODES);
 
-        parallelDistributed.KMeans.runSecondary(NUM_CLUSTERS,NUM_POINTS,MIN_COORDINATE,MAX_COORDINATE, NUM_ITER, NUM_NODES);
+        }
     }
 }

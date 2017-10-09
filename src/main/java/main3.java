@@ -11,8 +11,8 @@ public class main3 {
         final int MAX_COORDINATE = 10000;
 
         final int NUM_ITER = 1;
-        final int NUM_NODES = 10;
-        for (int i = 0; i < NUM_NODES - 2; i++) {
+        final int NUM_NODES = 9;
+        for (int i = 0; i < 4; i++) {
             parallelDistributed.KMeans.runSecondary(NUM_CLUSTERS,NUM_POINTS,MIN_COORDINATE,MAX_COORDINATE, NUM_ITER, NUM_NODES);
 
         }

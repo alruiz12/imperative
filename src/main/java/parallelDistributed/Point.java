@@ -9,7 +9,7 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * Created by alvaro on 27/09/17.
  */
-public class Point implements Externalizable {
+public class Point implements Serializable {
     private double x = 0;
     private double y = 0;
     private int cluster_number = 0;
@@ -58,7 +58,7 @@ public class Point implements Externalizable {
     }
 
     protected static ConcurrentMap createRandomPoints(int min, int max, int number, HazelcastInstance instance) {
-        ConcurrentMap<Integer,Point> points = instance.getMap("pooints");
+        ConcurrentMap<Integer,Point> points = instance.getMap("points");
         for(int i = 0; i<number; i++) {
             Point aux = createRandomPoint(min,max);
             points.put(i,aux);
@@ -69,7 +69,7 @@ public class Point implements Externalizable {
     public String toString() {
         return "("+x+","+y+")";
     }
-
+/*
     @Override
     public void writeExternal(ObjectOutput objectOutput) throws IOException {
         objectOutput.writeDouble(x);
@@ -82,5 +82,5 @@ public class Point implements Externalizable {
         x=objectInput.readDouble();
         y=objectInput.readDouble();
         cluster_number= objectInput.readInt();
-    }
+    } */
 }

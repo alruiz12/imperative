@@ -11,7 +11,7 @@ public class main2 {
         final int MAX_COORDINATE = 10000;
 
         final int NUM_ITER = 1;
-        final int NUM_NODES = 1;
+        final int NUM_NODES = 2;
         long startTime;
         long finalTime;
 

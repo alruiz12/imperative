@@ -1,16 +1,13 @@
 package parallelDistributed;
 
-import java.io.Externalizable;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectOutput;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by alvaro on 27/09/17.
  */
-public class Cluster implements Externalizable {
+public class Cluster implements Serializable {
     //private static final long serialVersionUID = 1L;
     public List<Point> points;
     public Point centroid;
@@ -63,7 +60,7 @@ public class Cluster implements Externalizable {
         }
         System.out.println("]");
     }
-
+/*
     @Override
     public void writeExternal(ObjectOutput objectOutput) throws IOException {
         points.forEach(point -> {
@@ -77,7 +74,7 @@ public class Cluster implements Externalizable {
         objectOutput.writeInt(id);
        /* public List<Point> points;
         public Point centroid;
-        public int id; */
+        public int id; *//*
     }
 
     @Override
@@ -90,4 +87,5 @@ public class Cluster implements Externalizable {
         centroid.readExternal(objectInput);
         id = objectInput.readInt();
     }
+    */
 }

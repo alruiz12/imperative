@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by alvaro on 26/09/17.
  */
@@ -11,10 +14,21 @@ public class main2 {
         final int MAX_COORDINATE = 10000;
 
         final int NUM_ITER = 1;
-        final int NUM_NODES = 3;
+        final int NUM_NODES = 6;
 
         //for (int i = 0; i < 4; i++) {
-            parallelDistributed.KMeans.runSecondary(NUM_CLUSTERS,NUM_POINTS,MIN_COORDINATE,MAX_COORDINATE, NUM_ITER, NUM_NODES);
+        List<Integer> list = new ArrayList<>(); // 5 elem
+
+        list.add(2);
+        list.add(4);
+        list.add(6);
+        list.add(8);
+        list.add(10);
+
+        list.stream().forEach(elem-> parallelDistributed.KMeans.runSecondary(NUM_CLUSTERS,NUM_POINTS,MIN_COORDINATE,MAX_COORDINATE, NUM_ITER, NUM_NODES));
+
+
+        //parallelDistributed.KMeans.runSecondary(NUM_CLUSTERS,NUM_POINTS,MIN_COORDINATE,MAX_COORDINATE, NUM_ITER, NUM_NODES);
 
         //}
     }

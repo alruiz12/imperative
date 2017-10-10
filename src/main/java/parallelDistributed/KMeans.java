@@ -56,10 +56,12 @@ public class KMeans {
 
             //Assign points to the closest cluster
             assignCluster(clusters, points, pointsPart, localCount, numNodes, iteration, clearIter);
+
+
             System.out.println("calculate end (localcount: "+localCount+" )");
 
             //Calculate new centroids.
-            calculateCentroids(clusters, clustersPart, localCount, numNodes, iteration, clearIter, instance); // Todo now!!!!!!!!!!!!
+            //calculateCentroids(clusters, clustersPart, localCount, numNodes, iteration, clearIter, instance); // Todo now!!!!!!!!!!!!
 /*
 
             List<Point> currentCentroids = getCentroids(clusters);

@@ -11,7 +11,7 @@ public class main {
         final int MAX_COORDINATE = 10000;
 
         final int NUM_ITER = 1;
-        final int NUM_NODES = 3;
+        final int NUM_NODES = 1;
 
         parallelDistributed.KMeans.run(NUM_CLUSTERS,NUM_POINTS,MIN_COORDINATE,MAX_COORDINATE, NUM_ITER, NUM_NODES);
     }

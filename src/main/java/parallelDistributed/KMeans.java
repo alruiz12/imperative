@@ -309,7 +309,7 @@ public class KMeans {
         int clustersPart = clusters.size()/numNodes;
 
         calculate(clusters, points, clustersPart, pointsPart, localCount, numNodes, clearIter, instance);
-
+	instance.shutdown();
         //end(clusters);
 
 

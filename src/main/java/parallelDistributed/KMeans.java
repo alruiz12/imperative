@@ -44,10 +44,10 @@ public class KMeans {
     }
 
     //The process to calculate the K Means, with iterating method.
-    public static void calculate(ConcurrentMap clusters, ConcurrentMap points, int clustersPart, int pointsPart, long localCount, int numNodes, ConcurrentMap<Integer, Integer> clearIter, HazelcastInstance instance) {
+    public static int calculate(ConcurrentMap clusters, ConcurrentMap points, int clustersPart, int pointsPart, long localCount, int numNodes, ConcurrentMap<Integer, Integer> clearIter, HazelcastInstance instance) {
         boolean finish = false;
         long iteration = 1;
-
+        int retValue=-1;
 
         // Add in new data, one at a time, recalculating centroids with each new one.
         while(!finish) {
@@ -55,7 +55,7 @@ public class KMeans {
             clearClusters(clusters, clustersPart, localCount, numNodes, iteration, clearIter, instance);
 
             //Assign points to the closest cluster
-            assignCluster(clusters, points, pointsPart, localCount, numNodes, iteration, clearIter);
+            retValue=assignCluster(clusters, points, pointsPart, localCount, numNodes, iteration, clearIter);
 
 
             System.out.println("calculate end (localcount: "+localCount+" )");
@@ -79,7 +79,7 @@ public class KMeans {
             iteration++;
             finish=true;
         }
-
+        return retValue;
     }
 
     private static void clearClusters(Map clusters, int clustersPart, long localCount, int numNodes, long iteration, ConcurrentMap<Integer, Integer> clearIter, HazelcastInstance instance) {
@@ -102,13 +102,13 @@ public class KMeans {
 
     }
 
-    private static void assignCluster(Map clusters, Map points, int pointsPart, long localCount, int numNodes, long iteration, Map<Integer, Integer> clearIter) {
+    private static int assignCluster(Map clusters, Map points, int pointsPart, long localCount, int numNodes, long iteration, Map<Integer, Integer> clearIter) {
         double max = Double.MAX_VALUE;
         double min = max;
         int cluster = 0;
         double distance = 0.0;
         int repetitionMax;
-        final int REPETITION_LIMIT = 10;
+        final int REPETITION_LIMIT = 200;
         int module = 0;
         List<Integer> delays = new ArrayList<>();
 
@@ -140,6 +140,9 @@ public class KMeans {
                 if (repetitionMax <= 0) {
                     System.out.println("WARNING: cluster " + j + " is taking too long to clear");
                     // Todo: decide what to do when cluster takes too long to clear
+                    // Temporary debug:
+                    debugEnd(localCount, false, j);
+                    return 1;
                 }
 
                 Cluster c = (Cluster) clusters.get(j);
@@ -163,7 +166,7 @@ public class KMeans {
             }
 
         }
-
+        return 0;
 
     }
 
@@ -285,7 +288,7 @@ public class KMeans {
         int clustersPart = clusters.size()/numNodes;
 
         calculate(clusters, points, clustersPart, pointsPart, localCount, numNodes, clearIter, instance);
-
+        debugEnd(localCount, true, 0);
         //end(clusters);
 
     }
@@ -308,11 +311,32 @@ public class KMeans {
         int pointsPart = points.size()/numNodes;
         int clustersPart = clusters.size()/numNodes;
 
-        calculate(clusters, points, clustersPart, pointsPart, localCount, numNodes, clearIter, instance);
-	instance.shutdown();
+        if (calculate(clusters, points, clustersPart, pointsPart, localCount, numNodes, clearIter, instance) ==0) {
+            debugEnd(localCount, true, 0);
+        }
+
+	    instance.shutdown();
         //end(clusters);
 
 
+    }
+
+    // debugEnd debugs the execution of a process without using the (heavily used by Hazelcast) standard output
+    public static void debugEnd(long localCount, boolean endSuccessful, int stoppedAt){
+        String pid="_";
+        if (endSuccessful){
+            pid = String.valueOf(localCount)+"OK";
+        } else {
+            pid = String.valueOf(localCount)+"KO!"+String.valueOf(stoppedAt);
+        }
+        File file = new File(pid);
+        try {
+            PrintWriter printWriter = new PrintWriter(file);
+            printWriter.print(pid);
+            printWriter.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     }

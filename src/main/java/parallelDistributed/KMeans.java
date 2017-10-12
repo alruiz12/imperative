@@ -1,6 +1,9 @@
 package parallelDistributed;
 
 
+import com.hazelcast.client.HazelcastClient;
+import com.hazelcast.client.config.ClientConfig;
+import com.hazelcast.config.Config;
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.IAtomicLong;
@@ -98,6 +101,7 @@ public class KMeans {
                 c.clear();
                 clearIter.replace(i, clusterIter+1) ;
             }
+            System.out.println(localCount+": cluster "+i+" cleared");
         }
 
     }
@@ -138,11 +142,11 @@ public class KMeans {
 
             for (int j = 0; j < delays.size(); j++) {
                 if (repetitionMax <= 0) {
-                    System.out.println("WARNING: cluster " + j + " is taking too long to clear");
+                    System.out.println(localCount+": WARNING: cluster " + j + " is taking too long to clear");
                     // Todo: decide what to do when cluster takes too long to clear
                     // Temporary debug:
-                    debugEnd(localCount, false, j);
-                    return 1;
+                   /* debugEnd(localCount, false, j);
+                    return 1;*/
                 }
 
                 Cluster c = (Cluster) clusters.get(j);
@@ -159,6 +163,7 @@ public class KMeans {
                     repetitionMax--;
                 }
             }
+            System.out.println(point);
             if (distance < max) { // if any point is ready
                 point.setCluster(cluster);
                 Cluster aux = (Cluster) clusters.get(cluster);
@@ -270,7 +275,9 @@ public class KMeans {
     }
 
     public static void run(int numClusters, int num_points, int minCoordinate, int maxCoordinate, int numIter, int numNodes) {
-        HazelcastInstance instance = Hazelcast.newHazelcastInstance();
+        Config conf = new Config();
+        conf.getGroupConfig().setName("kmeansName").setPassword("kmeansPass");
+        HazelcastInstance instance = Hazelcast.newHazelcastInstance(conf);
 
         ConcurrentMap points = Point.createRandomPoints(minCoordinate, maxCoordinate, num_points, instance);
         ConcurrentMap<Integer,Integer> clearIter = instance.getMap("clearIter");        // Keeps track of the number of "clear" iterations of each cluster
@@ -294,13 +301,15 @@ public class KMeans {
     }
 
     public static void runSecondary(int numClusters, int num_points, int minCoordinate, int maxCoordinate, int numIter, int numNodes) {
-        HazelcastInstance instance = Hazelcast.newHazelcastInstance();
+        ClientConfig clientConfig = new ClientConfig();
+        clientConfig.getGroupConfig().setName("kmeansName").setPassword("kmeansPass");
+        HazelcastInstance client = HazelcastClient.newHazelcastClient(clientConfig);
 
-        ConcurrentMap points = instance.getMap("points");
-        ConcurrentMap clusters = instance.getMap("clusters");
-        ConcurrentMap<Integer,Integer> clearIter = instance.getMap("clearIter");
+        ConcurrentMap points = client.getMap("points");
+        ConcurrentMap clusters = client.getMap("clusters");
+        ConcurrentMap<Integer,Integer> clearIter = client.getMap("clearIter");
 
-        IAtomicLong count = instance.getAtomicLong("count");
+        IAtomicLong count = client.getAtomicLong("count");
         long localCount = count.incrementAndGet();
         if (localCount>numNodes){
             // Todo: create distributed long for numNodes and update it as needed
@@ -311,11 +320,10 @@ public class KMeans {
         int pointsPart = points.size()/numNodes;
         int clustersPart = clusters.size()/numNodes;
 
-        if (calculate(clusters, points, clustersPart, pointsPart, localCount, numNodes, clearIter, instance) ==0) {
+        if (calculate(clusters, points, clustersPart, pointsPart, localCount, numNodes, clearIter, client) ==0) {
             debugEnd(localCount, true, 0);
         }
-
-	    instance.shutdown();
+        client.shutdown();
         //end(clusters);
 
 

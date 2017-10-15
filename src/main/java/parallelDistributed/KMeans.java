@@ -104,6 +104,7 @@ public class KMeans {
             System.out.println(localCount+": cluster "+i+" cleared");
         }
 
+
     }
 
     private static int assignCluster(Map clusters, Map points, int pointsPart, long localCount, int numNodes, long iteration, Map<Integer, Integer> clearIter) {
@@ -127,7 +128,7 @@ public class KMeans {
                 Cluster c = (Cluster) clusters.get(j);
 
                 if (clearIter.get(j) == iteration) {    // if cluster has been cleared
-                    System.out.println(clearIter.get(j) + " == " + iteration);
+                    //System.out.println(clearIter.get(j) + " == " + iteration);
                     distance = Point.distance(point, c.getCentroid());
                     if (distance < min) {
                         min = distance;
@@ -163,7 +164,6 @@ public class KMeans {
                     repetitionMax--;
                 }
             }
-            System.out.println(point);
             if (distance < max) { // if any point is ready
                 point.setCluster(cluster);
                 Cluster aux = (Cluster) clusters.get(cluster);
@@ -275,9 +275,13 @@ public class KMeans {
     }
 
     public static void run(int numClusters, int num_points, int minCoordinate, int maxCoordinate, int numIter, int numNodes) {
+        long startTime = System.currentTimeMillis();
         Config conf = new Config();
         conf.getGroupConfig().setName("kmeansName").setPassword("kmeansPass");
+
         HazelcastInstance instance = Hazelcast.newHazelcastInstance(conf);
+        IAtomicLong finished = instance.getAtomicLong("finished");
+        finished.set(0);
 
         ConcurrentMap points = Point.createRandomPoints(minCoordinate, maxCoordinate, num_points, instance);
         ConcurrentMap<Integer,Integer> clearIter = instance.getMap("clearIter");        // Keeps track of the number of "clear" iterations of each cluster
@@ -294,7 +298,16 @@ public class KMeans {
         int pointsPart = points.size()/numNodes;
         int clustersPart = clusters.size()/numNodes;
 
-        calculate(clusters, points, clustersPart, pointsPart, localCount, numNodes, clearIter, instance);
+        calculate(clusters, points, clustersPart, pointsPart, localCount, numNodes, clearIter, instance); // main call
+
+        finished.incrementAndGet(); // Counts finished processes
+        while (finished.get() != numNodes){
+
+        }
+
+
+        long finalTime = System.currentTimeMillis();            // When lock released, time elapsed time
+        debugEnd((finalTime-startTime)/1000, true, 0);    // Create a file with info about time (avoids busy st out)
         debugEnd(localCount, true, 0);
         //end(clusters);
 
@@ -302,13 +315,20 @@ public class KMeans {
 
     public static void runSecondary(int numClusters, int num_points, int minCoordinate, int maxCoordinate, int numIter, int numNodes) {
         ClientConfig clientConfig = new ClientConfig();
+        clientConfig.getNetworkConfig().setConnectionAttemptLimit(15);
         clientConfig.getGroupConfig().setName("kmeansName").setPassword("kmeansPass");
         HazelcastInstance client = HazelcastClient.newHazelcastClient(clientConfig);
+
 
         ConcurrentMap points = client.getMap("points");
         ConcurrentMap clusters = client.getMap("clusters");
         ConcurrentMap<Integer,Integer> clearIter = client.getMap("clearIter");
 
+
+        while(points.size()!=num_points || clusters.size() != numClusters || clearIter.size() != numClusters){
+            // Wait for initialization
+            // Todo: could be optimized putting thread to sleep, now hazelcast exception stops execution
+        }
         IAtomicLong count = client.getAtomicLong("count");
         long localCount = count.incrementAndGet();
         if (localCount>numNodes){
@@ -321,6 +341,10 @@ public class KMeans {
         int clustersPart = clusters.size()/numNodes;
 
         if (calculate(clusters, points, clustersPart, pointsPart, localCount, numNodes, clearIter, client) ==0) {
+            IAtomicLong finished = client.getAtomicLong("finished");
+            finished.incrementAndGet();
+           
+
             debugEnd(localCount, true, 0);
         }
         client.shutdown();
@@ -333,7 +357,7 @@ public class KMeans {
     public static void debugEnd(long localCount, boolean endSuccessful, int stoppedAt){
         String pid="_";
         if (endSuccessful){
-            pid = String.valueOf(localCount)+"OK";
+            pid = String.valueOf(localCount)+"_OK";
         } else {
             pid = String.valueOf(localCount)+"KO!"+String.valueOf(stoppedAt);
         }

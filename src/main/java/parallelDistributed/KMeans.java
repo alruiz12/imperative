@@ -333,7 +333,7 @@ public class KMeans {
         long localCount = count.incrementAndGet();
         if (localCount>numNodes){
             // Todo: create distributed long for numNodes and update it as needed
-            System.out.println("number of nodes increased");
+            System.out.println("number of nodes increased, localcount: "+ localCount+", numNodes: "+numNodes);
             return;
         }
 

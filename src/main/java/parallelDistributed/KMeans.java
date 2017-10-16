@@ -4,9 +4,7 @@ package parallelDistributed;
 import com.hazelcast.client.HazelcastClient;
 import com.hazelcast.client.config.ClientConfig;
 import com.hazelcast.config.Config;
-import com.hazelcast.core.Hazelcast;
-import com.hazelcast.core.HazelcastInstance;
-import com.hazelcast.core.IAtomicLong;
+import com.hazelcast.core.*;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -51,11 +49,15 @@ public class KMeans {
         boolean finish = false;
         long iteration = 1;
         int retValue=-1;
+        List<Point> lastCentroids = new ArrayList<>();
 
         // Add in new data, one at a time, recalculating centroids with each new one.
         while(!finish) {
-            //Clear cluster state
+            instance.getAtomicReference("distance").set(0.1);
+            //Clear clusters point list (doesn't clear centroids)
             clearClusters(clusters, clustersPart, localCount, numNodes, iteration, clearIter, instance);
+
+            getLocalCentroids(clusters, clustersPart, localCount, numNodes, lastCentroids);   // fills lastCentroids up
 
             //Assign points to the closest cluster
             retValue=assignCluster(clusters, points, pointsPart, localCount, numNodes, iteration, clearIter);
@@ -68,24 +70,73 @@ public class KMeans {
 
             System.out.println("waiting for assignCluster done: "+instance.getAtomicLong("assignsFinished").get());
 
+            instance.getAtomicLong("assignsFinished").compareAndSet(numNodes, 0L);  // reset assignsFinished for next iteration
+
             //Calculate new centroids.
             calculateCentroids(clusters, points, clustersPart, localCount, numNodes, iteration, clearIter, instance); // Todo now!!!!!!!!!!!!
-            
+
+            // Calculates total distance between new and old Centroids
+            double distance = 0;
+            int i = (int) ((localCount-1)*clustersPart);
+            for (Point oldCentroid: lastCentroids ) {
+                Cluster c = (Cluster) clusters.get(i);
+                Point currentCentroid = c.getCentroid();
+                distance += Point.distance(oldCentroid, currentCentroid);
+                i++;
+            }
+
+            System.out.println("before alter: *************** "+instance.getAtomicReference("distance").get());
+
+            IAtomicReference<Double> ref = instance.getAtomicReference("distance");
+
+
+            IFunction<Object, Object> add = x -> new Double((double)x+1);
 /*
-
-
-            //Calculates total distance between new and old Centroids
-            AtomicDouble distance = new AtomicDouble();
-            for(int i = 0; i < lastCentroids.size(); i++) {
-                distance.getAndAdd(Point.distance(lastCentroids.get(i),currentCentroids.get(i)));
+             abstract class IncFunction implements IFunction<Object,Object> {
+                public Double apply(Double input){
+                    if(input == null) return new Double(1);
+                    return input++;
+                }
             }
+*/
+            instance.getAtomicReference("distance").alter(new IFunction<Object, Object>() {
+                @Override
+                public Object apply(Object o) {
+                    return new Double(0.2+ ((double) o));
+                }
+                /*@Override
+                public Object apply(Object o) {
 
-            if (distance.compareAndSet(0.0,0.0)){
-                finish = true;
-            }
+                    return new Double( (double) o +1.0);
+                }
+                */
+            });
+
+
+            /*
+            instance.getAtomicReference("distance").alter(new IFunction<Object, Object>() {
+                @Override
+                public Object apply(Object o) {
+                    double aux = (Double) o;
+
+                    return aux + (Double)instance.getAtomicReference("distance").get() ;
+                }
+
+
+            });
             */
+/*
+            instance.getAtomicReference("distance").alter((IFunction<Object, Object>) o ->
+                    (Double) o + (Double) instance.getAtomicReference("distance").get());
+*/
+            System.out.println("AFTER alter: *************** "+instance.getAtomicReference("distance").get());
+
+
+            //if (distance == 0){ finish= true; }
+
+            //System.out.println("******************************* DISTANCE = "+distance);
+            finish= true;
             iteration++;
-            finish=true;
         }
         return retValue;
     }
@@ -110,6 +161,19 @@ public class KMeans {
         }
 
 
+    }
+    private static void getLocalCentroids(ConcurrentMap clusters, int clustersPart, long localCount, int numNodes, List<Point> lastCentroids){
+        int module = 0;
+
+        if (localCount == numNodes) { // if it's last node
+            module=clusters.size()%numNodes;
+        }
+
+        for (int i = (int) ((localCount-1)*clustersPart); i <((localCount-1)*clustersPart) + clustersPart + module; i++) {
+            // walk through its part
+            Cluster c = (Cluster) clusters.get(i);
+            lastCentroids.add(c.getCentroid());
+        }
     }
 
     private static int assignCluster(Map clusters, Map points, int pointsPart, long localCount, int numNodes, long iteration, Map<Integer, Integer> clearIter) {
@@ -212,32 +276,6 @@ public class KMeans {
         }
 
     }
-
-        //----------------------------------------------------------------
-        /*
-        for(Cluster cluster : clusters) {           // for each cluster
-            double sumX = 0;
-            double sumY = 0;
-
-            List<Point> list = cluster.getPoints();
-            int n_points = list.size();
-
-            for(Point point : list) {                       // for each of its points
-                sumX += point.getX();                           // add to process local variables
-                sumY += point.getY();
-            }
-
-            Point centroid = cluster.getCentroid();         
-            if(n_points > 0) {
-                double newX = sumX / n_points;                  // compute avg
-                double newY = sumY / n_points;
-
-                centroid.setX(newX);                            // set clusters avg
-                centroid.setY(newY);
-            }
-            };
-            */
-
 
 
     public static void end(List<Cluster> clusters){

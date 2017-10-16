@@ -60,14 +60,19 @@ public class KMeans {
             //Assign points to the closest cluster
             retValue=assignCluster(clusters, points, pointsPart, localCount, numNodes, iteration, clearIter);
 
+            instance.getAtomicLong("assignsFinished").incrementAndGet();
 
-            System.out.println("calculate end (localcount: "+localCount+" )");
+            while (instance.getAtomicLong("assignsFinished").get() != numNodes) {
+                // while "assignClusters" not finished in all processes don't start "calculateCentroids"
+            }
+
+            System.out.println("waiting for assignCluster done: "+instance.getAtomicLong("assignsFinished").get());
 
             //Calculate new centroids.
-            //calculateCentroids(clusters, clustersPart, localCount, numNodes, iteration, clearIter, instance); // Todo now!!!!!!!!!!!!
+            calculateCentroids(clusters, points, clustersPart, localCount, numNodes, iteration, clearIter, instance); // Todo now!!!!!!!!!!!!
+            
 /*
 
-            List<Point> currentCentroids = getCentroids(clusters);
 
             //Calculates total distance between new and old Centroids
             AtomicDouble distance = new AtomicDouble();
@@ -120,15 +125,14 @@ public class KMeans {
         if (localCount == numNodes) { // if it's last node
             module = points.size() % numNodes;
         }
-        for (int i = (int) ((localCount - 1) * pointsPart); i < (localCount - 1) * pointsPart + pointsPart + module; i++) {
+        for (int i = (int) ((localCount - 1) * pointsPart); i < (localCount - 1) * pointsPart + pointsPart + module; i++) {     // for each point
             // walk through its part
             Point point = (Point) points.get(i);
 
-            for (int j = 0; j < clusters.size(); j++) {
+            for (int j = 0; j < clusters.size(); j++) {     // assign to the closest cluster
                 Cluster c = (Cluster) clusters.get(j);
 
                 if (clearIter.get(j) == iteration) {    // if cluster has been cleared
-                    //System.out.println(clearIter.get(j) + " == " + iteration);
                     distance = Point.distance(point, c.getCentroid());
                     if (distance < min) {
                         min = distance;
@@ -164,8 +168,8 @@ public class KMeans {
                     repetitionMax--;
                 }
             }
-            if (distance < max) { // if any point is ready
-                point.setCluster(cluster);
+            if (distance < max) {   // if any point is ready
+                point.setCluster(cluster);                          // mark point as ready for next stage (calculateCentroids)
                 Cluster aux = (Cluster) clusters.get(cluster);
                 aux.addPoint(point);
             }
@@ -175,61 +179,65 @@ public class KMeans {
 
     }
 
-    private static void calculateCentroids(ConcurrentMap clusters, int clustersPart, long localCount, int numNodes, long iteration, ConcurrentMap<Integer, Integer> clearIter, HazelcastInstance instance) {
+    private static void calculateCentroids(ConcurrentMap clusters, ConcurrentMap points, int clustersPart, long localCount, int numNodes, long iteration, ConcurrentMap<Integer, Integer> clearIter, HazelcastInstance instance) {
+        int module = 0;
+        double sumX = 0;
+        double sumY = 0;
 
-        if (localCount < numNodes){ // if it's not last node
-            int clusterIter=0;
-            for (int i = (int) ((localCount-1)*clustersPart); i <((localCount-1)*clustersPart) + clustersPart ; i++) {
-                // walk through its part
-                Cluster c = (Cluster) clusters.get(i);
-                clusterIter = clearIter.get(i);
-                if (clusterIter < iteration){
-                    c.clear();
-                    clearIter.replace(i, clusterIter+1) ;
-                }
-            }
+        double newX = 0;
+        double newY = 0;
 
-        } else {
-            int clusterIter=0;
-            int module = clusters.size()%numNodes;
-            for (int i = (int) ((localCount-1)*clustersPart); i <((localCount-1)*clustersPart) + clustersPart + module; i++) {
-                // walk through its part (including module)
-                Cluster c = (Cluster) clusters.get(i);
-                clusterIter =  clearIter.get(i);
-                if (clusterIter < iteration){
-                    c.clear();
-                    clearIter.replace(i, clusterIter+1) ;
-                }
-
-            }
-
+        if (localCount == numNodes) { // if it's last node
+            module=clusters.size()%numNodes;
         }
+
+        for (int i = (int) ((localCount-1)*clustersPart); i <((localCount-1)*clustersPart) + clustersPart + module; i++) {      // for each cluster
+            // walk through its part
+            Cluster c = (Cluster) clusters.get(i);
+            for (Point point: c.points) {               // for each of its points
+                sumX += point.getX();                           // add to process local variables
+                sumY += point.getY();                           // Todo: either use BigDecimal or check Double.POSITIVE_INFINITY or Double.NEGATIVE_INFINITY
+            }
+
+            Point centroid = c.getCentroid();
+            int n_points = c.points.size();
+            if(n_points > 0) {
+                newX = sumX / n_points;                  // compute avg
+                newY = sumY / n_points;
+
+                centroid.setX(newX);                            // set clusters avg
+                centroid.setY(newY);
+            }
+            System.out.println(localCount+": centroid of cluster "+i+" calculated");
+        }
+
+    }
 
         //----------------------------------------------------------------
         /*
-        for(Cluster cluster : clusters) {           // parallelized
+        for(Cluster cluster : clusters) {           // for each cluster
             double sumX = 0;
             double sumY = 0;
 
             List<Point> list = cluster.getPoints();
             int n_points = list.size();
 
-            for(Point point : list) {               // Todo: can be divided in n processes
-                sumX += point.getX();
+            for(Point point : list) {                       // for each of its points
+                sumX += point.getX();                           // add to process local variables
                 sumY += point.getY();
             }
 
-            Point centroid = cluster.getCentroid();
+            Point centroid = cluster.getCentroid();         
             if(n_points > 0) {
-                double newX = sumX / n_points;
+                double newX = sumX / n_points;                  // compute avg
                 double newY = sumY / n_points;
 
-                centroid.setX(newX);
+                centroid.setX(newX);                            // set clusters avg
                 centroid.setY(newY);
             }
             };
             */
-        }
+
 
 
     public static void end(List<Cluster> clusters){

@@ -13,7 +13,7 @@ public class main3 {
             }
             final int NUM_CLUSTERS = 150;
             //Number of Points
-            final int NUM_POINTS = 350;
+            final int NUM_POINTS = 3500;
             //Min and Max X and Y
             final int MIN_COORDINATE = 0;
             final int MAX_COORDINATE = 10000;

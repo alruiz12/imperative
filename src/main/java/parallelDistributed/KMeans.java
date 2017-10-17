@@ -54,6 +54,8 @@ public class KMeans {
         // Add in new data, one at a time, recalculating centroids with each new one.
         while(!finish) {
             instance.getAtomicReference("distance").set(0.0);
+            instance.getAtomicLong("distanceCompleted").compareAndSet(numNodes, 0L);
+            instance.getAtomicLong("assignsFinished").compareAndSet(numNodes, 0L);  // reset assignsFinished for next iteration
             //Clear clusters point list (doesn't clear centroids)
             clearClusters(clusters, clustersPart, localCount, numNodes, iteration, clearIter, instance);
 
@@ -66,11 +68,8 @@ public class KMeans {
 
             while (instance.getAtomicLong("assignsFinished").get() != numNodes) {
                 // while "assignClusters" not finished in all processes don't start "calculateCentroids"
+
             }
-
-            System.out.println("waiting for assignCluster done: "+instance.getAtomicLong("assignsFinished").get());
-
-            instance.getAtomicLong("assignsFinished").compareAndSet(numNodes, 0L);  // reset assignsFinished for next iteration
 
             //Calculate new centroids.
             calculateCentroids(clusters, points, clustersPart, localCount, numNodes, iteration, clearIter, instance);
@@ -82,11 +81,11 @@ public class KMeans {
                 Cluster c = (Cluster) clusters.get(i);
                 Point currentCentroid = c.getCentroid();
                 distance += Point.distance(oldCentroid, currentCentroid);
+                System.out.println(" b4 i++ :"+i);
                 i++;
             }
-            System.out.println("7777777777777777777 iteration distance: " +distance);
+
             final double IterationDistance = distance;
-            System.out.println("before alter: *************** "+instance.getAtomicReference("distance").get());
 
             instance.getAtomicReference("distance").alter(new IFunction<Object, Object>() {
                 @Override
@@ -95,8 +94,12 @@ public class KMeans {
                 }
 
             });
+            instance.getAtomicLong("distanceCompleted").incrementAndGet();
+            while (instance.getAtomicLong("distanceCompleted").get() != numNodes){
+                // wait until all processes have finished adding their distance (alter func)
+            }
 
-            System.out.println("AFTER alter: *************** "+instance.getAtomicReference("distance").get());
+            System.out.println("ALL PROCESSES HAVE ADDED THEIR DISTANCES :"+ instance.getAtomicLong("distanceCompleted").get());
 
 
             //if (distance == 0){ finish= true; }
@@ -122,7 +125,7 @@ public class KMeans {
             clusterIter = clearIter.get(i);
             if (clusterIter < iteration){   // if cluster needs to be cleared
                 c.clear();
-                clearIter.replace(i, clusterIter+1) ;
+                clearIter.replace(i, clusterIter+1);
             }
             System.out.println(localCount+": cluster "+i+" cleared");
         }
@@ -161,6 +164,7 @@ public class KMeans {
         if (localCount == numNodes) { // if it's last node
             module = points.size() % numNodes;
         }
+        
         for (int i = (int) ((localCount - 1) * pointsPart); i < (localCount - 1) * pointsPart + pointsPart + module; i++) {     // for each point
             // walk through its part
             Point point = (Point) points.get(i);

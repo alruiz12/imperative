@@ -34,8 +34,8 @@
       <file leaf-file-name="KMeans.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/parallelDistributed/KMeans.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="57" column="104" lean-forward="true" selection-start-line="57" selection-start-column="104" selection-end-line="57" selection-end-column="104" />
+            <state relative-caret-position="-1404">
+              <caret line="166" column="8" lean-forward="false" selection-start-line="166" selection-start-column="8" selection-end-line="166" selection-end-column="8" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -1039,11 +1039,19 @@
       <workItem from="1508198038729" duration="85000" />
       <workItem from="1508198391238" duration="182000" />
       <workItem from="1508199629702" duration="124000" />
+      <workItem from="1508200629254" duration="491000" />
+      <workItem from="1508202665453" duration="169000" />
+      <workItem from="1508203517191" duration="115000" />
+      <workItem from="1508204190386" duration="276000" />
+      <workItem from="1508205020857" duration="391000" />
+      <workItem from="1508205816204" duration="156000" />
+      <workItem from="1508206341148" duration="286000" />
+      <workItem from="1508207211841" duration="139000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="50350000" />
+    <option name="totallyTimeSpent" value="52373000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="24" width="2495" height="1056" extended-state="7" />
@@ -1354,8 +1362,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/parallelDistributed/KMeans.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="57" column="104" lean-forward="true" selection-start-line="57" selection-start-column="104" selection-end-line="57" selection-end-column="104" />
+        <state relative-caret-position="-1404">
+          <caret line="166" column="8" lean-forward="false" selection-start-line="166" selection-start-column="8" selection-end-line="166" selection-end-column="8" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

@@ -53,7 +53,7 @@ public class KMeans {
 
         // Add in new data, one at a time, recalculating centroids with each new one.
         while(!finish) {
-            instance.getAtomicReference("distance").set(0.1);
+            instance.getAtomicReference("distance").set(0.0);
             //Clear clusters point list (doesn't clear centroids)
             clearClusters(clusters, clustersPart, localCount, numNodes, iteration, clearIter, instance);
 
@@ -73,7 +73,7 @@ public class KMeans {
             instance.getAtomicLong("assignsFinished").compareAndSet(numNodes, 0L);  // reset assignsFinished for next iteration
 
             //Calculate new centroids.
-            calculateCentroids(clusters, points, clustersPart, localCount, numNodes, iteration, clearIter, instance); // Todo now!!!!!!!!!!!!
+            calculateCentroids(clusters, points, clustersPart, localCount, numNodes, iteration, clearIter, instance);
 
             // Calculates total distance between new and old Centroids
             double distance = 0;
@@ -84,51 +84,18 @@ public class KMeans {
                 distance += Point.distance(oldCentroid, currentCentroid);
                 i++;
             }
-
+            System.out.println("7777777777777777777 iteration distance: " +distance);
+            final double IterationDistance = distance;
             System.out.println("before alter: *************** "+instance.getAtomicReference("distance").get());
 
-            IAtomicReference<Double> ref = instance.getAtomicReference("distance");
-
-
-            IFunction<Object, Object> add = x -> new Double((double)x+1);
-/*
-             abstract class IncFunction implements IFunction<Object,Object> {
-                public Double apply(Double input){
-                    if(input == null) return new Double(1);
-                    return input++;
-                }
-            }
-*/
             instance.getAtomicReference("distance").alter(new IFunction<Object, Object>() {
                 @Override
                 public Object apply(Object o) {
-                    return new Double(0.2+ ((double) o));
+                    return new Double(IterationDistance+ ((double) o));
                 }
-                /*@Override
-                public Object apply(Object o) {
 
-                    return new Double( (double) o +1.0);
-                }
-                */
             });
 
-
-            /*
-            instance.getAtomicReference("distance").alter(new IFunction<Object, Object>() {
-                @Override
-                public Object apply(Object o) {
-                    double aux = (Double) o;
-
-                    return aux + (Double)instance.getAtomicReference("distance").get() ;
-                }
-
-
-            });
-            */
-/*
-            instance.getAtomicReference("distance").alter((IFunction<Object, Object>) o ->
-                    (Double) o + (Double) instance.getAtomicReference("distance").get());
-*/
             System.out.println("AFTER alter: *************** "+instance.getAtomicReference("distance").get());
 
 
@@ -172,7 +139,12 @@ public class KMeans {
         for (int i = (int) ((localCount-1)*clustersPart); i <((localCount-1)*clustersPart) + clustersPart + module; i++) {
             // walk through its part
             Cluster c = (Cluster) clusters.get(i);
-            lastCentroids.add(c.getCentroid());
+            Point oldCentroid = c.getCentroid();
+            Point point = new Point();
+            point.setX(oldCentroid.getX());
+            point.setY(oldCentroid.getX());
+            lastCentroids.add(point);
+
         }
     }
 

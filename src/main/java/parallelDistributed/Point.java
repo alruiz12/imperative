@@ -57,7 +57,7 @@ public class Point implements Serializable {
         return point;
     }
 
-    protected static ConcurrentMap createRandomPoints(int min, int max, int number, HazelcastInstance instance) {
+    protected static ConcurrentMap<Integer,Point> createRandomPoints(int min, int max, int number, HazelcastInstance instance) {
         ConcurrentMap<Integer,Point> points = instance.getMap("points");
         for(int i = 0; i<number; i++) {
             Point aux = createRandomPoint(min,max);

@@ -1,0 +1,600 @@
+Oct 18, 2017 12:06:57 AM com.hazelcast.instance.AddressPicker
+INFO: [LOCAL] [kmeansName] [3.8.6] Prefer IPv4 stack is true.
+Oct 18, 2017 12:06:57 AM com.hazelcast.instance.AddressPicker
+INFO: [LOCAL] [kmeansName] [3.8.6] Picked [10.0.0.11]:5701, using socket ServerSocket[addr=/0:0:0:0:0:0:0:0,localport=5701], bind any local is true
+Oct 18, 2017 12:06:57 AM com.hazelcast.system
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Hazelcast 3.8.6 (20170921 - b1aa90b) starting at [10.0.0.11]:5701
+Oct 18, 2017 12:06:57 AM com.hazelcast.system
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Copyright (c) 2008-2016, Hazelcast, Inc. All Rights Reserved.
+Oct 18, 2017 12:06:57 AM com.hazelcast.system
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Configured Hazelcast Serialization version : 1
+Oct 18, 2017 12:07:00 AM com.hazelcast.spi.impl.operationservice.impl.BackpressureRegulator
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Backpressure is disabled
+Oct 18, 2017 12:07:02 AM com.hazelcast.instance.Node
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Creating MulticastJoiner
+Oct 18, 2017 12:07:02 AM com.hazelcast.spi.impl.operationexecutor.impl.OperationExecutorImpl
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Starting 3 partition threads
+Oct 18, 2017 12:07:02 AM com.hazelcast.spi.impl.operationexecutor.impl.OperationExecutorImpl
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Starting 3 generic threads (1 dedicated for priority tasks)
+Oct 18, 2017 12:07:02 AM com.hazelcast.core.LifecycleService
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] [10.0.0.11]:5701 is STARTING
+Oct 18, 2017 12:07:02 AM com.hazelcast.nio.tcp.SocketAcceptorThread
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Accepting socket connection from /127.0.0.1:57022
+Oct 18, 2017 12:07:02 AM com.hazelcast.nio.tcp.SocketAcceptorThread
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Accepting socket connection from /127.0.0.1:57026
+Oct 18, 2017 12:07:02 AM com.hazelcast.nio.tcp.SocketAcceptorThread
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Accepting socket connection from /127.0.0.1:57030
+Oct 18, 2017 12:07:02 AM com.hazelcast.nio.tcp.SocketAcceptorThread
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Accepting socket connection from /127.0.0.1:57038
+Oct 18, 2017 12:07:03 AM com.hazelcast.nio.tcp.SocketAcceptorThread
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Accepting socket connection from /127.0.0.1:57042
+Oct 18, 2017 12:07:03 AM com.hazelcast.nio.tcp.SocketAcceptorThread
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Accepting socket connection from /127.0.0.1:57044
+Oct 18, 2017 12:07:03 AM com.hazelcast.nio.tcp.SocketAcceptorThread
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Accepting socket connection from /127.0.0.1:57050
+Oct 18, 2017 12:07:03 AM com.hazelcast.nio.tcp.SocketAcceptorThread
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Accepting socket connection from /127.0.0.1:57056
+Oct 18, 2017 12:07:03 AM com.hazelcast.nio.tcp.SocketAcceptorThread
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Accepting socket connection from /127.0.0.1:57058
+Oct 18, 2017 12:07:03 AM com.hazelcast.nio.tcp.SocketAcceptorThread
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Accepting socket connection from /127.0.0.1:57060
+Oct 18, 2017 12:07:03 AM com.hazelcast.nio.tcp.SocketAcceptorThread
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Accepting socket connection from /127.0.0.1:57062
+Oct 18, 2017 12:07:03 AM com.hazelcast.nio.tcp.SocketAcceptorThread
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Accepting socket connection from /127.0.0.1:57064
+Oct 18, 2017 12:07:03 AM com.hazelcast.nio.tcp.SocketAcceptorThread
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Accepting socket connection from /127.0.0.1:57068
+Oct 18, 2017 12:07:03 AM com.hazelcast.nio.tcp.SocketAcceptorThread
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Accepting socket connection from /127.0.0.1:57074
+Oct 18, 2017 12:07:03 AM com.hazelcast.nio.tcp.SocketAcceptorThread
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Accepting socket connection from /127.0.0.1:57076
+Oct 18, 2017 12:07:03 AM com.hazelcast.nio.tcp.SocketAcceptorThread
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Accepting socket connection from /127.0.0.1:57078
+Oct 18, 2017 12:07:03 AM com.hazelcast.nio.tcp.SocketAcceptorThread
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Accepting socket connection from /127.0.0.1:57084
+Oct 18, 2017 12:07:03 AM com.hazelcast.nio.tcp.SocketAcceptorThread
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Accepting socket connection from /127.0.0.1:57090
+Oct 18, 2017 12:07:03 AM com.hazelcast.nio.tcp.SocketAcceptorThread
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Accepting socket connection from /127.0.0.1:57096
+Oct 18, 2017 12:07:03 AM com.hazelcast.nio.tcp.TcpIpConnectionManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Established socket connection between /127.0.0.1:5701 and /127.0.0.1:57022
+Oct 18, 2017 12:07:03 AM com.hazelcast.nio.tcp.TcpIpConnectionManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Established socket connection between /127.0.0.1:5701 and /127.0.0.1:57026
+Oct 18, 2017 12:07:03 AM com.hazelcast.nio.tcp.TcpIpConnectionManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Established socket connection between /127.0.0.1:5701 and /127.0.0.1:57090
+Oct 18, 2017 12:07:03 AM com.hazelcast.nio.tcp.TcpIpConnectionManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Established socket connection between /127.0.0.1:5701 and /127.0.0.1:57096
+Oct 18, 2017 12:07:03 AM com.hazelcast.nio.tcp.TcpIpConnectionManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Established socket connection between /127.0.0.1:5701 and /127.0.0.1:57030
+Oct 18, 2017 12:07:03 AM com.hazelcast.nio.tcp.TcpIpConnectionManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Established socket connection between /127.0.0.1:5701 and /127.0.0.1:57038
+Oct 18, 2017 12:07:03 AM com.hazelcast.nio.tcp.TcpIpConnectionManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Established socket connection between /127.0.0.1:5701 and /127.0.0.1:57042
+Oct 18, 2017 12:07:03 AM com.hazelcast.nio.tcp.TcpIpConnectionManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Established socket connection between /127.0.0.1:5701 and /127.0.0.1:57044
+Oct 18, 2017 12:07:03 AM com.hazelcast.nio.tcp.TcpIpConnectionManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Established socket connection between /127.0.0.1:5701 and /127.0.0.1:57050
+Oct 18, 2017 12:07:03 AM com.hazelcast.nio.tcp.TcpIpConnectionManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Established socket connection between /127.0.0.1:5701 and /127.0.0.1:57060
+Oct 18, 2017 12:07:03 AM com.hazelcast.nio.tcp.TcpIpConnectionManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Established socket connection between /127.0.0.1:5701 and /127.0.0.1:57058
+Oct 18, 2017 12:07:03 AM com.hazelcast.nio.tcp.TcpIpConnectionManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Established socket connection between /127.0.0.1:5701 and /127.0.0.1:57056
+Oct 18, 2017 12:07:03 AM com.hazelcast.nio.tcp.TcpIpConnectionManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Established socket connection between /127.0.0.1:5701 and /127.0.0.1:57062
+Oct 18, 2017 12:07:03 AM com.hazelcast.nio.tcp.TcpIpConnectionManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Established socket connection between /127.0.0.1:5701 and /127.0.0.1:57076
+Oct 18, 2017 12:07:03 AM com.hazelcast.nio.tcp.TcpIpConnectionManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Established socket connection between /127.0.0.1:5701 and /127.0.0.1:57068
+Oct 18, 2017 12:07:03 AM com.hazelcast.nio.tcp.TcpIpConnectionManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Established socket connection between /127.0.0.1:5701 and /127.0.0.1:57064
+Oct 18, 2017 12:07:03 AM com.hazelcast.nio.tcp.TcpIpConnectionManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Established socket connection between /127.0.0.1:5701 and /127.0.0.1:57074
+Oct 18, 2017 12:07:03 AM com.hazelcast.nio.tcp.TcpIpConnectionManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Established socket connection between /127.0.0.1:5701 and /127.0.0.1:57078
+Oct 18, 2017 12:07:03 AM com.hazelcast.nio.tcp.TcpIpConnectionManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Established socket connection between /127.0.0.1:5701 and /127.0.0.1:57084
+Oct 18, 2017 12:07:04 AM com.hazelcast.system
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Cluster version set to 3.8
+Oct 18, 2017 12:07:04 AM com.hazelcast.internal.cluster.impl.MulticastJoiner
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] 
+
+
+Members [1] {
+	Member [10.0.0.11]:5701 - 4d653d9b-1c36-41ff-89f8-0854504f8108 this
+}
+
+Oct 18, 2017 12:07:05 AM com.hazelcast.core.LifecycleService
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] [10.0.0.11]:5701 is STARTED
+Oct 18, 2017 12:07:05 AM com.hazelcast.internal.partition.impl.PartitionStateManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Initializing cluster partition table arrangement...
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.impl.protocol.task.AuthenticationMessageTask
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Received auth from Connection[id=3, /127.0.0.1:5701->/127.0.0.1:57090, endpoint=null, alive=true, type=JAVA_CLIENT], successfully authenticated, principal : ClientPrincipal{uuid='141a749a-7d60-4710-a7d8-deeaa873242e', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, owner connection : true, client version : 3.8.6
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.impl.protocol.task.AuthenticationMessageTask
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Received auth from Connection[id=6, /127.0.0.1:5701->/127.0.0.1:57038, endpoint=null, alive=true, type=JAVA_CLIENT], successfully authenticated, principal : ClientPrincipal{uuid='e6aa14de-d1aa-433b-a632-413e1431c109', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, owner connection : true, client version : 3.8.6
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.impl.protocol.task.AuthenticationMessageTask
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Received auth from Connection[id=1, /127.0.0.1:5701->/127.0.0.1:57022, endpoint=null, alive=true, type=JAVA_CLIENT], successfully authenticated, principal : ClientPrincipal{uuid='2163509c-43f3-4c6d-9462-63f8f6f9ac35', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, owner connection : true, client version : 3.8.6
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.impl.protocol.task.AuthenticationMessageTask
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Received auth from Connection[id=8, /127.0.0.1:5701->/127.0.0.1:57044, endpoint=null, alive=true, type=JAVA_CLIENT], successfully authenticated, principal : ClientPrincipal{uuid='99da7f9b-0a15-4572-ba84-9e5dcbbf82bd', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, owner connection : true, client version : 3.8.6
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.impl.protocol.task.AuthenticationMessageTask
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Received auth from Connection[id=18, /127.0.0.1:5701->/127.0.0.1:57078, endpoint=null, alive=true, type=JAVA_CLIENT], successfully authenticated, principal : ClientPrincipal{uuid='889a0ab6-b4f9-4c5e-9068-286a1feff312', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, owner connection : true, client version : 3.8.6
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.impl.protocol.task.AuthenticationMessageTask
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Received auth from Connection[id=14, /127.0.0.1:5701->/127.0.0.1:57076, endpoint=null, alive=true, type=JAVA_CLIENT], successfully authenticated, principal : ClientPrincipal{uuid='d7cb8540-f164-48d6-b877-024c5e0776f9', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, owner connection : true, client version : 3.8.6
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.impl.protocol.task.AuthenticationMessageTask
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Received auth from Connection[id=15, /127.0.0.1:5701->/127.0.0.1:57068, endpoint=null, alive=true, type=JAVA_CLIENT], successfully authenticated, principal : ClientPrincipal{uuid='43f77e2d-1904-4434-ab01-59da92f79ec2', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, owner connection : true, client version : 3.8.6
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.impl.protocol.task.AuthenticationMessageTask
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Received auth from Connection[id=12, /127.0.0.1:5701->/127.0.0.1:57056, endpoint=null, alive=true, type=JAVA_CLIENT], successfully authenticated, principal : ClientPrincipal{uuid='414af21d-22f1-4f0e-8177-560b61ca52ac', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, owner connection : true, client version : 3.8.6
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.impl.protocol.task.AuthenticationMessageTask
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Received auth from Connection[id=2, /127.0.0.1:5701->/127.0.0.1:57026, endpoint=null, alive=true, type=JAVA_CLIENT], successfully authenticated, principal : ClientPrincipal{uuid='25bc8f7d-2c9b-48a7-a99d-b2cf2baa0927', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, owner connection : true, client version : 3.8.6
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.impl.protocol.task.AuthenticationMessageTask
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Received auth from Connection[id=11, /127.0.0.1:5701->/127.0.0.1:57058, endpoint=null, alive=true, type=JAVA_CLIENT], successfully authenticated, principal : ClientPrincipal{uuid='c7f47ef8-53dd-42b6-9e3a-1aa5b5839b25', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, owner connection : true, client version : 3.8.6
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.impl.protocol.task.AuthenticationMessageTask
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Received auth from Connection[id=5, /127.0.0.1:5701->/127.0.0.1:57030, endpoint=null, alive=true, type=JAVA_CLIENT], successfully authenticated, principal : ClientPrincipal{uuid='4a953b1b-fac3-4641-902b-c93e73736028', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, owner connection : true, client version : 3.8.6
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.impl.protocol.task.AuthenticationMessageTask
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Received auth from Connection[id=9, /127.0.0.1:5701->/127.0.0.1:57050, endpoint=null, alive=true, type=JAVA_CLIENT], successfully authenticated, principal : ClientPrincipal{uuid='202f4ce6-da75-498f-82d8-79c3036c6f24', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, owner connection : true, client version : 3.8.6
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.impl.protocol.task.AuthenticationMessageTask
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Received auth from Connection[id=16, /127.0.0.1:5701->/127.0.0.1:57064, endpoint=null, alive=true, type=JAVA_CLIENT], successfully authenticated, principal : ClientPrincipal{uuid='2d23f2c8-6199-4b13-8c26-8d99515c26ed', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, owner connection : true, client version : 3.8.6
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.impl.protocol.task.AuthenticationMessageTask
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Received auth from Connection[id=13, /127.0.0.1:5701->/127.0.0.1:57062, endpoint=null, alive=true, type=JAVA_CLIENT], successfully authenticated, principal : ClientPrincipal{uuid='f234f9e2-1aa9-40c8-a004-096fb49d7dd1', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, owner connection : true, client version : 3.8.6
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.impl.protocol.task.AuthenticationMessageTask
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Received auth from Connection[id=10, /127.0.0.1:5701->/127.0.0.1:57060, endpoint=null, alive=true, type=JAVA_CLIENT], successfully authenticated, principal : ClientPrincipal{uuid='c607f9a6-900b-4996-aea9-3dae5abf64bb', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, owner connection : true, client version : 3.8.6
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.impl.protocol.task.AuthenticationMessageTask
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Received auth from Connection[id=4, /127.0.0.1:5701->/127.0.0.1:57096, endpoint=null, alive=true, type=JAVA_CLIENT], successfully authenticated, principal : ClientPrincipal{uuid='bcb92e88-ff55-4464-be94-e0c6a5de8598', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, owner connection : true, client version : 3.8.6
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.impl.protocol.task.AuthenticationMessageTask
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Received auth from Connection[id=7, /127.0.0.1:5701->/127.0.0.1:57042, endpoint=null, alive=true, type=JAVA_CLIENT], successfully authenticated, principal : ClientPrincipal{uuid='fb447324-bba3-4fb5-8688-f3be2170a568', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, owner connection : true, client version : 3.8.6
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.impl.protocol.task.AuthenticationMessageTask
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Received auth from Connection[id=17, /127.0.0.1:5701->/127.0.0.1:57074, endpoint=null, alive=true, type=JAVA_CLIENT], successfully authenticated, principal : ClientPrincipal{uuid='91aa4ca2-3726-44f5-9422-3ceaf6fd5fa4', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, owner connection : true, client version : 3.8.6
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.impl.protocol.task.AuthenticationMessageTask
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Received auth from Connection[id=19, /127.0.0.1:5701->/127.0.0.1:57084, endpoint=null, alive=true, type=JAVA_CLIENT], successfully authenticated, principal : ClientPrincipal{uuid='bff5937e-4c1c-4e7a-ba97-b626ce81d7d8', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, owner connection : true, client version : 3.8.6
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.TcpIpConnection
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Connection[id=3, /127.0.0.1:5701->/127.0.0.1:57090, endpoint=[127.0.0.1]:57090, alive=false, type=JAVA_CLIENT] closed. Reason: Connection closed by the other side
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.ClientEndpointManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Destroying ClientEndpoint{connection=Connection[id=3, 0.0.0.0/0.0.0.0:5701->/127.0.0.1:57090, endpoint=[127.0.0.1]:57090, alive=false, type=JAVA_CLIENT], principal='ClientPrincipal{uuid='141a749a-7d60-4710-a7d8-deeaa873242e', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, firstConnection=true, authenticated=true, clientVersion=3.8.6}
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.TcpIpConnection
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Connection[id=1, /127.0.0.1:5701->/127.0.0.1:57022, endpoint=[127.0.0.1]:57022, alive=false, type=JAVA_CLIENT] closed. Reason: Connection closed by the other side
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.TcpIpConnection
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Connection[id=10, /127.0.0.1:5701->/127.0.0.1:57060, endpoint=[127.0.0.1]:57060, alive=false, type=JAVA_CLIENT] closed. Reason: Connection closed by the other side
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.ClientEndpointManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Destroying ClientEndpoint{connection=Connection[id=10, 0.0.0.0/0.0.0.0:5701->/127.0.0.1:57060, endpoint=[127.0.0.1]:57060, alive=false, type=JAVA_CLIENT], principal='ClientPrincipal{uuid='c607f9a6-900b-4996-aea9-3dae5abf64bb', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, firstConnection=true, authenticated=true, clientVersion=3.8.6}
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.SocketAcceptorThread
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Accepting socket connection from /127.0.0.1:57104
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.SocketAcceptorThread
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Accepting socket connection from /127.0.0.1:57106
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.TcpIpConnection
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Connection[id=12, /127.0.0.1:5701->/127.0.0.1:57056, endpoint=[127.0.0.1]:57056, alive=false, type=JAVA_CLIENT] closed. Reason: Connection closed by the other side
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.TcpIpConnectionManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Established socket connection between /127.0.0.1:5701 and /127.0.0.1:57104
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.TcpIpConnection
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Connection[id=2, /127.0.0.1:5701->/127.0.0.1:57026, endpoint=[127.0.0.1]:57026, alive=false, type=JAVA_CLIENT] closed. Reason: Connection closed by the other side
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.ClientEndpointManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Destroying ClientEndpoint{connection=Connection[id=1, 0.0.0.0/0.0.0.0:5701->null, endpoint=[127.0.0.1]:57022, alive=false, type=JAVA_CLIENT], principal='ClientPrincipal{uuid='2163509c-43f3-4c6d-9462-63f8f6f9ac35', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, firstConnection=true, authenticated=true, clientVersion=3.8.6}
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.TcpIpConnection
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Connection[id=18, /127.0.0.1:5701->/127.0.0.1:57078, endpoint=[127.0.0.1]:57078, alive=false, type=JAVA_CLIENT] closed. Reason: Connection closed by the other side
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.ClientEndpointManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Destroying ClientEndpoint{connection=Connection[id=12, 0.0.0.0/0.0.0.0:5701->/127.0.0.1:57056, endpoint=[127.0.0.1]:57056, alive=false, type=JAVA_CLIENT], principal='ClientPrincipal{uuid='414af21d-22f1-4f0e-8177-560b61ca52ac', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, firstConnection=true, authenticated=true, clientVersion=3.8.6}
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.TcpIpConnectionManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Established socket connection between /127.0.0.1:5701 and /127.0.0.1:57106
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.TcpIpConnection
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Connection[id=15, /127.0.0.1:5701->/127.0.0.1:57068, endpoint=[127.0.0.1]:57068, alive=false, type=JAVA_CLIENT] closed. Reason: Connection closed by the other side
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.ClientEndpointManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Destroying ClientEndpoint{connection=Connection[id=18, 0.0.0.0/0.0.0.0:5701->/127.0.0.1:57078, endpoint=[127.0.0.1]:57078, alive=false, type=JAVA_CLIENT], principal='ClientPrincipal{uuid='889a0ab6-b4f9-4c5e-9068-286a1feff312', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, firstConnection=true, authenticated=true, clientVersion=3.8.6}
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.ClientEndpointManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Destroying ClientEndpoint{connection=Connection[id=15, 0.0.0.0/0.0.0.0:5701->/127.0.0.1:57068, endpoint=[127.0.0.1]:57068, alive=false, type=JAVA_CLIENT], principal='ClientPrincipal{uuid='43f77e2d-1904-4434-ab01-59da92f79ec2', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, firstConnection=true, authenticated=true, clientVersion=3.8.6}
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.SocketAcceptorThread
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Accepting socket connection from /127.0.0.1:57116
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.TcpIpConnection
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Connection[id=8, /127.0.0.1:5701->/127.0.0.1:57044, endpoint=[127.0.0.1]:57044, alive=false, type=JAVA_CLIENT] closed. Reason: Connection closed by the other side
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.TcpIpConnectionManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Established socket connection between /127.0.0.1:5701 and /127.0.0.1:57116
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.ClientEndpointManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Destroying ClientEndpoint{connection=Connection[id=8, 0.0.0.0/0.0.0.0:5701->/127.0.0.1:57044, endpoint=[127.0.0.1]:57044, alive=false, type=JAVA_CLIENT], principal='ClientPrincipal{uuid='99da7f9b-0a15-4572-ba84-9e5dcbbf82bd', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, firstConnection=true, authenticated=true, clientVersion=3.8.6}
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.SocketAcceptorThread
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Accepting socket connection from /127.0.0.1:57120
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.TcpIpConnection
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Connection[id=11, /127.0.0.1:5701->/127.0.0.1:57058, endpoint=[127.0.0.1]:57058, alive=false, type=JAVA_CLIENT] closed. Reason: Connection closed by the other side
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.ClientEndpointManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Destroying ClientEndpoint{connection=Connection[id=2, 0.0.0.0/0.0.0.0:5701->null, endpoint=[127.0.0.1]:57026, alive=false, type=JAVA_CLIENT], principal='ClientPrincipal{uuid='25bc8f7d-2c9b-48a7-a99d-b2cf2baa0927', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, firstConnection=true, authenticated=true, clientVersion=3.8.6}
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.impl.protocol.task.AuthenticationMessageTask
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Received auth from Connection[id=21, /127.0.0.1:5701->/127.0.0.1:57106, endpoint=null, alive=true, type=JAVA_CLIENT], successfully authenticated, principal : ClientPrincipal{uuid='60100d53-79f5-4b8c-badb-2bb886e9da80', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, owner connection : true, client version : 3.8.6
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.ClientEndpointManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Destroying ClientEndpoint{connection=Connection[id=11, 0.0.0.0/0.0.0.0:5701->/127.0.0.1:57058, endpoint=[127.0.0.1]:57058, alive=false, type=JAVA_CLIENT], principal='ClientPrincipal{uuid='c7f47ef8-53dd-42b6-9e3a-1aa5b5839b25', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, firstConnection=true, authenticated=true, clientVersion=3.8.6}
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.TcpIpConnection
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Connection[id=5, /127.0.0.1:5701->/127.0.0.1:57030, endpoint=[127.0.0.1]:57030, alive=false, type=JAVA_CLIENT] closed. Reason: Connection closed by the other side
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.impl.protocol.task.AuthenticationMessageTask
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Received auth from Connection[id=20, /127.0.0.1:5701->/127.0.0.1:57104, endpoint=null, alive=true, type=JAVA_CLIENT], successfully authenticated, principal : ClientPrincipal{uuid='da71acf9-4076-499b-9ef4-1caa4701d654', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, owner connection : true, client version : 3.8.6
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.impl.protocol.task.AuthenticationMessageTask
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Received auth from Connection[id=22, /127.0.0.1:5701->/127.0.0.1:57116, endpoint=null, alive=true, type=JAVA_CLIENT], successfully authenticated, principal : ClientPrincipal{uuid='536a4d1d-ba05-4550-ae26-02ea205f3796', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, owner connection : true, client version : 3.8.6
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.ClientEndpointManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Destroying ClientEndpoint{connection=Connection[id=5, 0.0.0.0/0.0.0.0:5701->null, endpoint=[127.0.0.1]:57030, alive=false, type=JAVA_CLIENT], principal='ClientPrincipal{uuid='4a953b1b-fac3-4641-902b-c93e73736028', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, firstConnection=true, authenticated=true, clientVersion=3.8.6}
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.TcpIpConnectionManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Established socket connection between /127.0.0.1:5701 and /127.0.0.1:57120
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.SocketAcceptorThread
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Accepting socket connection from /127.0.0.1:57128
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.impl.protocol.task.AuthenticationMessageTask
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Received auth from Connection[id=23, /127.0.0.1:5701->/127.0.0.1:57120, endpoint=null, alive=true, type=JAVA_CLIENT], successfully authenticated, principal : ClientPrincipal{uuid='546b056c-e96f-431b-9c74-43b2227142b2', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, owner connection : true, client version : 3.8.6
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.TcpIpConnectionManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Established socket connection between /127.0.0.1:5701 and /127.0.0.1:57128
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.TcpIpConnection
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Connection[id=6, /127.0.0.1:5701->/127.0.0.1:57038, endpoint=[127.0.0.1]:57038, alive=false, type=JAVA_CLIENT] closed. Reason: Connection closed by the other side
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.impl.protocol.task.AuthenticationMessageTask
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Received auth from Connection[id=24, /127.0.0.1:5701->/127.0.0.1:57128, endpoint=null, alive=true, type=JAVA_CLIENT], successfully authenticated, principal : ClientPrincipal{uuid='1bcc540a-5531-4d1f-a9ae-1b36b282bcef', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, owner connection : true, client version : 3.8.6
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.ClientEndpointManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Destroying ClientEndpoint{connection=Connection[id=6, 0.0.0.0/0.0.0.0:5701->/127.0.0.1:57038, endpoint=[127.0.0.1]:57038, alive=false, type=JAVA_CLIENT], principal='ClientPrincipal{uuid='e6aa14de-d1aa-433b-a632-413e1431c109', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, firstConnection=true, authenticated=true, clientVersion=3.8.6}
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.SocketAcceptorThread
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Accepting socket connection from /127.0.0.1:57138
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.TcpIpConnectionManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Established socket connection between /127.0.0.1:5701 and /127.0.0.1:57138
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.SocketAcceptorThread
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Accepting socket connection from /127.0.0.1:57142
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.SocketAcceptorThread
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Accepting socket connection from /127.0.0.1:57144
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.SocketAcceptorThread
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Accepting socket connection from /127.0.0.1:57148
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.TcpIpConnectionManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Established socket connection between /127.0.0.1:5701 and /127.0.0.1:57142
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.TcpIpConnectionManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Established socket connection between /127.0.0.1:5701 and /127.0.0.1:57148
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.TcpIpConnectionManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Established socket connection between /127.0.0.1:5701 and /127.0.0.1:57144
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.TcpIpConnection
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Connection[id=16, /127.0.0.1:5701->/127.0.0.1:57064, endpoint=[127.0.0.1]:57064, alive=false, type=JAVA_CLIENT] closed. Reason: Connection closed by the other side
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.ClientEndpointManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Destroying ClientEndpoint{connection=Connection[id=16, 0.0.0.0/0.0.0.0:5701->/127.0.0.1:57064, endpoint=[127.0.0.1]:57064, alive=false, type=JAVA_CLIENT], principal='ClientPrincipal{uuid='2d23f2c8-6199-4b13-8c26-8d99515c26ed', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, firstConnection=true, authenticated=true, clientVersion=3.8.6}
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.impl.protocol.task.AuthenticationMessageTask
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Received auth from Connection[id=25, /127.0.0.1:5701->/127.0.0.1:57138, endpoint=null, alive=true, type=JAVA_CLIENT], successfully authenticated, principal : ClientPrincipal{uuid='0c4aa019-c830-4dcb-ae24-ad90cf619c15', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, owner connection : true, client version : 3.8.6
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.TcpIpConnection
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Connection[id=19, /127.0.0.1:5701->/127.0.0.1:57084, endpoint=[127.0.0.1]:57084, alive=false, type=JAVA_CLIENT] closed. Reason: Connection closed by the other side
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.impl.protocol.task.AuthenticationMessageTask
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Received auth from Connection[id=28, /127.0.0.1:5701->/127.0.0.1:57144, endpoint=null, alive=true, type=JAVA_CLIENT], successfully authenticated, principal : ClientPrincipal{uuid='3407f919-6269-48bf-9d1d-75ceaaaa21ac', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, owner connection : true, client version : 3.8.6
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.ClientEndpointManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Destroying ClientEndpoint{connection=Connection[id=19, 0.0.0.0/0.0.0.0:5701->null, endpoint=[127.0.0.1]:57084, alive=false, type=JAVA_CLIENT], principal='ClientPrincipal{uuid='bff5937e-4c1c-4e7a-ba97-b626ce81d7d8', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, firstConnection=true, authenticated=true, clientVersion=3.8.6}
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.TcpIpConnection
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Connection[id=14, /127.0.0.1:5701->/127.0.0.1:57076, endpoint=[127.0.0.1]:57076, alive=false, type=JAVA_CLIENT] closed. Reason: Connection closed by the other side
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.TcpIpConnection
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Connection[id=13, /127.0.0.1:5701->/127.0.0.1:57062, endpoint=[127.0.0.1]:57062, alive=false, type=JAVA_CLIENT] closed. Reason: Connection closed by the other side
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.SocketAcceptorThread
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Accepting socket connection from /127.0.0.1:57158
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.TcpIpConnection
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Connection[id=4, /127.0.0.1:5701->/127.0.0.1:57096, endpoint=[127.0.0.1]:57096, alive=false, type=JAVA_CLIENT] closed. Reason: Connection closed by the other side
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.TcpIpConnection
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Connection[id=9, /127.0.0.1:5701->/127.0.0.1:57050, endpoint=[127.0.0.1]:57050, alive=false, type=JAVA_CLIENT] closed. Reason: Connection closed by the other side
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.ClientEndpointManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Destroying ClientEndpoint{connection=Connection[id=9, 0.0.0.0/0.0.0.0:5701->/127.0.0.1:57050, endpoint=[127.0.0.1]:57050, alive=false, type=JAVA_CLIENT], principal='ClientPrincipal{uuid='202f4ce6-da75-498f-82d8-79c3036c6f24', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, firstConnection=true, authenticated=true, clientVersion=3.8.6}
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.impl.protocol.task.AuthenticationMessageTask
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Received auth from Connection[id=26, /127.0.0.1:5701->/127.0.0.1:57142, endpoint=null, alive=true, type=JAVA_CLIENT], successfully authenticated, principal : ClientPrincipal{uuid='6a729ff5-1dbd-4060-a764-11151d86a410', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, owner connection : true, client version : 3.8.6
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.TcpIpConnection
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Connection[id=17, /127.0.0.1:5701->/127.0.0.1:57074, endpoint=[127.0.0.1]:57074, alive=false, type=JAVA_CLIENT] closed. Reason: Connection closed by the other side
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.ClientEndpointManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Destroying ClientEndpoint{connection=Connection[id=13, 0.0.0.0/0.0.0.0:5701->/127.0.0.1:57062, endpoint=[127.0.0.1]:57062, alive=false, type=JAVA_CLIENT], principal='ClientPrincipal{uuid='f234f9e2-1aa9-40c8-a004-096fb49d7dd1', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, firstConnection=true, authenticated=true, clientVersion=3.8.6}
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.SocketAcceptorThread
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Accepting socket connection from /127.0.0.1:57164
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.TcpIpConnectionManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Established socket connection between /127.0.0.1:5701 and /127.0.0.1:57158
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.ClientEndpointManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Destroying ClientEndpoint{connection=Connection[id=14, 0.0.0.0/0.0.0.0:5701->/127.0.0.1:57076, endpoint=[127.0.0.1]:57076, alive=false, type=JAVA_CLIENT], principal='ClientPrincipal{uuid='d7cb8540-f164-48d6-b877-024c5e0776f9', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, firstConnection=true, authenticated=true, clientVersion=3.8.6}
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.ClientEndpointManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Destroying ClientEndpoint{connection=Connection[id=4, 0.0.0.0/0.0.0.0:5701->/127.0.0.1:57096, endpoint=[127.0.0.1]:57096, alive=false, type=JAVA_CLIENT], principal='ClientPrincipal{uuid='bcb92e88-ff55-4464-be94-e0c6a5de8598', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, firstConnection=true, authenticated=true, clientVersion=3.8.6}
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.TcpIpConnectionManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Established socket connection between /127.0.0.1:5701 and /127.0.0.1:57164
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.impl.protocol.task.AuthenticationMessageTask
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Received auth from Connection[id=30, /127.0.0.1:5701->/127.0.0.1:57164, endpoint=null, alive=true, type=JAVA_CLIENT], successfully authenticated, principal : ClientPrincipal{uuid='903f1919-faca-4308-b570-a1378370f78f', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, owner connection : true, client version : 3.8.6
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.SocketAcceptorThread
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Accepting socket connection from /127.0.0.1:57166
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.TcpIpConnectionManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Established socket connection between /127.0.0.1:5701 and /127.0.0.1:57166
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.ClientEndpointManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Destroying ClientEndpoint{connection=Connection[id=17, 0.0.0.0/0.0.0.0:5701->/127.0.0.1:57074, endpoint=[127.0.0.1]:57074, alive=false, type=JAVA_CLIENT], principal='ClientPrincipal{uuid='91aa4ca2-3726-44f5-9422-3ceaf6fd5fa4', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, firstConnection=true, authenticated=true, clientVersion=3.8.6}
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.impl.protocol.task.AuthenticationMessageTask
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Received auth from Connection[id=27, /127.0.0.1:5701->/127.0.0.1:57148, endpoint=null, alive=true, type=JAVA_CLIENT], successfully authenticated, principal : ClientPrincipal{uuid='70bccbf4-51a8-472b-afcd-edba31dd8f03', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, owner connection : true, client version : 3.8.6
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.TcpIpConnection
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Connection[id=7, /127.0.0.1:5701->/127.0.0.1:57042, endpoint=[127.0.0.1]:57042, alive=false, type=JAVA_CLIENT] closed. Reason: Connection closed by the other side
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.SocketAcceptorThread
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Accepting socket connection from /127.0.0.1:57176
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.SocketAcceptorThread
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Accepting socket connection from /127.0.0.1:57180
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.TcpIpConnectionManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Established socket connection between /127.0.0.1:5701 and /127.0.0.1:57176
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.TcpIpConnectionManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Established socket connection between /127.0.0.1:5701 and /127.0.0.1:57180
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.SocketAcceptorThread
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Accepting socket connection from /127.0.0.1:57182
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.SocketAcceptorThread
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Accepting socket connection from /127.0.0.1:57184
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.SocketAcceptorThread
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Accepting socket connection from /127.0.0.1:57190
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.impl.protocol.task.AuthenticationMessageTask
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Received auth from Connection[id=33, /127.0.0.1:5701->/127.0.0.1:57180, endpoint=null, alive=true, type=JAVA_CLIENT], successfully authenticated, principal : ClientPrincipal{uuid='6aa49f54-f8d0-4036-978c-87015f8690f9', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, owner connection : true, client version : 3.8.6
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.ClientEndpointManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Destroying ClientEndpoint{connection=Connection[id=7, 0.0.0.0/0.0.0.0:5701->/127.0.0.1:57042, endpoint=[127.0.0.1]:57042, alive=false, type=JAVA_CLIENT], principal='ClientPrincipal{uuid='fb447324-bba3-4fb5-8688-f3be2170a568', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, firstConnection=true, authenticated=true, clientVersion=3.8.6}
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.SocketAcceptorThread
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Accepting socket connection from /127.0.0.1:57196
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.TcpIpConnectionManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Established socket connection between /127.0.0.1:5701 and /127.0.0.1:57182
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.SocketAcceptorThread
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Accepting socket connection from /127.0.0.1:57200
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.TcpIpConnectionManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Established socket connection between /127.0.0.1:5701 and /127.0.0.1:57196
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.TcpIpConnectionManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Established socket connection between /127.0.0.1:5701 and /127.0.0.1:57184
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.TcpIpConnectionManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Established socket connection between /127.0.0.1:5701 and /127.0.0.1:57190
+Oct 18, 2017 12:07:05 AM com.hazelcast.nio.tcp.TcpIpConnectionManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Established socket connection between /127.0.0.1:5701 and /127.0.0.1:57200
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.impl.protocol.task.AuthenticationMessageTask
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Received auth from Connection[id=36, /127.0.0.1:5701->/127.0.0.1:57184, endpoint=null, alive=true, type=JAVA_CLIENT], successfully authenticated, principal : ClientPrincipal{uuid='ce83db85-8754-4249-8751-1a512bda394c', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, owner connection : true, client version : 3.8.6
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.impl.protocol.task.AuthenticationMessageTask
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Received auth from Connection[id=32, /127.0.0.1:5701->/127.0.0.1:57176, endpoint=null, alive=true, type=JAVA_CLIENT], successfully authenticated, principal : ClientPrincipal{uuid='96192adf-11ef-4413-95ec-5562ebcabe65', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, owner connection : true, client version : 3.8.6
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.impl.protocol.task.AuthenticationMessageTask
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Received auth from Connection[id=35, /127.0.0.1:5701->/127.0.0.1:57196, endpoint=null, alive=true, type=JAVA_CLIENT], successfully authenticated, principal : ClientPrincipal{uuid='18d2fb34-ba4d-4bae-95c4-3af8873564a9', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, owner connection : true, client version : 3.8.6
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.impl.protocol.task.AuthenticationMessageTask
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Received auth from Connection[id=29, /127.0.0.1:5701->/127.0.0.1:57158, endpoint=null, alive=true, type=JAVA_CLIENT], successfully authenticated, principal : ClientPrincipal{uuid='383d657e-35ba-436a-880d-bc86a51c6a79', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, owner connection : true, client version : 3.8.6
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.impl.protocol.task.AuthenticationMessageTask
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Received auth from Connection[id=38, /127.0.0.1:5701->/127.0.0.1:57200, endpoint=null, alive=true, type=JAVA_CLIENT], successfully authenticated, principal : ClientPrincipal{uuid='fbdce591-f111-4d33-aa8d-5cb5db4182a8', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, owner connection : true, client version : 3.8.6
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.impl.protocol.task.AuthenticationMessageTask
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Received auth from Connection[id=37, /127.0.0.1:5701->/127.0.0.1:57190, endpoint=null, alive=true, type=JAVA_CLIENT], successfully authenticated, principal : ClientPrincipal{uuid='90c6cf1f-0885-4064-8f05-933d1b4fc51b', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, owner connection : true, client version : 3.8.6
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.impl.protocol.task.AuthenticationMessageTask
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Received auth from Connection[id=34, /127.0.0.1:5701->/127.0.0.1:57182, endpoint=null, alive=true, type=JAVA_CLIENT], successfully authenticated, principal : ClientPrincipal{uuid='5ea92d8a-4620-4155-9d1d-bae6aa96cd80', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, owner connection : true, client version : 3.8.6
+Oct 18, 2017 12:07:05 AM com.hazelcast.client.impl.protocol.task.AuthenticationMessageTask
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Received auth from Connection[id=31, /127.0.0.1:5701->/127.0.0.1:57166, endpoint=null, alive=true, type=JAVA_CLIENT], successfully authenticated, principal : ClientPrincipal{uuid='82dc7463-84bf-48f9-854d-3261e377ec0f', ownerUuid='4d653d9b-1c36-41ff-89f8-0854504f8108'}, owner connection : true, client version : 3.8.6
+init 0
+init 1
+init 0
+init 1
+init 0
+init 1
+init 0
+init 1
+init 0
+init 1
+init 0
+init 1
+init 0
+init 1
+init 0
+init 1
+init 0
+init 1
+init 0
+init 1
+init 0
+init 1
+init 0
+init 1
+init 0
+init 1
+init 0
+init 1
+init 0
+init 1
+init 0
+init 1
+init 0
+init 1
+init 0
+init 1
+init 0
+init 1
+init 0
+init 1
+init 0
+init 1
+init 0
+init 1
+init 0
+init 1
+init 0
+init 1
+init 0
+init 1
+init 0
+init 1
+init 0
+init 1
+init 0
+init 1
+init 0
+init 1
+init 0
+init 1
+init 0
+init 1
+init 0
+init 1
+init 0
+init 1
+init 0
+init 1
+init 0
+init 1
+init 0
+init 1
+init 0
+init 1
+init 0
+init 1
+init 0
+init 1
+init 0
+init 1
+init 0
+init 1
+init 0
+init 1
+init 0
+init 1
+init 0
+init 1
+init 0
+init 1
+preCentroids: (2479.6856954076907,5755.659290045396)
+preCentroids: (4159.2359546195,50.20501900589003)
+1: cluster 0 cleared
+1: cluster 1 cleared
+assignCluster1: cluster 40  size: 0
+assignCluster2: cluster 40  size: 0
+assignCluster3: cluster 40  size: 0
+assignCluster1: cluster 40  size: 0
+assignCluster2: cluster 40  size: 0
+assignCluster3: cluster 40  size: 0
+assignCluster1: cluster 6  size: 0
+assignCluster2: cluster 6  size: 0
+assignCluster3: cluster 6  size: 0
+assignCluster1: cluster 44  size: 0
+assignCluster2: cluster 44  size: 0
+assignCluster3: cluster 44  size: 0
+Oct 18, 2017 12:07:15 AM com.hazelcast.transaction.TransactionManagerService
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Committing/rolling-back alive transactions of client, UUID: 141a749a-7d60-4710-a7d8-deeaa873242e
+Oct 18, 2017 12:07:15 AM com.hazelcast.transaction.TransactionManagerService
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Committing/rolling-back alive transactions of client, UUID: c607f9a6-900b-4996-aea9-3dae5abf64bb
+Oct 18, 2017 12:07:15 AM com.hazelcast.transaction.TransactionManagerService
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Committing/rolling-back alive transactions of client, UUID: 2163509c-43f3-4c6d-9462-63f8f6f9ac35
+Oct 18, 2017 12:07:15 AM com.hazelcast.transaction.TransactionManagerService
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Committing/rolling-back alive transactions of client, UUID: 889a0ab6-b4f9-4c5e-9068-286a1feff312
+Oct 18, 2017 12:07:15 AM com.hazelcast.transaction.TransactionManagerService
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Committing/rolling-back alive transactions of client, UUID: 43f77e2d-1904-4434-ab01-59da92f79ec2
+Oct 18, 2017 12:07:15 AM com.hazelcast.transaction.TransactionManagerService
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Committing/rolling-back alive transactions of client, UUID: 99da7f9b-0a15-4572-ba84-9e5dcbbf82bd
+Oct 18, 2017 12:07:15 AM com.hazelcast.transaction.TransactionManagerService
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Committing/rolling-back alive transactions of client, UUID: 25bc8f7d-2c9b-48a7-a99d-b2cf2baa0927
+Oct 18, 2017 12:07:15 AM com.hazelcast.transaction.TransactionManagerService
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Committing/rolling-back alive transactions of client, UUID: 414af21d-22f1-4f0e-8177-560b61ca52ac
+Oct 18, 2017 12:07:15 AM com.hazelcast.transaction.TransactionManagerService
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Committing/rolling-back alive transactions of client, UUID: c7f47ef8-53dd-42b6-9e3a-1aa5b5839b25
+Oct 18, 2017 12:07:15 AM com.hazelcast.transaction.TransactionManagerService
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Committing/rolling-back alive transactions of client, UUID: 4a953b1b-fac3-4641-902b-c93e73736028
+Oct 18, 2017 12:07:15 AM com.hazelcast.transaction.TransactionManagerService
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Committing/rolling-back alive transactions of client, UUID: e6aa14de-d1aa-433b-a632-413e1431c109
+Oct 18, 2017 12:07:15 AM com.hazelcast.transaction.TransactionManagerService
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Committing/rolling-back alive transactions of client, UUID: 2d23f2c8-6199-4b13-8c26-8d99515c26ed
+Oct 18, 2017 12:07:15 AM com.hazelcast.transaction.TransactionManagerService
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Committing/rolling-back alive transactions of client, UUID: bff5937e-4c1c-4e7a-ba97-b626ce81d7d8
+Oct 18, 2017 12:07:15 AM com.hazelcast.transaction.TransactionManagerService
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Committing/rolling-back alive transactions of client, UUID: f234f9e2-1aa9-40c8-a004-096fb49d7dd1
+Oct 18, 2017 12:07:15 AM com.hazelcast.transaction.TransactionManagerService
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Committing/rolling-back alive transactions of client, UUID: bcb92e88-ff55-4464-be94-e0c6a5de8598
+Oct 18, 2017 12:07:15 AM com.hazelcast.transaction.TransactionManagerService
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Committing/rolling-back alive transactions of client, UUID: d7cb8540-f164-48d6-b877-024c5e0776f9
+Oct 18, 2017 12:07:15 AM com.hazelcast.transaction.TransactionManagerService
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Committing/rolling-back alive transactions of client, UUID: 91aa4ca2-3726-44f5-9422-3ceaf6fd5fa4
+Oct 18, 2017 12:07:15 AM com.hazelcast.transaction.TransactionManagerService
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Committing/rolling-back alive transactions of client, UUID: 202f4ce6-da75-498f-82d8-79c3036c6f24
+Oct 18, 2017 12:07:15 AM com.hazelcast.transaction.TransactionManagerService
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Committing/rolling-back alive transactions of client, UUID: fb447324-bba3-4fb5-8688-f3be2170a568
+assignCluster1: cluster 15  size: 0
+assignCluster2: cluster 15  size: 0
+assignCluster3: cluster 15  size: 0
+assignCluster1: cluster 41  size: 0
+assignCluster2: cluster 41  size: 0
+assignCluster3: cluster 41  size: 0
+assignCluster1: cluster 17  size: 0
+assignCluster2: cluster 17  size: 0
+assignCluster3: cluster 17  size: 0
+assignCluster1: cluster 2  size: 0
+assignCluster2: cluster 2  size: 0
+assignCluster3: cluster 2  size: 0
+assignCluster1: cluster 16  size: 0
+assignCluster2: cluster 16  size: 0
+assignCluster3: cluster 16  size: 0
+assignCluster1: cluster 12  size: 0
+assignCluster2: cluster 12  size: 0
+assignCluster3: cluster 12  size: 0
+assignCluster1: cluster 10  size: 0
+assignCluster2: cluster 10  size: 0
+assignCluster3: cluster 10  size: 0
+assignCluster1: cluster 38  size: 0
+assignCluster2: cluster 38  size: 0
+assignCluster3: cluster 38  size: 0
+assignCluster1: cluster 31  size: 0
+assignCluster2: cluster 31  size: 0
+assignCluster3: cluster 31  size: 0
+assignCluster1: cluster 41  size: 0
+assignCluster2: cluster 41  size: 0
+assignCluster3: cluster 41  size: 0
+assignCluster1: cluster 12  size: 0
+assignCluster2: cluster 12  size: 0
+assignCluster3: cluster 12  size: 0
+assignCluster1: cluster 33  size: 0
+assignCluster2: cluster 33  size: 0
+assignCluster3: cluster 33  size: 0
+assignCluster1: cluster 43  size: 0
+assignCluster2: cluster 43  size: 0
+assignCluster3: cluster 43  size: 0
+assignCluster1: cluster 41  size: 0
+assignCluster2: cluster 41  size: 0
+assignCluster3: cluster 41  size: 0
+assignCluster1: cluster 2  size: 0
+assignCluster2: cluster 2  size: 0
+assignCluster3: cluster 2  size: 0
+assignCluster1: cluster 44  size: 0
+assignCluster2: cluster 44  size: 0
+assignCluster3: cluster 44  size: 0
+assignCluster1: cluster 2  size: 0
+assignCluster2: cluster 2  size: 0
+assignCluster3: cluster 2  size: 0
+assignCluster1: cluster 39  size: 0
+assignCluster2: cluster 39  size: 0
+assignCluster3: cluster 39  size: 0
+assignCluster1: cluster 29  size: 0
+assignCluster2: cluster 29  size: 0
+assignCluster3: cluster 29  size: 0
+assignCluster1: cluster 23  size: 0
+assignCluster2: cluster 23  size: 0
+assignCluster3: cluster 23  size: 0
+assignCluster1: cluster 10  size: 0
+assignCluster2: cluster 10  size: 0
+assignCluster3: cluster 10  size: 0
+assignCluster1: cluster 26  size: 0
+assignCluster2: cluster 26  size: 0
+assignCluster3: cluster 26  size: 0
+assignCluster1: cluster 40  size: 0
+assignCluster2: cluster 40  size: 0
+assignCluster3: cluster 40  size: 0
+assignCluster1: cluster 20  size: 0
+assignCluster2: cluster 20  size: 0
+assignCluster3: cluster 20  size: 0
+assignCluster1: cluster 36  size: 0
+assignCluster2: cluster 36  size: 0
+assignCluster3: cluster 36  size: 0
+assignCluster1: cluster 37  size: 0
+assignCluster2: cluster 37  size: 0
+assignCluster3: cluster 37  size: 0
+assignCluster1: cluster 2  size: 0
+assignCluster2: cluster 2  size: 0
+assignCluster3: cluster 2  size: 0
+assignCluster1: cluster 34  size: 0
+assignCluster2: cluster 34  size: 0
+assignCluster3: cluster 34  size: 0
+assignCluster1: cluster 40  size: 0
+assignCluster2: cluster 40  size: 0
+assignCluster3: cluster 40  size: 0
+assignCluster1: cluster 2  size: 0
+assignCluster2: cluster 2  size: 0
+assignCluster3: cluster 2  size: 0
+assignCluster1: cluster 13  size: 0
+assignCluster2: cluster 13  size: 0
+assignCluster3: cluster 13  size: 0
+assignCluster1: cluster 36  size: 0
+assignCluster2: cluster 36  size: 0
+assignCluster3: cluster 36  size: 0
+assignCluster1: cluster 33  size: 0
+assignCluster2: cluster 33  size: 0
+assignCluster3: cluster 33  size: 0
+assignCluster1: cluster 12  size: 0
+assignCluster2: cluster 12  size: 0
+assignCluster3: cluster 12  size: 0
+assignCluster1: cluster 19  size: 0
+assignCluster2: cluster 19  size: 0
+assignCluster3: cluster 19  size: 0
+assignCluster1: cluster 31  size: 0
+assignCluster2: cluster 31  size: 0
+assignCluster3: cluster 31  size: 0
+Exception in thread "main" com.hazelcast.core.HazelcastInstanceNotActiveException: Hazelcast instance is not active!
+	at com.hazelcast.spi.AbstractDistributedObject.throwNotActiveException(AbstractDistributedObject.java:104)
+	at com.hazelcast.spi.AbstractDistributedObject.lifecycleCheck(AbstractDistributedObject.java:99)
+	at com.hazelcast.spi.AbstractDistributedObject.getNodeEngine(AbstractDistributedObject.java:93)
+	at com.hazelcast.spi.AbstractDistributedObject.invokeOnPartition(AbstractDistributedObject.java:71)
+	at com.hazelcast.concurrent.atomiclong.AtomicLongProxy.getAsync(AtomicLongProxy.java:171)
+	at com.hazelcast.concurrent.atomiclong.AtomicLongProxy.get(AtomicLongProxy.java:164)
+	at parallelDistributed.KMeans.calculate(KMeans.java:106)
+	at parallelDistributed.KMeans.run(KMeans.java:396)
+	at main.main(main.java:24)

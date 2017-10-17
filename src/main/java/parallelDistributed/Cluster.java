@@ -1,6 +1,6 @@
 package parallelDistributed;
 
-import java.io.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +19,10 @@ public class Cluster implements Serializable {
         this.points = new ArrayList();
         this.centroid = null;
     }
+
+   /* public void setPoints(HazelcastInstance instance){
+        points= instance.getList(String.valueOf(id));
+    }*/
 
     public List getPoints() {
         return points;

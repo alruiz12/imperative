@@ -2,30 +2,30 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c2fc32f-86ad-4454-9718-b712f1b37b8c" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/1" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/10" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/11" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/12" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/13" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/14" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/15" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/16" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/17" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/18" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/19" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/2" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/3" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/4" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/5" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/6" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/7" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/8" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/9" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/A" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/parallelDistributed/KMeans$1.class" afterPath="$PROJECT_DIR$/target/classes/parallelDistributed/KMeans$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/parallelDistributed/KMeans.class" afterPath="$PROJECT_DIR$/target/classes/parallelDistributed/KMeans.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/parallelDistributed/KMeans.java" afterPath="$PROJECT_DIR$/src/main/java/parallelDistributed/KMeans.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/1" afterPath="$PROJECT_DIR$/target/classes/1" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/10" afterPath="$PROJECT_DIR$/target/classes/10" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/11" afterPath="$PROJECT_DIR$/target/classes/11" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/12" afterPath="$PROJECT_DIR$/target/classes/12" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/13" afterPath="$PROJECT_DIR$/target/classes/13" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/14" afterPath="$PROJECT_DIR$/target/classes/14" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/15" afterPath="$PROJECT_DIR$/target/classes/15" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/16" afterPath="$PROJECT_DIR$/target/classes/16" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/17" afterPath="$PROJECT_DIR$/target/classes/17" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/18" afterPath="$PROJECT_DIR$/target/classes/18" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/19" afterPath="$PROJECT_DIR$/target/classes/19" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/2" afterPath="$PROJECT_DIR$/target/classes/2" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/3" afterPath="$PROJECT_DIR$/target/classes/3" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/4" afterPath="$PROJECT_DIR$/target/classes/4" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/5" afterPath="$PROJECT_DIR$/target/classes/5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/6" afterPath="$PROJECT_DIR$/target/classes/6" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/7" afterPath="$PROJECT_DIR$/target/classes/7" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/8" afterPath="$PROJECT_DIR$/target/classes/8" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/9" afterPath="$PROJECT_DIR$/target/classes/9" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/A" afterPath="$PROJECT_DIR$/target/classes/A" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -44,8 +44,8 @@
       <file leaf-file-name="KMeans.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/parallelDistributed/KMeans.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="468">
-              <caret line="184" column="34" lean-forward="false" selection-start-line="184" selection-start-column="34" selection-end-line="184" selection-end-column="34" />
+            <state relative-caret-position="648">
+              <caret line="330" column="74" lean-forward="false" selection-start-line="330" selection-start-column="74" selection-end-line="330" selection-end-column="74" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -965,11 +965,12 @@
       <workItem from="1508286684977" duration="772000" />
       <workItem from="1508288192515" duration="153000" />
       <workItem from="1508289346932" duration="110000" />
+      <workItem from="1508292234034" duration="436000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="72994000" />
+    <option name="totallyTimeSpent" value="73430000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="52" width="2495" height="1028" extended-state="1" />
@@ -1275,8 +1276,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/parallelDistributed/KMeans.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="184" column="34" lean-forward="false" selection-start-line="184" selection-start-column="34" selection-end-line="184" selection-end-column="34" />
+        <state relative-caret-position="648">
+          <caret line="330" column="74" lean-forward="false" selection-start-line="330" selection-start-column="74" selection-end-line="330" selection-end-column="74" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

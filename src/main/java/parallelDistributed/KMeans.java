@@ -289,12 +289,12 @@ public class KMeans {
             if (distance < max) {   // if any point is ready
                 points.get(i).setCluster(cluster);                          // mark point as ready for next stage (calculateCentroids)
                 //Cluster aux = (Cluster) clusters.get(cluster);
-                System.out.println("assignCluster1: cluster "+cluster+"  size: "+(clusterPoints.get(cluster).size())) ;
+            //    System.out.println("assignCluster1: cluster "+cluster+"  size: "+(clusterPoints.get(cluster).size())) ;
                 clusterPoints.put(cluster, points.get(i));
                 //clusterPoints.get(cluster).add(points.get(i)); //.addPoint(points.get(i));
                 //clusters.get(cluster).points.add(points.get(i));
                 //clusters.get(cluster).
-                System.out.println("assignCluster2: cluster "+cluster+"  size: "+(clusterPoints.get(cluster).size())) ;
+            //    System.out.println("assignCluster2: cluster "+cluster+"  size: "+(clusterPoints.get(cluster).size())) ;
 
 
 
@@ -328,6 +328,7 @@ public class KMeans {
             sumY=0;     // reset for each cluster
 
             //Cluster c = (Cluster) clusters.get(i);
+            System.out.println("calcCent clusterPoints.get("+i+").size() :"+clusterPoints.get(i).size());
             for (Point point: clusterPoints.get(i) ) {               // for each of its points
                 sumX += point.getX();                           // add to process local variables
                 sumY += point.getY();                           // Todo: either use BigDecimal or check Double.POSITIVE_INFINITY or Double.NEGATIVE_INFINITY

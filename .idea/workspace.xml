@@ -2,14 +2,30 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c2fc32f-86ad-4454-9718-b712f1b37b8c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/parallelDistributed/Cluster.class" afterPath="$PROJECT_DIR$/target/classes/parallelDistributed/Cluster.class" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/1" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/10" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/11" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/12" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/13" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/14" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/15" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/16" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/17" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/18" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/19" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/2" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/3" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/4" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/5" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/6" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/7" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/8" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/9" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/A" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/parallelDistributed/KMeans$1.class" afterPath="$PROJECT_DIR$/target/classes/parallelDistributed/KMeans$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/parallelDistributed/KMeans.class" afterPath="$PROJECT_DIR$/target/classes/parallelDistributed/KMeans.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/parallelDistributed/Point.class" afterPath="$PROJECT_DIR$/target/classes/parallelDistributed/Point.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/parallelDistributed/Cluster.java" afterPath="$PROJECT_DIR$/src/main/java/parallelDistributed/Cluster.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/parallelDistributed/KMeans.java" afterPath="$PROJECT_DIR$/src/main/java/parallelDistributed/KMeans.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/parallelDistributed/Point.java" afterPath="$PROJECT_DIR$/src/main/java/parallelDistributed/Point.java" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,8 +44,20 @@
       <file leaf-file-name="KMeans.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/parallelDistributed/KMeans.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="18">
-              <caret line="10" column="22" lean-forward="true" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
+            <state relative-caret-position="468">
+              <caret line="184" column="34" lean-forward="false" selection-start-line="184" selection-start-column="34" selection-end-line="184" selection-end-column="34" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Collection.class" pinned="false" current-in-tab="false">
+        <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/java/util/Collection.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="828">
+              <caret line="55" column="9" lean-forward="false" selection-start-line="55" selection-start-column="9" selection-end-line="55" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -38,7 +66,7 @@
       <file leaf-file-name="Cluster.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/parallelDistributed/Cluster.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="287">
+            <state relative-caret-position="288">
               <caret line="18" column="29" lean-forward="false" selection-start-line="18" selection-start-column="29" selection-end-line="18" selection-end-column="29" />
               <folding />
             </state>
@@ -117,9 +145,9 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="65" />
-    <option name="y" value="24" />
+    <option name="y" value="52" />
     <option name="width" value="2495" />
-    <option name="height" value="1056" />
+    <option name="height" value="1028" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -929,15 +957,22 @@
       <workItem from="1508268807056" duration="638000" />
       <workItem from="1508277747676" duration="66000" />
       <workItem from="1508277885122" duration="121000" />
-      <workItem from="1508278153432" duration="2456000" />
+      <workItem from="1508278153432" duration="4424000" />
+      <workItem from="1508283436890" duration="187000" />
+      <workItem from="1508283719786" duration="120000" />
+      <workItem from="1508284355378" duration="803000" />
+      <workItem from="1508285343906" duration="741000" />
+      <workItem from="1508286684977" duration="772000" />
+      <workItem from="1508288192515" duration="153000" />
+      <workItem from="1508289346932" duration="110000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="68140000" />
+    <option name="totallyTimeSpent" value="72994000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="24" width="2495" height="1056" extended-state="6" />
+    <frame x="65" y="52" width="2495" height="1028" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -988,14 +1023,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/parallelDistributed/KMeans.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1944">
-          <caret line="108" column="24" lean-forward="true" selection-start-line="108" selection-start-column="24" selection-end-line="108" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/localParallelize.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1033,7 +1060,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2448">
           <caret line="145" column="31" lean-forward="false" selection-start-line="145" selection-start-column="31" selection-end-line="145" selection-end-column="31" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1069,7 +1098,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1077,7 +1108,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5670">
           <caret line="315" column="9" lean-forward="false" selection-start-line="315" selection-start-column="9" selection-end-line="315" selection-end-column="9" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1154,7 +1187,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="18">
           <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="6" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1163,7 +1195,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="18">
           <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1171,7 +1202,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1193,7 +1223,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
           <caret line="11" column="6" lean-forward="false" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1201,7 +1230,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
           <caret line="12" column="6" lean-forward="false" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1231,17 +1259,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/parallelDistributed/Cluster.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
+        <state relative-caret-position="288">
           <caret line="18" column="29" lean-forward="false" selection-start-line="18" selection-start-column="29" selection-end-line="18" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/java/util/Collection.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="828">
+          <caret line="55" column="9" lean-forward="false" selection-start-line="55" selection-start-column="9" selection-end-line="55" selection-end-column="9" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/parallelDistributed/KMeans.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="10" column="22" lean-forward="true" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
-          <folding />
+        <state relative-caret-position="468">
+          <caret line="184" column="34" lean-forward="false" selection-start-line="184" selection-start-column="34" selection-end-line="184" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

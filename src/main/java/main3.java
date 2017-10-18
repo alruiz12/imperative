@@ -11,9 +11,9 @@ public class main3 {
                 System.err.println("Argument" + args[0] + " must be an integer.");
                 System.exit(1);
             }
-            final int NUM_CLUSTERS = 45;
+            final int NUM_CLUSTERS = 450;
             //Number of Points
-            final int NUM_POINTS = 800;
+            final int NUM_POINTS = 8000;
             //Min and Max X and Y
             final int MIN_COORDINATE = 0;
             final int MAX_COORDINATE = 10000;

@@ -19,7 +19,7 @@ import java.util.concurrent.ConcurrentMap;
  */
 public class KMeans {
 
-    public KMeans() {}
+    //public KMeans() {}
 
 
     // Initializes the process
@@ -46,17 +46,14 @@ public class KMeans {
     }
 
     // The process to calculate the K Means, with iterating method.
-    public static int calculate(ConcurrentMap<Integer, Point> centroids,  MultiMap<Integer, Point> clusterPoints, ConcurrentMap<Integer, Point> points, int clustersPart, int pointsPart, long localCount, int numNodes, ConcurrentMap<Integer, Integer> clearIter, HazelcastInstance instance) {
+    public static void calculate(ConcurrentMap<Integer, Point> centroids,  MultiMap<Integer, Point> clusterPoints, ConcurrentMap<Integer, Point> points, int clustersPart, int pointsPart, long localCount, int numNodes, ConcurrentMap<Integer, Integer> clearIter, HazelcastInstance instance) {
         boolean finish = false;
         long iteration = 1;
-        int retValue=-1;
+        double distance;
+
         List<Point> lastCentroids = new ArrayList<>();
         instance.getAtomicLong("resetDone").set(0);
 
-        int module=0;
-        if (localCount == numNodes) { // if it's last node
-            module=centroids.size()%numNodes;
-        }
 
         while(!finish) {
 
@@ -90,14 +87,15 @@ public class KMeans {
             // A copy of current centroids is saved in lastCentroids before they are recalculated
             getLocalCentroids(centroids, clustersPart, localCount, numNodes, lastCentroids);   // fills lastCentroids up
 
-            //Assign points to the closest cluster
-            retValue=assignCluster(centroids, clusterPoints, points, pointsPart, localCount, numNodes, iteration, clearIter);
+            // Assign points to the closest cluster
+            assignCluster(centroids, clusterPoints, points, pointsPart, localCount, numNodes, iteration, clearIter);
 
             instance.getAtomicLong("assignsFinished").incrementAndGet();
             while (instance.getAtomicLong("assignsFinished").get() != numNodes) {
                 // while "assignClusters" not finished in all processes don't start "calculateCentroids"
 
             }
+
             // As this call is between 2 waits for all processes is safe
             instance.getAtomicLong("iterationFinished").set(0);
 
@@ -105,7 +103,7 @@ public class KMeans {
             calculateCentroids(centroids, clusterPoints, clustersPart, localCount, numNodes);
 
             // Calculates total distance between new and old Centroids
-            double distance = 0;
+            distance = 0;
             int i = (int) ((localCount-1)*clustersPart);
             for (Point oldCentroid: lastCentroids ) {
                 Point currentCentroid = centroids.get(i);
@@ -140,12 +138,12 @@ public class KMeans {
             iteration++;
             System.out.println("Iteration: "+iteration+" with a distance: "+instance.getAtomicReference("distance").get());
         }
-        return retValue;
+
     }
 
     private static void clearClusters(MultiMap<Integer, Point> clusterPoints, int clustersPart, long localCount, int numNodes, long iteration, ConcurrentMap<Integer, Integer> clearIter) {
         int module = 0;
-        int clusterIter=0;
+        int clusterIter;
 
         if (clusterPoints.size() != 0) {    // first iteration won't have any points yet
 
@@ -187,7 +185,7 @@ public class KMeans {
         }
     }
 
-    private static int assignCluster(ConcurrentMap<Integer, Point> centroids,  MultiMap<Integer, Point> clusterPoints, ConcurrentMap<Integer, Point> points, int pointsPart, long localCount, int numNodes, long iteration, ConcurrentMap<Integer, Integer> clearIter) {
+    private static void assignCluster(ConcurrentMap<Integer, Point> centroids,  MultiMap<Integer, Point> clusterPoints, ConcurrentMap<Integer, Point> points, int pointsPart, long localCount, int numNodes, long iteration, ConcurrentMap<Integer, Integer> clearIter) {
         double max = Double.MAX_VALUE;
         double min = max;
         int cluster = 0;
@@ -251,17 +249,19 @@ public class KMeans {
             }
 
         }
-        return 0;
+
 
     }
 
     private static void calculateCentroids(ConcurrentMap<Integer, Point> centroids,  MultiMap<Integer, Point> clusterPoints, int clustersPart, long localCount, int numNodes) {
         int module = 0;
-        double sumX = 0;
-        double sumY = 0;
+        double sumX;
+        double sumY;
 
-        double newX = 0;
-        double newY = 0;
+        double newX;
+        double newY;
+
+        int n_points;
 
         if (localCount == numNodes) { // if it's last node
             module=centroids.size()%numNodes;
@@ -273,13 +273,13 @@ public class KMeans {
             sumX=0;     // reset for each cluster
             sumY=0;
 
-            for (Point point: clusterPoints.get(i) ) {               // for each of its points
+            for (Point point: clusterPoints.get(i) ) {      // for each of its points
                 sumX += point.getX();                           // add to process local variables
                 sumY += point.getY();                           // Todo: either use BigDecimal or check Double.POSITIVE_INFINITY or Double.NEGATIVE_INFINITY
             }
 
             Point centroid = centroids.get(i);
-            int n_points = clusterPoints.get(i).size();
+            n_points = clusterPoints.get(i).size();
             if(n_points > 0) {
                 newX = sumX / n_points;                  // compute avg
                 newY = sumY / n_points;
@@ -341,6 +341,7 @@ public class KMeans {
         conf.getGroupConfig().setName("kmeansName").setPassword("kmeansPass");
 
         HazelcastInstance instance = Hazelcast.newHazelcastInstance(conf);
+
         IAtomicLong finished = instance.getAtomicLong("finished");
         finished.set(0);
 
@@ -350,7 +351,7 @@ public class KMeans {
         ConcurrentMap<Integer, Point> centroids = instance.getMap("centroids");
         MultiMap<Integer, Point> clusterPoints = instance.getMultiMap("clusterPoints");
 
-       init(numClusters, minCoordinate, maxCoordinate, centroids, clearIter);
+        init(numClusters, minCoordinate, maxCoordinate, centroids, clearIter);      // Sets random centroids and initializes clearIter
 
         IAtomicLong count = instance.getAtomicLong("count");
         long localCount = count.incrementAndGet();      // As new processes run, they increment a counter and keep the local copy as their ID
@@ -367,12 +368,12 @@ public class KMeans {
 
         finished.incrementAndGet(); // Counts finished processes
         while (finished.get() != numNodes){
-
+            // Waits for all processes to finish before obtaining elapsed time
         }
 
 
-        long finalTime = System.currentTimeMillis();            // When lock released, time elapsed time
-        debugEnd((finalTime-startTime)/1000, true, 0);    // Create a file with info about time (avoids busy st out)
+        long finalTime = System.currentTimeMillis();            // When all process finish, time elapsed time
+        debugEnd((finalTime-startTime)/1000, true, -1);    // Create a file with info about time (avoids busy st out)
         debugEnd(localCount, true, 0);
         //end(clusters);
 
@@ -383,7 +384,6 @@ public class KMeans {
         clientConfig.getNetworkConfig().setConnectionAttemptLimit(15);
         clientConfig.getGroupConfig().setName("kmeansName").setPassword("kmeansPass");
         HazelcastInstance client = HazelcastClient.newHazelcastClient(clientConfig);
-
 
         ConcurrentMap points = client.getMap("points");
         ConcurrentMap<Integer,Integer> clearIter = client.getMap("clearIter");
@@ -396,10 +396,11 @@ public class KMeans {
             // Wait for initialization
             // Todo: could be optimized putting thread to sleep, now hazelcast exception stops execution
         }
+
         IAtomicLong count = client.getAtomicLong("count");
         long localCount = count.incrementAndGet();
         if (localCount>numNodes){
-            // Todo: create distributed long for numNodes and update it as needed
+            // Todo: create distributed long for numNodes and update it as needed (thus avoids hard code)
             System.out.println("number of nodes increased, localcount: "+ localCount+", numNodes: "+numNodes);
             return;
         }
@@ -407,13 +408,13 @@ public class KMeans {
         int pointsPart = points.size()/numNodes;
         int clustersPart = centroids.size()/numNodes;
 
-        if (calculate(centroids, clusterPoints, points, clustersPart, pointsPart, localCount, numNodes, clearIter, client) ==0) {
-            IAtomicLong finished = client.getAtomicLong("finished");
-            finished.incrementAndGet();
-           
+        calculate(centroids, clusterPoints, points, clustersPart, pointsPart, localCount, numNodes, clearIter, client);
 
-            debugEnd(localCount, true, 0);
-        }
+        IAtomicLong finished = client.getAtomicLong("finished");
+        finished.incrementAndGet();
+
+        debugEnd(localCount, true, 0);
+
         client.shutdown();
         //end(clusters);
 
@@ -421,20 +422,24 @@ public class KMeans {
     }
 
     // debugEnd debugs the execution of a process without using the (heavily used by Hazelcast) standard output
-    public static void debugEnd(long localCount, boolean endSuccessful, int stoppedAt){
-        String pid="_";
-        if (endSuccessful){
-            pid = String.valueOf(localCount)+"_OK";
+    public static void debugEnd(long localCount, boolean endSuccessful, int stoppedAt) {
+        String pid = "_";
+        if (stoppedAt == -1) {
+            pid = "TIME=" + String.valueOf(localCount);
         } else {
-            pid = String.valueOf(localCount)+"KO!"+String.valueOf(stoppedAt);
-        }
-        File file = new File(pid);
-        try {
-            PrintWriter printWriter = new PrintWriter(file);
-            printWriter.print(pid);
-            printWriter.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            if (endSuccessful) {
+                pid = String.valueOf(localCount) + "_OK";
+            } else {
+                pid = String.valueOf(localCount) + "KO!" + String.valueOf(stoppedAt);
+            }
+            File file = new File(pid);
+            try {
+                PrintWriter printWriter = new PrintWriter(file);
+                printWriter.print(pid);
+                printWriter.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
         }
     }
 

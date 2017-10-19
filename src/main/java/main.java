@@ -11,9 +11,9 @@ public class main {
                 System.err.println("Argument" + args[0] + " must be an integer.");
                 System.exit(1);
             }
-            final int NUM_CLUSTERS = 450;
+            final int NUM_CLUSTERS = 45;
             //Number of Points
-            final int NUM_POINTS = 8000;
+            final int NUM_POINTS = 800;
             //Min and Max X and Y
             final int MIN_COORDINATE = 0;
             final int MAX_COORDINATE = 10000;
@@ -22,6 +22,7 @@ public class main {
             final int NUM_NODES = firstArg;
 
             parallelDistributed.KMeans.run(NUM_CLUSTERS,NUM_POINTS,MIN_COORDINATE,MAX_COORDINATE, NUM_ITER, NUM_NODES);
+
         } else {System.out.println("not enough args");}
 
 

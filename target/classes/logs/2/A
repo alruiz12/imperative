@@ -1,0 +1,101 @@
+Oct 23, 2017 2:05:31 AM com.hazelcast.instance.AddressPicker
+INFO: [LOCAL] [kmeansName] [3.8.6] Prefer IPv4 stack is true.
+Oct 23, 2017 2:05:32 AM com.hazelcast.instance.AddressPicker
+INFO: [LOCAL] [kmeansName] [3.8.6] Picked [10.0.0.11]:5701, using socket ServerSocket[addr=/0:0:0:0:0:0:0:0,localport=5701], bind any local is true
+Oct 23, 2017 2:05:32 AM com.hazelcast.system
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Hazelcast 3.8.6 (20170921 - b1aa90b) starting at [10.0.0.11]:5701
+Oct 23, 2017 2:05:32 AM com.hazelcast.system
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Copyright (c) 2008-2016, Hazelcast, Inc. All Rights Reserved.
+Oct 23, 2017 2:05:32 AM com.hazelcast.system
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Configured Hazelcast Serialization version : 1
+Oct 23, 2017 2:05:32 AM com.hazelcast.spi.impl.operationservice.impl.BackpressureRegulator
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Backpressure is disabled
+Oct 23, 2017 2:05:33 AM com.hazelcast.instance.Node
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Creating MulticastJoiner
+Oct 23, 2017 2:05:33 AM com.hazelcast.spi.impl.operationexecutor.impl.OperationExecutorImpl
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Starting 3 partition threads
+Oct 23, 2017 2:05:33 AM com.hazelcast.spi.impl.operationexecutor.impl.OperationExecutorImpl
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Starting 3 generic threads (1 dedicated for priority tasks)
+Oct 23, 2017 2:05:33 AM com.hazelcast.core.LifecycleService
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] [10.0.0.11]:5701 is STARTING
+Oct 23, 2017 2:05:33 AM com.hazelcast.nio.tcp.SocketAcceptorThread
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Accepting socket connection from /127.0.0.1:45078
+Oct 23, 2017 2:05:33 AM com.hazelcast.nio.tcp.SocketAcceptorThread
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Accepting socket connection from /127.0.0.1:45080
+Oct 23, 2017 2:05:33 AM com.hazelcast.nio.tcp.TcpIpConnectionManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Established socket connection between /127.0.0.1:5701 and /127.0.0.1:45078
+Oct 23, 2017 2:05:33 AM com.hazelcast.nio.tcp.TcpIpConnectionManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Established socket connection between /127.0.0.1:5701 and /127.0.0.1:45080
+Oct 23, 2017 2:05:35 AM com.hazelcast.system
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Cluster version set to 3.8
+Oct 23, 2017 2:05:35 AM com.hazelcast.internal.cluster.impl.MulticastJoiner
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] 
+
+
+Members [1] {
+	Member [10.0.0.11]:5701 - 10685a71-390e-4d56-b1f9-55f8ae647868 this
+}
+
+Oct 23, 2017 2:05:35 AM com.hazelcast.core.LifecycleService
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] [10.0.0.11]:5701 is STARTED
+Oct 23, 2017 2:05:35 AM com.hazelcast.internal.partition.impl.PartitionStateManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Initializing cluster partition table arrangement...
+Oct 23, 2017 2:05:36 AM com.hazelcast.client.impl.protocol.task.AuthenticationMessageTask
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Received auth from Connection[id=2, /127.0.0.1:5701->/127.0.0.1:45080, endpoint=null, alive=true, type=JAVA_CLIENT], successfully authenticated, principal : ClientPrincipal{uuid='f087cbd2-a957-4a2e-8942-bf7d6796edc7', ownerUuid='10685a71-390e-4d56-b1f9-55f8ae647868'}, owner connection : true, client version : 3.8.6
+Oct 23, 2017 2:05:36 AM com.hazelcast.client.impl.protocol.task.AuthenticationMessageTask
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Received auth from Connection[id=1, /127.0.0.1:5701->/127.0.0.1:45078, endpoint=null, alive=true, type=JAVA_CLIENT], successfully authenticated, principal : ClientPrincipal{uuid='0475a05e-65a7-468f-bfc2-1ef8edc255fa', ownerUuid='10685a71-390e-4d56-b1f9-55f8ae647868'}, owner connection : true, client version : 3.8.6
+Oct 23, 2017 2:05:36 AM com.hazelcast.nio.tcp.TcpIpConnection
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Connection[id=2, /127.0.0.1:5701->/127.0.0.1:45080, endpoint=[127.0.0.1]:45080, alive=false, type=JAVA_CLIENT] closed. Reason: Connection closed by the other side
+Oct 23, 2017 2:05:36 AM com.hazelcast.nio.tcp.TcpIpConnection
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Connection[id=1, /127.0.0.1:5701->/127.0.0.1:45078, endpoint=[127.0.0.1]:45078, alive=false, type=JAVA_CLIENT] closed. Reason: Connection closed by the other side
+Oct 23, 2017 2:05:36 AM com.hazelcast.client.ClientEndpointManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Destroying ClientEndpoint{connection=Connection[id=1, 0.0.0.0/0.0.0.0:5701->/127.0.0.1:45078, endpoint=[127.0.0.1]:45078, alive=false, type=JAVA_CLIENT], principal='ClientPrincipal{uuid='0475a05e-65a7-468f-bfc2-1ef8edc255fa', ownerUuid='10685a71-390e-4d56-b1f9-55f8ae647868'}, firstConnection=true, authenticated=true, clientVersion=3.8.6}
+Oct 23, 2017 2:05:36 AM com.hazelcast.client.ClientEndpointManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Destroying ClientEndpoint{connection=Connection[id=2, 0.0.0.0/0.0.0.0:5701->/127.0.0.1:45080, endpoint=[127.0.0.1]:45080, alive=false, type=JAVA_CLIENT], principal='ClientPrincipal{uuid='f087cbd2-a957-4a2e-8942-bf7d6796edc7', ownerUuid='10685a71-390e-4d56-b1f9-55f8ae647868'}, firstConnection=true, authenticated=true, clientVersion=3.8.6}
+Oct 23, 2017 2:05:36 AM com.hazelcast.nio.tcp.SocketAcceptorThread
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Accepting socket connection from /127.0.0.1:45088
+Oct 23, 2017 2:05:36 AM com.hazelcast.nio.tcp.TcpIpConnectionManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Established socket connection between /127.0.0.1:5701 and /127.0.0.1:45088
+Oct 23, 2017 2:05:36 AM com.hazelcast.nio.tcp.SocketAcceptorThread
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Accepting socket connection from /127.0.0.1:45096
+Oct 23, 2017 2:05:36 AM com.hazelcast.client.impl.protocol.task.AuthenticationMessageTask
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Received auth from Connection[id=3, /127.0.0.1:5701->/127.0.0.1:45088, endpoint=null, alive=true, type=JAVA_CLIENT], successfully authenticated, principal : ClientPrincipal{uuid='60db09f3-2bac-4a00-a44e-d4e8a866da00', ownerUuid='10685a71-390e-4d56-b1f9-55f8ae647868'}, owner connection : true, client version : 3.8.6
+Oct 23, 2017 2:05:36 AM com.hazelcast.nio.tcp.TcpIpConnectionManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Established socket connection between /127.0.0.1:5701 and /127.0.0.1:45096
+Oct 23, 2017 2:05:36 AM com.hazelcast.client.impl.protocol.task.AuthenticationMessageTask
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Received auth from Connection[id=4, /127.0.0.1:5701->/127.0.0.1:45096, endpoint=null, alive=true, type=JAVA_CLIENT], successfully authenticated, principal : ClientPrincipal{uuid='54684838-b88b-4a32-9670-04edfc8aa823', ownerUuid='10685a71-390e-4d56-b1f9-55f8ae647868'}, owner connection : true, client version : 3.8.6
+Oct 23, 2017 2:05:46 AM com.hazelcast.transaction.TransactionManagerService
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Committing/rolling-back alive transactions of client, UUID: 0475a05e-65a7-468f-bfc2-1ef8edc255fa
+Oct 23, 2017 2:05:46 AM com.hazelcast.transaction.TransactionManagerService
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Committing/rolling-back alive transactions of client, UUID: f087cbd2-a957-4a2e-8942-bf7d6796edc7
+Iteration: 2 with a distance: 16060.219040431264
+Iteration: 3 with a distance: 3434.99844922823
+Iteration: 4 with a distance: 1469.3649997597938
+Iteration: 5 with a distance: 520.41451316846
+Iteration: 6 with a distance: 237.11072152065083
+Distance limit reached! distance: 9.094947017729282E-13 in iteration: 6
+Iteration: 7 with a distance: 9.094947017729282E-13
+Oct 23, 2017 2:06:22 AM com.hazelcast.nio.tcp.TcpIpConnection
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Connection[id=4, /127.0.0.1:5701->/127.0.0.1:45096, endpoint=[127.0.0.1]:45096, alive=false, type=JAVA_CLIENT] closed. Reason: Connection closed by the other side
+Oct 23, 2017 2:06:22 AM com.hazelcast.nio.tcp.TcpIpConnection
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Connection[id=3, /127.0.0.1:5701->/127.0.0.1:45088, endpoint=[127.0.0.1]:45088, alive=false, type=JAVA_CLIENT] closed. Reason: Connection closed by the other side
+Oct 23, 2017 2:06:22 AM com.hazelcast.client.ClientEndpointManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Destroying ClientEndpoint{connection=Connection[id=3, 0.0.0.0/0.0.0.0:5701->/127.0.0.1:45088, endpoint=[127.0.0.1]:45088, alive=false, type=JAVA_CLIENT], principal='ClientPrincipal{uuid='60db09f3-2bac-4a00-a44e-d4e8a866da00', ownerUuid='10685a71-390e-4d56-b1f9-55f8ae647868'}, firstConnection=true, authenticated=true, clientVersion=3.8.6}
+Oct 23, 2017 2:06:22 AM com.hazelcast.client.ClientEndpointManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Destroying ClientEndpoint{connection=Connection[id=4, 0.0.0.0/0.0.0.0:5701->/127.0.0.1:45096, endpoint=[127.0.0.1]:45096, alive=false, type=JAVA_CLIENT], principal='ClientPrincipal{uuid='54684838-b88b-4a32-9670-04edfc8aa823', ownerUuid='10685a71-390e-4d56-b1f9-55f8ae647868'}, firstConnection=true, authenticated=true, clientVersion=3.8.6}
+Oct 23, 2017 2:06:22 AM com.hazelcast.core.LifecycleService
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] [10.0.0.11]:5701 is SHUTTING_DOWN
+Oct 23, 2017 2:06:22 AM com.hazelcast.internal.partition.impl.MigrationManager
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Shutdown request of [10.0.0.11]:5701 is handled
+Oct 23, 2017 2:06:22 AM com.hazelcast.instance.Node
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Shutting down multicast service...
+Oct 23, 2017 2:06:22 AM com.hazelcast.instance.Node
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Shutting down connection manager...
+Oct 23, 2017 2:06:22 AM com.hazelcast.instance.Node
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Shutting down node engine...
+Oct 23, 2017 2:06:22 AM com.hazelcast.instance.NodeExtension
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Destroying node NodeExtension.
+Oct 23, 2017 2:06:22 AM com.hazelcast.instance.Node
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] Hazelcast Shutdown is completed in 158 ms.
+Oct 23, 2017 2:06:22 AM com.hazelcast.core.LifecycleService
+INFO: [10.0.0.11]:5701 [kmeansName] [3.8.6] [10.0.0.11]:5701 is SHUTDOWN

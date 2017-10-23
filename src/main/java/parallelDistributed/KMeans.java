@@ -376,6 +376,7 @@ public class KMeans {
         debugEnd((finalTime-startTime)/1000, true, -1);    // Create a file with info about time (avoids busy st out)
         debugEnd(localCount, true, 0);
         //end(clusters);
+        instance.shutdown();
 
     }
 
@@ -432,6 +433,7 @@ public class KMeans {
             } else {
                 pid = String.valueOf(localCount) + "KO!" + String.valueOf(stoppedAt);
             }
+        }
             File file = new File(pid);
             try {
                 PrintWriter printWriter = new PrintWriter(file);
@@ -440,7 +442,7 @@ public class KMeans {
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
-        }
+
     }
 
     }

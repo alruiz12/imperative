@@ -5,10 +5,12 @@ import com.hazelcast.client.HazelcastClient;
 import com.hazelcast.client.config.ClientConfig;
 import com.hazelcast.config.Config;
 import com.hazelcast.core.*;
+import com.hazelcast.map.AbstractEntryProcessor;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -17,6 +19,10 @@ import java.util.List;
 public class KMeans {
 
     //public KMeans() {}
+
+    static double currentCentroidGlobalX = 0.0;
+    static double currentCentroidGlobalY = 0.0;
+    static int currentClusterSize = 0;
 
 
     // Initializes the process
@@ -47,8 +53,12 @@ public class KMeans {
         boolean finish = false;
         long iteration = 1;
         double distance;
+        String clusterSize="clusterSize";
 
-        List<Point> lastCentroids = new ArrayList<>();
+        List<Integer> localClustersSize = new ArrayList<>();
+        List<Point> localCentroids = new ArrayList<>();
+        getLocalCentroids(centroids, clustersPart, localCount, numNodes, localCentroids, instance, localClustersSize);   // fills localCentroids up
+
         instance.getAtomicLong("resetDone").set(0);
 
 
@@ -77,15 +87,31 @@ public class KMeans {
             instance.getLock("resetLock").unlock();
 
 
-
-            // Clear clusters point list (doesn't clear centroids)
-            clearClusters(clusterPoints, clustersPart, localCount, numNodes, iteration, clearIter, instance);
-
-            // A copy of current centroids is saved in lastCentroids before they are recalculated
-            getLocalCentroids(centroids, clustersPart, localCount, numNodes, lastCentroids, instance);   // fills lastCentroids up
-
             // Assign points to the closest cluster
-            assignCluster(centroids, clusterPoints, points, pointsPart, localCount, numNodes, iteration, clearIter, instance);
+            assignCluster(centroids, clusterPoints, points, pointsPart, localCount, numNodes, iteration, clearIter, instance, localCentroids, localClustersSize);
+
+
+
+
+            int i = (int) ((localCount-1)*clustersPart);
+            int j =0;
+            for (Point localCentroid: localCentroids ) {
+                currentCentroidGlobalX=localCentroid.getX();
+                currentCentroidGlobalY=localCentroid.getY();
+                System.out.println("before entry processor 1"+instance.getMap(centroids).get(i));
+                instance.getMap(centroids).executeOnKey(i,new AddCurrentCentroidEntryProcessor());
+                System.out.println("after entry processor 1"+instance.getMap(centroids).get(i));
+
+                System.out.println("before entry processor 2"+instance.getMap(clusterSize).get(j));
+                currentClusterSize=localClustersSize.get(j);
+                instance.getMap(clusterSize).executeOnKey(i, new AddCurrentSizeEntryProcessor());
+                System.out.println("before entry processor 2"+instance.getMap(clusterSize).get(j));
+
+
+                i++;
+                j++;
+            }
+
 
             instance.getAtomicLong("assignsFinished").incrementAndGet();
             while (instance.getAtomicLong("assignsFinished").get() != numNodes) {
@@ -101,8 +127,8 @@ public class KMeans {
 
             // Calculates total distance between new and old Centroids
             distance = 0;
-            int i = (int) ((localCount-1)*clustersPart);
-            for (Point oldCentroid: lastCentroids ) {
+            i = (int) ((localCount-1)*clustersPart);
+            for (Point oldCentroid: localCentroids ) {
                 Point currentCentroid = (Point) instance.getMap(centroids).get(i);
                 distance += Point.distance(oldCentroid, currentCentroid);
 
@@ -162,10 +188,10 @@ public class KMeans {
         }
 
     }
-    private static void getLocalCentroids(String centroids, int clustersPart, long localCount, int numNodes, List<Point> lastCentroids, HazelcastInstance instance){
+    private static void getLocalCentroids(String centroids, int clustersPart, long localCount, int numNodes, List<Point> localCentroids, HazelcastInstance instance, List<Integer> localClustersSize){
         int module = 0;
 
-        lastCentroids.clear(); // avoids mixing centroids from different iterations
+        localCentroids.clear(); // avoids mixing centroids from different iterations
 
         if (localCount == numNodes) { // if it's last node
             module=instance.getMap(centroids).size()%numNodes;
@@ -178,12 +204,14 @@ public class KMeans {
             Point aux = (Point) instance.getMap(centroids).get(i);
             point.setX(aux.getX());
             point.setY(aux.getY());
-            lastCentroids.add(point);
+            localCentroids.add(point);
+
+            localClustersSize.add(0);
 
         }
     }
 
-    private static void assignCluster(String centroids, String clusterPoints, String points, int pointsPart, long localCount, int numNodes, long iteration, String clearIter, HazelcastInstance instance) {
+    private static void assignCluster(String centroids, String clusterPoints, String points, int pointsPart, long localCount, int numNodes, long iteration, String clearIter, HazelcastInstance instance, List<Point> localCentroids, List<Integer> localClustersSize) {
         double max = Double.MAX_VALUE;
         double min = max;
         int cluster = 0;
@@ -192,6 +220,8 @@ public class KMeans {
         final int REPETITION_LIMIT = 200;
         int module = 0;
         List<Integer> delays = new ArrayList<>();
+        Point newCentroid = new Point();
+        Point currentCentroid = new Point();
 
 
         if (localCount == numNodes) { // if it's last node
@@ -242,7 +272,13 @@ public class KMeans {
             if (distance < max) {   // if any point is ready
                 //instance.getMap(points).get(i).setCluster(cluster);                          // mark point as ready for next stage (calculateCentroids)
                 //clusterPoints.put(cluster, points.get(i));
-                instance.getMultiMap(clusterPoints).put(cluster, instance.getMap(points).get(i));
+                //instance.getMultiMap(clusterPoints).put(cluster, instance.getMap(points).get(i));
+                currentCentroid = (Point) instance.getMap(points).get(i);
+                newCentroid.setX(localCentroids.get(cluster).getX()+currentCentroid.getX() );
+                newCentroid.setX(localCentroids.get(cluster).getY()+currentCentroid.getY() );
+                localCentroids.set(cluster, newCentroid);
+
+                localClustersSize.add(cluster,1);
 
             }
 
@@ -442,7 +478,32 @@ public class KMeans {
 
     }
 
+    private static class AddCurrentCentroidEntryProcessor extends AbstractEntryProcessor<Integer, Point> {
+        @Override
+        public Object process(Map.Entry<Integer, Point> entry) {
+            Point point = entry.getValue();
+            point.setX(point.getX()+currentCentroidGlobalX);
+            point.setX(point.getY()+currentCentroidGlobalY);
+            entry.setValue(point);
+
+            return null;
+        }
     }
+
+    private static class AddCurrentSizeEntryProcessor extends AbstractEntryProcessor<Integer, Integer> {
+        @Override
+        public Object process(Map.Entry<Integer, Integer> entry) {
+            int size = entry.getValue();
+            size=size+currentClusterSize;
+
+            entry.setValue(size);
+
+            return null;
+        }
+    }
+}
+
+
 
 
 

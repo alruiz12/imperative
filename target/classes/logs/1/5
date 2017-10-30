@@ -3,13 +3,9 @@ INFO: hz.client_0 [kmeansName] [3.8.6] HazelcastClient 3.8.6 (20170921 - b1aa90b
 Oct 30, 2017 10:47:48 PM com.hazelcast.core.LifecycleService
 INFO: hz.client_0 [kmeansName] [3.8.6] HazelcastClient 3.8.6 (20170921 - b1aa90b) is STARTED
 Oct 30, 2017 10:47:48 PM com.hazelcast.client.spi.impl.ClusterListenerSupport
-INFO: hz.client_0 [kmeansName] [3.8.6] Trying to connect to [127.0.0.1]:5702 as owner member
-Oct 30, 2017 10:47:49 PM com.hazelcast.client.spi.impl.ClusterListenerSupport
-WARNING: hz.client_0 [kmeansName] [3.8.6] Exception during initial connection to [127.0.0.1]:5702, exception com.hazelcast.core.HazelcastException: java.net.ConnectException: Connection refused
-Oct 30, 2017 10:47:49 PM com.hazelcast.client.spi.impl.ClusterListenerSupport
 INFO: hz.client_0 [kmeansName] [3.8.6] Trying to connect to [127.0.0.1]:5701 as owner member
 Oct 30, 2017 10:47:51 PM com.hazelcast.client.connection.nio.ClientConnection
-WARNING: hz.client_0 [kmeansName] [3.8.6] ClientConnection{alive=false, connectionId=1, socketChannel=DefaultSocketChannelWrapper{socketChannel=java.nio.channels.SocketChannel[connected local=/127.0.0.1:33332 remote=/127.0.0.1:5701]}, remoteEndpoint=[10.0.0.11]:5701, lastReadTime=2017-10-30 22:47:51.702, lastWriteTime=2017-10-30 22:47:51.687, closedTime=2017-10-30 22:47:51.713, lastHeartbeatRequested=never, lastHeartbeatReceived=never, connected server version=3.8.6} closed. Reason: com.hazelcast.client.AuthenticationException[Owner authentication response from address [127.0.0.1]:5701 is late. Dropping the response. Principal : null]
+WARNING: hz.client_0 [kmeansName] [3.8.6] ClientConnection{alive=false, connectionId=1, socketChannel=DefaultSocketChannelWrapper{socketChannel=java.nio.channels.SocketChannel[connected local=/127.0.0.1:33322 remote=/127.0.0.1:5701]}, remoteEndpoint=[10.0.0.11]:5701, lastReadTime=2017-10-30 22:47:51.723, lastWriteTime=2017-10-30 22:47:51.688, closedTime=2017-10-30 22:47:51.732, lastHeartbeatRequested=never, lastHeartbeatReceived=never, connected server version=3.8.6} closed. Reason: com.hazelcast.client.AuthenticationException[Owner authentication response from address [127.0.0.1]:5701 is late. Dropping the response. Principal : null]
 com.hazelcast.client.AuthenticationException: Owner authentication response from address [127.0.0.1]:5701 is late. Dropping the response. Principal : null
 	at com.hazelcast.client.connection.nio.ClientConnectionManagerImpl$2.onResponse(ClientConnectionManagerImpl.java:576)
 	at com.hazelcast.client.connection.nio.ClientConnectionManagerImpl$2.onResponse(ClientConnectionManagerImpl.java:558)
@@ -32,12 +28,6 @@ com.hazelcast.client.AuthenticationException: Owner authentication response from
 Oct 30, 2017 10:47:51 PM com.hazelcast.client.spi.impl.ClusterListenerSupport
 WARNING: hz.client_0 [kmeansName] [3.8.6] Exception during initial connection to [127.0.0.1]:5701, exception com.hazelcast.client.AuthenticationException: Owner authentication response from address [127.0.0.1]:5701 is late. Dropping the response. Principal : null
 Oct 30, 2017 10:47:51 PM com.hazelcast.client.spi.impl.ClusterListenerSupport
-INFO: hz.client_0 [kmeansName] [3.8.6] Trying to connect to [127.0.0.1]:5703 as owner member
-Oct 30, 2017 10:47:51 PM com.hazelcast.client.spi.impl.ClusterListenerSupport
-WARNING: hz.client_0 [kmeansName] [3.8.6] Exception during initial connection to [127.0.0.1]:5703, exception com.hazelcast.core.HazelcastException: java.net.ConnectException: Connection refused
-Oct 30, 2017 10:47:51 PM com.hazelcast.client.spi.impl.ClusterListenerSupport
-WARNING: hz.client_0 [kmeansName] [3.8.6] Unable to get alive cluster connection, try in 116 ms later, attempt 1 of 15.
-Oct 30, 2017 10:47:51 PM com.hazelcast.client.spi.impl.ClusterListenerSupport
 INFO: hz.client_0 [kmeansName] [3.8.6] Trying to connect to [127.0.0.1]:5702 as owner member
 Oct 30, 2017 10:47:51 PM com.hazelcast.client.spi.impl.ClusterListenerSupport
 WARNING: hz.client_0 [kmeansName] [3.8.6] Exception during initial connection to [127.0.0.1]:5702, exception com.hazelcast.core.HazelcastException: java.net.ConnectException: Connection refused
@@ -46,11 +36,13 @@ INFO: hz.client_0 [kmeansName] [3.8.6] Trying to connect to [127.0.0.1]:5703 as 
 Oct 30, 2017 10:47:51 PM com.hazelcast.client.spi.impl.ClusterListenerSupport
 WARNING: hz.client_0 [kmeansName] [3.8.6] Exception during initial connection to [127.0.0.1]:5703, exception com.hazelcast.core.HazelcastException: java.net.ConnectException: Connection refused
 Oct 30, 2017 10:47:51 PM com.hazelcast.client.spi.impl.ClusterListenerSupport
+WARNING: hz.client_0 [kmeansName] [3.8.6] Unable to get alive cluster connection, try in 0 ms later, attempt 1 of 15.
+Oct 30, 2017 10:47:51 PM com.hazelcast.client.spi.impl.ClusterListenerSupport
 INFO: hz.client_0 [kmeansName] [3.8.6] Trying to connect to [127.0.0.1]:5701 as owner member
 Oct 30, 2017 10:47:51 PM com.hazelcast.client.connection.ClientConnectionManager
-INFO: hz.client_0 [kmeansName] [3.8.6] Setting ClientConnection{alive=true, connectionId=2, socketChannel=DefaultSocketChannelWrapper{socketChannel=java.nio.channels.SocketChannel[connected local=/127.0.0.1:33366 remote=/127.0.0.1:5701]}, remoteEndpoint=[10.0.0.11]:5701, lastReadTime=2017-10-30 22:47:51.942, lastWriteTime=2017-10-30 22:47:51.890, closedTime=never, lastHeartbeatRequested=never, lastHeartbeatReceived=never, connected server version=3.8.6} as owner  with principal ClientPrincipal{uuid='3712dc35-fcc0-42b2-b16b-bd4007c8be09', ownerUuid='b08f9357-589a-4c7d-a5aa-f265b36039b8'}
+INFO: hz.client_0 [kmeansName] [3.8.6] Setting ClientConnection{alive=true, connectionId=2, socketChannel=DefaultSocketChannelWrapper{socketChannel=java.nio.channels.SocketChannel[connected local=/127.0.0.1:33358 remote=/127.0.0.1:5701]}, remoteEndpoint=[10.0.0.11]:5701, lastReadTime=2017-10-30 22:47:51.804, lastWriteTime=2017-10-30 22:47:51.793, closedTime=never, lastHeartbeatRequested=never, lastHeartbeatReceived=never, connected server version=3.8.6} as owner  with principal ClientPrincipal{uuid='41880151-e7fe-4850-8cce-676524028785', ownerUuid='b08f9357-589a-4c7d-a5aa-f265b36039b8'}
 Oct 30, 2017 10:47:51 PM com.hazelcast.client.connection.ClientConnectionManager
-INFO: hz.client_0 [kmeansName] [3.8.6] Authenticated with server [10.0.0.11]:5701, server version:3.8.6 Local address: /127.0.0.1:33366
+INFO: hz.client_0 [kmeansName] [3.8.6] Authenticated with server [10.0.0.11]:5701, server version:3.8.6 Local address: /127.0.0.1:33358
 Oct 30, 2017 10:47:51 PM com.hazelcast.client.spi.impl.ClientMembershipListener
 INFO: hz.client_0 [kmeansName] [3.8.6] 
 
@@ -60,18 +52,18 @@ Members [1] {
 
 Oct 30, 2017 10:47:51 PM com.hazelcast.core.LifecycleService
 INFO: hz.client_0 [kmeansName] [3.8.6] HazelcastClient 3.8.6 (20170921 - b1aa90b) is CLIENT_CONNECTED
-    Adding newCentroid (7977.9350248224155,5009.520540160447) to position: 1
-Adding 1 to J: 1 which had a value of: 0
-after adding in AssignCluster: to J: 1 which has a value of: 1
-    Adding newCentroid (2781.336745070401,8411.060874451254) to position: 2
-Adding 1 to J: 2 which had a value of: 0
-after adding in AssignCluster: to J: 2 which has a value of: 1
-localClustersSize before: [0, 1, 1]
+    Adding newCentroid (4805.8962503912735,109.82892934644272) to position: 0
+Adding 1 to J: 0 which had a value of: 0
+after adding in AssignCluster: to J: 0 which has a value of: 1
+    Adding newCentroid (14444.385998226802,1391.4470350408203) to position: 0
+Adding 1 to J: 0 which had a value of: 1
+after adding in AssignCluster: to J: 0 which has a value of: 2
+localClustersSize before: [2, 0, 0]
 size: 3
-globalClusterSize (3) after: [0, 1, 1]
-localCentroids before: [(0.0,0.0), (7977.9350248224155,5009.520540160447), (2781.336745070401,8411.060874451254)]
+globalClusterSize (1) after: [2, 0, 0]
+localCentroids before: [(14444.385998226802,1391.4470350408203), (0.0,0.0), (0.0,0.0)]
 size: 3
-globalCentroids (3) after: [(0.0,0.0), (7977.9350248224155,5009.520540160447), (2781.336745070401,8411.060874451254)]
+globalCentroids (1) after: [(14444.385998226802,1391.4470350408203), (0.0,0.0), (0.0,0.0)]
 ----------PROCESSING ENTRY FINISHED-----------
 Exception in thread "main" java.lang.IllegalMonitorStateException
 	at java.lang.Object.wait(Native Method)

@@ -1,15 +1,15 @@
-Oct 30, 2017 10:47:47 PM com.hazelcast.core.LifecycleService
+Oct 31, 2017 2:12:13 AM com.hazelcast.core.LifecycleService
 INFO: hz.client_0 [kmeansName] [3.8.6] HazelcastClient 3.8.6 (20170921 - b1aa90b) is STARTING
-Oct 30, 2017 10:47:48 PM com.hazelcast.core.LifecycleService
+Oct 31, 2017 2:12:14 AM com.hazelcast.core.LifecycleService
 INFO: hz.client_0 [kmeansName] [3.8.6] HazelcastClient 3.8.6 (20170921 - b1aa90b) is STARTED
-Oct 30, 2017 10:47:48 PM com.hazelcast.client.spi.impl.ClusterListenerSupport
-INFO: hz.client_0 [kmeansName] [3.8.6] Trying to connect to [127.0.0.1]:5702 as owner member
-Oct 30, 2017 10:47:49 PM com.hazelcast.client.spi.impl.ClusterListenerSupport
-WARNING: hz.client_0 [kmeansName] [3.8.6] Exception during initial connection to [127.0.0.1]:5702, exception com.hazelcast.core.HazelcastException: java.net.ConnectException: Connection refused
-Oct 30, 2017 10:47:49 PM com.hazelcast.client.spi.impl.ClusterListenerSupport
+Oct 31, 2017 2:12:14 AM com.hazelcast.client.spi.impl.ClusterListenerSupport
+INFO: hz.client_0 [kmeansName] [3.8.6] Trying to connect to [127.0.0.1]:5703 as owner member
+Oct 31, 2017 2:12:14 AM com.hazelcast.client.spi.impl.ClusterListenerSupport
+WARNING: hz.client_0 [kmeansName] [3.8.6] Exception during initial connection to [127.0.0.1]:5703, exception com.hazelcast.core.HazelcastException: java.net.ConnectException: Connection refused
+Oct 31, 2017 2:12:14 AM com.hazelcast.client.spi.impl.ClusterListenerSupport
 INFO: hz.client_0 [kmeansName] [3.8.6] Trying to connect to [127.0.0.1]:5701 as owner member
-Oct 30, 2017 10:47:51 PM com.hazelcast.client.connection.nio.ClientConnection
-WARNING: hz.client_0 [kmeansName] [3.8.6] ClientConnection{alive=false, connectionId=1, socketChannel=DefaultSocketChannelWrapper{socketChannel=java.nio.channels.SocketChannel[connected local=/127.0.0.1:33332 remote=/127.0.0.1:5701]}, remoteEndpoint=[10.0.0.11]:5701, lastReadTime=2017-10-30 22:47:51.702, lastWriteTime=2017-10-30 22:47:51.687, closedTime=2017-10-30 22:47:51.713, lastHeartbeatRequested=never, lastHeartbeatReceived=never, connected server version=3.8.6} closed. Reason: com.hazelcast.client.AuthenticationException[Owner authentication response from address [127.0.0.1]:5701 is late. Dropping the response. Principal : null]
+Oct 31, 2017 2:12:16 AM com.hazelcast.client.connection.nio.ClientConnection
+WARNING: hz.client_0 [kmeansName] [3.8.6] ClientConnection{alive=false, connectionId=1, socketChannel=DefaultSocketChannelWrapper{socketChannel=java.nio.channels.SocketChannel[connected local=/127.0.0.1:35552 remote=/127.0.0.1:5701]}, remoteEndpoint=[10.0.0.11]:5701, lastReadTime=2017-10-31 02:12:16.860, lastWriteTime=2017-10-31 02:12:16.831, closedTime=2017-10-31 02:12:16.866, lastHeartbeatRequested=never, lastHeartbeatReceived=never, connected server version=3.8.6} closed. Reason: com.hazelcast.client.AuthenticationException[Owner authentication response from address [127.0.0.1]:5701 is late. Dropping the response. Principal : null]
 com.hazelcast.client.AuthenticationException: Owner authentication response from address [127.0.0.1]:5701 is late. Dropping the response. Principal : null
 	at com.hazelcast.client.connection.nio.ClientConnectionManagerImpl$2.onResponse(ClientConnectionManagerImpl.java:576)
 	at com.hazelcast.client.connection.nio.ClientConnectionManagerImpl$2.onResponse(ClientConnectionManagerImpl.java:558)
@@ -29,52 +29,98 @@ com.hazelcast.client.AuthenticationException: Owner authentication response from
 	at com.hazelcast.util.executor.HazelcastManagedThread.executeRun(HazelcastManagedThread.java:64)
 	at com.hazelcast.util.executor.HazelcastManagedThread.run(HazelcastManagedThread.java:80)
 
-Oct 30, 2017 10:47:51 PM com.hazelcast.client.spi.impl.ClusterListenerSupport
+Oct 31, 2017 2:12:16 AM com.hazelcast.client.spi.impl.ClusterListenerSupport
 WARNING: hz.client_0 [kmeansName] [3.8.6] Exception during initial connection to [127.0.0.1]:5701, exception com.hazelcast.client.AuthenticationException: Owner authentication response from address [127.0.0.1]:5701 is late. Dropping the response. Principal : null
-Oct 30, 2017 10:47:51 PM com.hazelcast.client.spi.impl.ClusterListenerSupport
-INFO: hz.client_0 [kmeansName] [3.8.6] Trying to connect to [127.0.0.1]:5703 as owner member
-Oct 30, 2017 10:47:51 PM com.hazelcast.client.spi.impl.ClusterListenerSupport
-WARNING: hz.client_0 [kmeansName] [3.8.6] Exception during initial connection to [127.0.0.1]:5703, exception com.hazelcast.core.HazelcastException: java.net.ConnectException: Connection refused
-Oct 30, 2017 10:47:51 PM com.hazelcast.client.spi.impl.ClusterListenerSupport
-WARNING: hz.client_0 [kmeansName] [3.8.6] Unable to get alive cluster connection, try in 116 ms later, attempt 1 of 15.
-Oct 30, 2017 10:47:51 PM com.hazelcast.client.spi.impl.ClusterListenerSupport
+Oct 31, 2017 2:12:16 AM com.hazelcast.client.spi.impl.ClusterListenerSupport
 INFO: hz.client_0 [kmeansName] [3.8.6] Trying to connect to [127.0.0.1]:5702 as owner member
-Oct 30, 2017 10:47:51 PM com.hazelcast.client.spi.impl.ClusterListenerSupport
+Oct 31, 2017 2:12:16 AM com.hazelcast.client.spi.impl.ClusterListenerSupport
 WARNING: hz.client_0 [kmeansName] [3.8.6] Exception during initial connection to [127.0.0.1]:5702, exception com.hazelcast.core.HazelcastException: java.net.ConnectException: Connection refused
-Oct 30, 2017 10:47:51 PM com.hazelcast.client.spi.impl.ClusterListenerSupport
-INFO: hz.client_0 [kmeansName] [3.8.6] Trying to connect to [127.0.0.1]:5703 as owner member
-Oct 30, 2017 10:47:51 PM com.hazelcast.client.spi.impl.ClusterListenerSupport
-WARNING: hz.client_0 [kmeansName] [3.8.6] Exception during initial connection to [127.0.0.1]:5703, exception com.hazelcast.core.HazelcastException: java.net.ConnectException: Connection refused
-Oct 30, 2017 10:47:51 PM com.hazelcast.client.spi.impl.ClusterListenerSupport
+Oct 31, 2017 2:12:16 AM com.hazelcast.client.spi.impl.ClusterListenerSupport
+WARNING: hz.client_0 [kmeansName] [3.8.6] Unable to get alive cluster connection, try in 196 ms later, attempt 1 of 15.
+Oct 31, 2017 2:12:17 AM com.hazelcast.client.spi.impl.ClusterListenerSupport
 INFO: hz.client_0 [kmeansName] [3.8.6] Trying to connect to [127.0.0.1]:5701 as owner member
-Oct 30, 2017 10:47:51 PM com.hazelcast.client.connection.ClientConnectionManager
-INFO: hz.client_0 [kmeansName] [3.8.6] Setting ClientConnection{alive=true, connectionId=2, socketChannel=DefaultSocketChannelWrapper{socketChannel=java.nio.channels.SocketChannel[connected local=/127.0.0.1:33366 remote=/127.0.0.1:5701]}, remoteEndpoint=[10.0.0.11]:5701, lastReadTime=2017-10-30 22:47:51.942, lastWriteTime=2017-10-30 22:47:51.890, closedTime=never, lastHeartbeatRequested=never, lastHeartbeatReceived=never, connected server version=3.8.6} as owner  with principal ClientPrincipal{uuid='3712dc35-fcc0-42b2-b16b-bd4007c8be09', ownerUuid='b08f9357-589a-4c7d-a5aa-f265b36039b8'}
-Oct 30, 2017 10:47:51 PM com.hazelcast.client.connection.ClientConnectionManager
-INFO: hz.client_0 [kmeansName] [3.8.6] Authenticated with server [10.0.0.11]:5701, server version:3.8.6 Local address: /127.0.0.1:33366
-Oct 30, 2017 10:47:51 PM com.hazelcast.client.spi.impl.ClientMembershipListener
+Oct 31, 2017 2:12:17 AM com.hazelcast.client.connection.ClientConnectionManager
+INFO: hz.client_0 [kmeansName] [3.8.6] Setting ClientConnection{alive=true, connectionId=2, socketChannel=DefaultSocketChannelWrapper{socketChannel=java.nio.channels.SocketChannel[connected local=/127.0.0.1:35558 remote=/127.0.0.1:5701]}, remoteEndpoint=[10.0.0.11]:5701, lastReadTime=2017-10-31 02:12:17.121, lastWriteTime=2017-10-31 02:12:17.095, closedTime=never, lastHeartbeatRequested=never, lastHeartbeatReceived=never, connected server version=3.8.6} as owner  with principal ClientPrincipal{uuid='ea67cc07-68bb-4d93-9da1-3a1657f34eaa', ownerUuid='2d532197-050c-49c9-ade0-f4b21fd5a764'}
+Oct 31, 2017 2:12:17 AM com.hazelcast.client.connection.ClientConnectionManager
+INFO: hz.client_0 [kmeansName] [3.8.6] Authenticated with server [10.0.0.11]:5701, server version:3.8.6 Local address: /127.0.0.1:35558
+Oct 31, 2017 2:12:17 AM com.hazelcast.client.spi.impl.ClientMembershipListener
 INFO: hz.client_0 [kmeansName] [3.8.6] 
 
 Members [1] {
-	Member [10.0.0.11]:5701 - b08f9357-589a-4c7d-a5aa-f265b36039b8
+	Member [10.0.0.11]:5701 - 2d532197-050c-49c9-ade0-f4b21fd5a764
 }
 
-Oct 30, 2017 10:47:51 PM com.hazelcast.core.LifecycleService
+Oct 31, 2017 2:12:17 AM com.hazelcast.core.LifecycleService
 INFO: hz.client_0 [kmeansName] [3.8.6] HazelcastClient 3.8.6 (20170921 - b1aa90b) is CLIENT_CONNECTED
-    Adding newCentroid (7977.9350248224155,5009.520540160447) to position: 1
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+    Adding newCentroid (4420.954167713431,4502.668161180644) to position: 0
+Adding 1 to J: 0 which had a value of: 0
+after adding in AssignCluster: to J: 0 which has a value of: 1
+    Adding newCentroid (5509.609143970439,5085.678552778086) to position: 0
+Adding 1 to J: 0 which had a value of: 1
+after adding in AssignCluster: to J: 0 which has a value of: 2
+    Adding newCentroid (5817.307785073061,8526.942560401732) to position: 1
 Adding 1 to J: 1 which had a value of: 0
 after adding in AssignCluster: to J: 1 which has a value of: 1
-    Adding newCentroid (2781.336745070401,8411.060874451254) to position: 2
+    Adding newCentroid (9998.10194502467,5129.314065805967) to position: 2
 Adding 1 to J: 2 which had a value of: 0
 after adding in AssignCluster: to J: 2 which has a value of: 1
-localClustersSize before: [0, 1, 1]
+    Adding newCentroid (8253.809288518643,7114.182430013586) to position: 0
+Adding 1 to J: 0 which had a value of: 2
+after adding in AssignCluster: to J: 0 which has a value of: 3
+    Adding newCentroid (8901.5848263012,10585.416976043474) to position: 0
+Adding 1 to J: 0 which had a value of: 3
+after adding in AssignCluster: to J: 0 which has a value of: 4
+    Adding newCentroid (9433.415728603039,15381.111785440002) to position: 0
+Adding 1 to J: 0 which had a value of: 4
+after adding in AssignCluster: to J: 0 which has a value of: 5
+    Adding newCentroid (11302.373202395273,17487.02046767577) to position: 1
+Adding 1 to J: 1 which had a value of: 1
+after adding in AssignCluster: to J: 1 which has a value of: 2
+RETURNING BIG DELTA OF 3.0
+localClustersSize before: [5, 2, 1]
 size: 3
-globalClusterSize (3) after: [0, 1, 1]
-localCentroids before: [(0.0,0.0), (7977.9350248224155,5009.520540160447), (2781.336745070401,8411.060874451254)]
+globalClusterSize (1) after: [5, 2, 1]
+localCentroids before: [(9433.415728603039,15381.111785440002), (11302.373202395273,17487.02046767577), (9998.10194502467,5129.314065805967)]
 size: 3
-globalCentroids (3) after: [(0.0,0.0), (7977.9350248224155,5009.520540160447), (2781.336745070401,8411.060874451254)]
+globalCentroids (1) after: [(9433.415728603039,15381.111785440002), (11302.373202395273,17487.02046767577), (9998.10194502467,5129.314065805967)]
 ----------PROCESSING ENTRY FINISHED-----------
-Exception in thread "main" java.lang.IllegalMonitorStateException
-	at java.lang.Object.wait(Native Method)
-	at networkImproved.KMeans.calculate(KMeans.java:226)
-	at networkImproved.KMeans.runSecondary(KMeans.java:561)
-	at main4.main(main4.java:24)
+AFTER adding, delta: 3.0 ; size: 2
+ ...
+3.0 3.0  ...
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+    Adding newCentroid (4420.954167713431,4502.668161180644) to position: 0
+Adding 1 to J: 0 which had a value of: 0
+after adding in AssignCluster: to J: 0 which has a value of: 1
+    Adding newCentroid (5509.609143970439,5085.678552778086) to position: 0
+Adding 1 to J: 0 which had a value of: 1
+after adding in AssignCluster: to J: 0 which has a value of: 2
+    Adding newCentroid (5817.307785073061,8526.942560401732) to position: 1
+Adding 1 to J: 1 which had a value of: 0
+after adding in AssignCluster: to J: 1 which has a value of: 1
+    Adding newCentroid (9998.10194502467,5129.314065805967) to position: 2
+Adding 1 to J: 2 which had a value of: 0
+after adding in AssignCluster: to J: 2 which has a value of: 1
+    Adding newCentroid (8253.809288518643,7114.182430013586) to position: 0
+Adding 1 to J: 0 which had a value of: 2
+after adding in AssignCluster: to J: 0 which has a value of: 3
+    Adding newCentroid (8901.5848263012,10585.416976043474) to position: 0
+Adding 1 to J: 0 which had a value of: 3
+after adding in AssignCluster: to J: 0 which has a value of: 4
+    Adding newCentroid (9433.415728603039,15381.111785440002) to position: 0
+Adding 1 to J: 0 which had a value of: 4
+after adding in AssignCluster: to J: 0 which has a value of: 5
+    Adding newCentroid (11302.373202395273,17487.02046767577) to position: 1
+Adding 1 to J: 1 which had a value of: 1
+after adding in AssignCluster: to J: 1 which has a value of: 2
+RETURNING BIG DELTA OF 0.0
+localClustersSize before: [5, 2, 1]
+size: 3
+globalClusterSize (1) after: [5, 2, 1]
+localCentroids before: [(9433.415728603039,15381.111785440002), (11302.373202395273,17487.02046767577), (9998.10194502467,5129.314065805967)]
+size: 3
+globalCentroids (1) after: [(9433.415728603039,15381.111785440002), (11302.373202395273,17487.02046767577), (9998.10194502467,5129.314065805967)]
+----------PROCESSING ENTRY FINISHED-----------
+AFTER adding, delta: 0.0 ; size: 2
+ ...
+1.0 0.0  ...

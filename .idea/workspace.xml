@@ -5,6 +5,7 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/logs/1/2" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/logs/1/3" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/logs/1/4" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/logs/1/5" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/networkImproved/KMeans$AddCurrentCentroidEntryProcessor.class" afterPath="$PROJECT_DIR$/target/classes/networkImproved/KMeans$AddCurrentCentroidEntryProcessor.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/networkImproved/KMeans$AddCurrentSizeEntryProcessor.class" afterPath="$PROJECT_DIR$/target/classes/networkImproved/KMeans$AddCurrentSizeEntryProcessor.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/networkImproved/KMeans.class" afterPath="$PROJECT_DIR$/target/classes/networkImproved/KMeans.class" />
@@ -30,12 +31,12 @@
       <file leaf-file-name="KMeans.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/networkImproved/KMeans.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="194" column="41" lean-forward="true" selection-start-line="194" selection-start-column="41" selection-end-line="194" selection-end-column="41" />
+            <state relative-caret-position="432">
+              <caret line="321" column="86" lean-forward="false" selection-start-line="321" selection-start-column="86" selection-end-line="321" selection-end-column="86" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <marker date="1509399504185" expanded="false" signature="10759:10782" ph=" { " />
-                <marker date="1509399504185" expanded="false" signature="10833:10851" ph=" }" />
+                <marker date="1509412315917" expanded="false" signature="10632:10655" ph=" { " />
+                <marker date="1509412315917" expanded="false" signature="10706:10724" ph=" }" />
               </folding>
             </state>
           </provider>
@@ -165,10 +166,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="65" />
-    <option name="y" value="24" />
-    <option name="width" value="2495" />
-    <option name="height" value="1056" />
+    <option name="x" value="1312" />
+    <option name="y" value="52" />
+    <option name="width" value="1248" />
+    <option name="height" value="1028" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -1042,14 +1043,28 @@
       <workItem from="1509396695114" duration="806000" />
       <workItem from="1509398751694" duration="757000" />
       <workItem from="1509399731339" duration="315000" />
+      <workItem from="1509400683779" duration="3973000" />
+      <workItem from="1509405045240" duration="1090000" />
+      <workItem from="1509406195556" duration="907000" />
+      <workItem from="1509407146089" duration="621000" />
+      <workItem from="1509407797336" duration="100000" />
+      <workItem from="1509408080834" duration="402000" />
+      <workItem from="1509408566924" duration="189000" />
+      <workItem from="1509408815055" duration="435000" />
+      <workItem from="1509409309752" duration="104000" />
+      <workItem from="1509409465853" duration="145000" />
+      <workItem from="1509409652271" duration="60000" />
+      <workItem from="1509409794578" duration="753000" />
+      <workItem from="1509410652519" duration="549000" />
+      <workItem from="1509411448726" duration="873000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="147104000" />
+    <option name="totallyTimeSpent" value="157305000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="24" width="2495" height="1056" extended-state="7" />
+    <frame x="1312" y="52" width="1248" height="1028" extended-state="5" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1312,14 +1327,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/main3.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="22" column="8" lean-forward="false" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/netImplocalParallelize.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
@@ -1367,14 +1374,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/main3.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="22" column="8" lean-forward="false" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/networkImproved/KMeans.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="194" column="41" lean-forward="true" selection-start-line="194" selection-start-column="41" selection-end-line="194" selection-end-column="41" />
+        <state relative-caret-position="432">
+          <caret line="321" column="86" lean-forward="false" selection-start-line="321" selection-start-column="86" selection-end-line="321" selection-end-column="86" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1509399504185" expanded="false" signature="10759:10782" ph=" { " />
-            <marker date="1509399504185" expanded="false" signature="10833:10851" ph=" }" />
+            <marker date="1509412315917" expanded="false" signature="10632:10655" ph=" { " />
+            <marker date="1509412315917" expanded="false" signature="10706:10724" ph=" }" />
           </folding>
         </state>
       </provider>

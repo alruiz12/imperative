@@ -82,23 +82,23 @@ public class KMeans {
             // Assign points to the closest cluster
             delta = assignCluster(centroids, clusterPoints, points, pointsPart, localCount, numNodes, iteration, clearIter, instance, localCentroids, localClustersSize, membership);
 
-
+/*
             System.out.println("localClustersSize before: "+localClustersSize);
             System.out.println("size: "+localClustersSize.size());
-
+*/
             instance.getMap("globalClusterSize").put((int)localCount-1, localClustersSize);
-            System.out.println("globalClusterSize ("+(int)(localCount-1)+") after adding localClusterSize: "+instance.getMap("globalClusterSize").get((int)localCount-1));
+/*            System.out.println("globalClusterSize ("+(int)(localCount-1)+") after adding localClusterSize: "+instance.getMap("globalClusterSize").get((int)localCount-1));
 
             System.out.println("-----------------------------");
 
             System.out.println("localCentroids before: "+localCentroids);
             System.out.println("size: "+localCentroids.size());
-
+*/
             instance.getMap("globalCentroids").put((int)localCount-1, localCentroids);
-            System.out.println("globalCentroids ("+(int)(localCount-1)+") after adding localCentroids: "+instance.getMap("globalCentroids").get((int)localCount-1));
+/*            System.out.println("globalCentroids ("+(int)(localCount-1)+") after adding localCentroids: "+instance.getMap("globalCentroids").get((int)localCount-1));
 
             System.out.println("----------GLOBAL DATA STRUCTURES UPDATED-----------");
-
+*/
 
 
 
@@ -106,12 +106,12 @@ public class KMeans {
             // ------------------------------------------- BARRIER START -----------------------------------------------
 
             instance.getList("deltaList").clear();
-            System.out.println( "assignsFinished: "+instance.getAtomicLong("assignsFinished").get()+" TIME: "+System.currentTimeMillis());
+//           System.out.println( "assignsFinished: "+instance.getAtomicLong("assignsFinished").get()+" TIME: "+System.currentTimeMillis());
             instance.getAtomicLong("assignsFinished").incrementAndGet();
             while (instance.getAtomicLong("assignsFinished").get() != numNodes) {
                 // while "assignClusters" not finished in all processes don't start "calculateCentroids"
             }
-            System.out.println( "assignsFinished after: "+instance.getAtomicLong("assignsFinished").get()+" TIME: "+System.currentTimeMillis());
+//            System.out.println( "assignsFinished after: "+instance.getAtomicLong("assignsFinished").get()+" TIME: "+System.currentTimeMillis());
 
             // ------------------------------------------- BARRIER END -------------------------------------------------
 
@@ -120,19 +120,19 @@ public class KMeans {
 
             instance.getList("deltaList").add(delta); //.add((int )localCount-1, delta);
         //    System.out.println("AFTER adding, delta: "+instance.getList("deltaList").get((int )localCount-1)+" ; size: "+instance.getList("deltaList").size());
-            System.out.println("deltaList start: ");
-
+//            System.out.println("deltaList start: ");
+/*
             for (int i = 0; i < instance.getList("deltaList").size(); i++) {
                 System.out.println("    "+instance.getList("deltaList").get(i).toString());
             }
             System.out.println("deltaList end");
-
+*/
 
             if (localCount == 1){
                 int acc;
                 Point accPoint;
-                System.out.println("clusterSize before: "+instance.getMap(clusterSize).entrySet() );
-                System.out.println("centroids before: "+instance.getMap(centroids).entrySet() );
+/*                System.out.println("clusterSize before: "+instance.getMap(clusterSize).entrySet() );
+                System.out.println("centroids before: "+instance.getMap(centroids).entrySet() );*/
                 ArrayList<Integer> auxArray;
                 Point auxPoint;
                 for (int i = 0; i < instance.getMap(clusterSize).size() ; i++) {
@@ -140,12 +140,12 @@ public class KMeans {
                     accPoint=new Point();
                     for (int k = 0; k < instance.getMap("globalCentroids").size(); k++) {
 
-                        System.out.println("k: "+k);
-                        System.out.println("    globalClusterSize: "+instance.getMap("globalClusterSize").get(k));
+/*                        System.out.println("k: "+k);
+                        System.out.println("    globalClusterSize: "+instance.getMap("globalClusterSize").get(k));  */
                         auxArray= (ArrayList) instance.getMap("globalClusterSize").get(k);
                         acc += auxArray.get(i);
 
-                        System.out.println("    globalCentroids: "+instance.getMap("globalCentroids").get(k));
+//                        System.out.println("    globalCentroids: "+instance.getMap("globalCentroids").get(k));
                         auxPoint=(Point) ((ArrayList) instance.getMap("globalCentroids").get(k)).get(i);
                         accPoint.setX(accPoint.getX()+auxPoint.getX());
                         accPoint.setY(accPoint.getY()+auxPoint.getY());
@@ -163,18 +163,18 @@ public class KMeans {
                     localCentroids.set(i,emptyPoint);
                     localClustersSize.set(i,0);
                 }
-                System.out.println("------ RESULTS: ------");
+/*                System.out.println("------ RESULTS: ------");
                 System.out.println("clusterSize after: "+instance.getMap(clusterSize).entrySet() );
-                System.out.println("centroids after: "+instance.getMap(centroids).entrySet() );
+                System.out.println("centroids after: "+instance.getMap(centroids).entrySet() );*/
                 deltaTmp=0.0;
                 for (int m = 0; m < instance.getList("deltaList").size() ; m++) {
                     deltaTmp += (double) instance.getList("deltaList").get(m);
                     instance.getList("deltaList").remove(m);
                 }
                 delta=deltaTmp/membership.length;
-                System.out.println("deltaTmp: "+deltaTmp);
+ /*               System.out.println("deltaTmp: "+deltaTmp);
                 System.out.println("membership.length: "+membership.length);
-                System.out.println("********** DELTA UPDATED: "+delta+" ***************");
+                System.out.println("********** DELTA UPDATED: "+delta+" ***************");*/
                 if (delta<0.001) {
                     finish = true;
                     instance.getAtomicLong("iterationFinished").set(-1L);
@@ -190,11 +190,11 @@ public class KMeans {
                     localCentroids.set(i,emptyPoint);
                     localClustersSize.set(i,0);
                 }
-                System.out.println("8   8   before while iterationFinished == 0");
+                //System.out.println("8   8   before while iterationFinished == 0");
                 while (instance.getAtomicLong("iterationFinished").get() == 0L){
 
                 }
-                System.out.println("8   8   iterationFinished != 0");
+                //System.out.println("8   8   iterationFinished != 0");
                 if (instance.getAtomicLong("iterationFinished").get() == -1L ){
                     finish = true;
                 }
@@ -217,7 +217,7 @@ public class KMeans {
         List<Integer> delays = new ArrayList<>();
         Point newCentroid;
         Point currentCentroid = new Point();
-        System.out.println("INSIDE ASSIGN CLUSTER");
+        //System.out.println("INSIDE ASSIGN CLUSTER");
 
         if (localCount == numNodes) { // if it's last node
             module = instance.getMap(points).size() % numNodes;
@@ -244,7 +244,7 @@ public class KMeans {
 
             for (int j = 0; j < delays.size(); j++) {
                 if (repetitionMax <= 0) {
-                    System.out.println("    "+localCount+": WARNING: cluster " + j + " is taking too long to clear");
+//                    System.out.println("    "+localCount+": WARNING: cluster " + j + " is taking too long to clear");
                     // Todo: decide what to do when cluster takes too long to clear
                     // Temporary debug:
                    /* debugEnd(localCount, false, j);
@@ -273,10 +273,10 @@ public class KMeans {
                 newCentroid.setX(localCentroids.get(cluster).getX()+currentCentroid.getX() );
                 newCentroid.setY(localCentroids.get(cluster).getY()+currentCentroid.getY() );
                 localCentroids.set(cluster, newCentroid);
-                System.out.println("    Adding newCentroid "+newCentroid.toString()+" to position: "+cluster);
-                System.out.println("    Adding 1 to J: "+cluster+" which had a value of: "+localClustersSize.get(cluster));
+/*                System.out.println("    Adding newCentroid "+newCentroid.toString()+" to position: "+cluster);
+                System.out.println("    Adding 1 to J: "+cluster+" which had a value of: "+localClustersSize.get(cluster));*/
                 localClustersSize.set(cluster, localClustersSize.get(cluster)+1);
-                System.out.println("    after adding in AssignCluster: to J: "+cluster+" which has a value of: "+localClustersSize.get(cluster));
+         //       System.out.println("    after adding in AssignCluster: to J: "+cluster+" which has a value of: "+localClustersSize.get(cluster));
 
                 if (membership[i] != cluster) delta += 1.0;
 
@@ -285,7 +285,7 @@ public class KMeans {
             }
 
         }
-        System.out.println("ASSIGN CLUSTER: RETURNING BIG DELTA OF "+delta);
+ //       System.out.println("ASSIGN CLUSTER: RETURNING BIG DELTA OF "+delta);
         return delta;
     }
 

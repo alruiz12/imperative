@@ -209,6 +209,7 @@ public class KMeans {
 
                 if (clearIter.get(j) == iteration || iteration==1 || clusterPoints.containsKey(j) == false ) {    // if cluster has been cleared (first iter doesn't clear)
                     distance = Point.distance(points.get(i), centroids.get(j));
+
                     if (distance < min) {
                         min = distance;
                         cluster = j;

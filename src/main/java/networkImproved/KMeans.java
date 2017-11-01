@@ -4,13 +4,15 @@ package networkImproved;
 import com.hazelcast.client.HazelcastClient;
 import com.hazelcast.client.config.ClientConfig;
 import com.hazelcast.config.Config;
-import com.hazelcast.core.*;
-import com.hazelcast.map.AbstractEntryProcessor;
+import com.hazelcast.core.Hazelcast;
+import com.hazelcast.core.HazelcastInstance;
+import com.hazelcast.core.IAtomicLong;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 
 /**
@@ -116,8 +118,8 @@ public class KMeans {
             instance.getAtomicLong("iterationFinished").set(0L);
 
 
-            instance.getList("deltaList").add((int )localCount-1, delta);
-            System.out.println("AFTER adding, delta: "+instance.getList("deltaList").get((int )localCount-1)+" ; size: "+instance.getList("deltaList").size());
+            instance.getList("deltaList").add(delta); //.add((int )localCount-1, delta);
+        //    System.out.println("AFTER adding, delta: "+instance.getList("deltaList").get((int )localCount-1)+" ; size: "+instance.getList("deltaList").size());
             System.out.println("deltaList start: ");
 
             for (int i = 0; i < instance.getList("deltaList").size(); i++) {
@@ -202,52 +204,6 @@ public class KMeans {
 
     }
 
-    private static void clearClusters(String clusterPoints, int clustersPart, long localCount, int numNodes, long iteration, String clearIter, HazelcastInstance instance) {
-        int module = 0;
-        int clusterIter;
-
-        if (instance.getMultiMap(clusterPoints).size() != 0) {    // first iteration won't have any points yet
-
-            if (localCount == numNodes) { // if it's last node
-                module = instance.getMap(clearIter).size() % numNodes;
-            }
-
-            for (int i = (int) ((localCount - 1) * clustersPart); i < ((localCount - 1) * clustersPart) + clustersPart + module; i++) {
-                // walk through its part
-                clusterIter = (int) instance.getMap(clearIter).get(i);
-                if (clusterIter < iteration) {   // if cluster needs to be cleared
-                    if (instance.getMultiMap(clusterPoints).size() > 0) {
-                        instance.getMultiMap(clusterPoints).remove(i);
-                    }
-                    instance.getMap(clearIter).replace(i, (int) iteration);
-                }
-            }
-
-        }
-
-    }
-    private static void getLocalCentroids(String centroids, int clustersPart, long localCount, int numNodes, List<Point> localCentroids, HazelcastInstance instance, List<Integer> localClustersSize){
-        int module = 0;
-
-        localCentroids.clear(); // avoids mixing centroids from different iterations
-
-        if (localCount == numNodes) { // if it's last node
-            module=instance.getMap(centroids).size()%numNodes;
-        }
-
-        for (int i = (int) ((localCount-1)*clustersPart); i <((localCount-1)*clustersPart) + clustersPart + module; i++) {
-            // walk through its part
-
-            Point point = new Point();
-            Point aux = (Point) instance.getMap(centroids).get(i);
-            point.setX(aux.getX());
-            point.setY(aux.getY());
-            localCentroids.add(point);
-
-            localClustersSize.add(0);
-
-        }
-    }
 
     private static double assignCluster(String centroids, String clusterPoints, String points, int pointsPart, long localCount, int numNodes, long iteration, String clearIter, HazelcastInstance instance, List<Point> localCentroids, List<Integer> localClustersSize, int[] membership) {
         double max = Double.MAX_VALUE;
@@ -331,88 +287,6 @@ public class KMeans {
         }
         System.out.println("ASSIGN CLUSTER: RETURNING BIG DELTA OF "+delta);
         return delta;
-    }
-
-    private static void calculateCentroids(String centroids, String clusterPoints, int clustersPart, long localCount, int numNodes, HazelcastInstance instance) {
-        int module = 0;
-        double sumX;
-        double sumY;
-
-        double newX;
-        double newY;
-
-        int n_points;
-
-        if (localCount == numNodes) { // if it's last node
-            module=instance.getMap(centroids).size()%numNodes;
-        }
-
-        for (int i = (int) ((localCount-1)*clustersPart); i <((localCount-1)*clustersPart) + clustersPart + module; i++) {      // for each cluster
-            // walk through its part
-
-            sumX=0;     // reset for each cluster
-            sumY=0;
-            MultiMap<Integer, Point> pointsMap =  instance.getMultiMap(clusterPoints);
-            for (Point point: pointsMap.get(i) ) {      // for each of its points
-                sumX += point.getX();                           // add to process local variables
-                sumY += point.getY();                           // Todo: either use BigDecimal or check Double.POSITIVE_INFINITY or Double.NEGATIVE_INFINITY
-            }
-
-            Point centroid = (Point) instance.getMap(centroids).get(i);
-            n_points = instance.getMultiMap(clusterPoints).get(i).size();
-            if(n_points > 0) {
-                newX = sumX / n_points;                  // compute avg
-                newY = sumY / n_points;
-
-                centroid.setX(newX);                            // set clusters avg
-                centroid.setY(newY);
-                instance.getMap(centroids).replace(i,centroid);
-            }
-        }
-
-    }
-
-
-    public static void end(List<Cluster> clusters){
-        for (int i = 0; i < clusters.size(); i++) {
-            try {
-                System.out.println(clusters.get(i).id);
-                PrintWriter writer = new PrintWriter(String.valueOf(clusters.get(i).id) , "UTF-8") ;
-                for (int j = 0; j < clusters.get(i).getPoints().size(); j++) {
-                    writer.write(String.valueOf(clusters.get(i).getPoints().get(j))); //print();
-                }
-                writer.close();
-
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
-        }
-
-        String s = null;
-        String[] cmd = {
-                "/bin/bash",
-                "-c",
-                "python /home/alvaro/imperative/src/main/java/kmeansOO/script.py "+clusters.size()
-        };
-        try {
-            Process p = Runtime.getRuntime().exec(cmd);
-            BufferedReader stdInput = new BufferedReader(new
-                    InputStreamReader(p.getInputStream()));
-
-            BufferedReader stdError = new BufferedReader(new
-                    InputStreamReader(p.getErrorStream()));
-
-            // read the output from the command
-            System.out.println("Here is the standard output of the command:\n");
-            while ((s = stdInput.readLine()) != null) {
-                System.out.println(s);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
     }
 
     public static void run(int numClusters, int num_points, int minCoordinate, int maxCoordinate, int numIter, int numNodes) {
@@ -527,41 +401,6 @@ public class KMeans {
 
     }
 
-    private static class AddCurrentCentroidEntryProcessor extends AbstractEntryProcessor<Integer, Point> {
-        @Override
-        public Object process(Map.Entry<Integer, Point> entry) {
-            Point point = entry.getValue();
-            point.setX(point.getX()+currentCentroidGlobalX);
-            point.setY(point.getY()+currentCentroidGlobalY);
-            entry.setValue(point);
-
-            return null;
-        }
-    }
-
-    private static class AddCurrentSizeEntryProcessor extends AbstractEntryProcessor<Integer, Integer>  implements Offloadable {
-        @Override
-        public Object process(Map.Entry<Integer, Integer> entry) {
-            System.out.println("    inside func, before 'getValue()' ");
-            int size = entry.getValue();
-            System.out.println("    getKey: "+entry.getKey()+" ; getValue: "+entry.getValue());
-            size=size+currentClusterSize;
-
-            System.out.println("    inside func, just added :"+currentClusterSize);
-            currentClusterSize=-1;
-            entry.setValue(size);
-            //entry.
-            return entry;
-        }
-
-        @Override
-        public String getExecutorName() {
-            return "";
-        }
-    }
-    private static void modifyCCC(){
-        currentClusterSize=-5;
-    }
 }
 
 

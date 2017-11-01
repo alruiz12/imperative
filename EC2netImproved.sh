@@ -2,10 +2,10 @@
 mkdir logs
 for j in $(seq 1 $2); do
     mkdir logs/$j
-    java -cp /home/ubuntu/.m2/repository/com/hazelcast/hazelcast/3.8.6/hazelcast-3.8.6.jar:/home/ubuntu/java/imperative/hazelcast-client-3.8.6.jar:. main $1 >logs/$j/A &>logs/$j/A &
+    java -cp /home/ubuntu/.m2/repository/com/hazelcast/hazelcast/3.8.6/hazelcast-3.8.6.jar:/home/ubuntu/java/imperative/hazelcast-client-3.8.6.jar:. main3 $1 >logs/$j/A &>logs/$j/A &
     num="$(($1-1 ))"
     for i in $(seq 1 $num); do
-        java -cp /home/ubuntu/.m2/repository/com/hazelcast/hazelcast/3.8.6/hazelcast-3.8.6.jar:/home/ubuntu/java/imperative/hazelcast-client-3.8.6.jar:. main2 $1 >logs/$j/$i &>logs/$j/$i &
+        java -cp /home/ubuntu/.m2/repository/com/hazelcast/hazelcast/3.8.6/hazelcast-3.8.6.jar:/home/ubuntu/java/imperative/hazelcast-client-3.8.6.jar:. main4 $1 >logs/$j/$i &>logs/$j/$i &
     done
 
     FAIL=0

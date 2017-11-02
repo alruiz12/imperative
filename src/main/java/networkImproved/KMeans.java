@@ -84,11 +84,13 @@ public class KMeans {
             }
             // ------------------------------------------- BARRIER END -------------------------------------------------
 
-            instance.getAtomicLong("iterationFinished").set(0L); // will be set to true when all processes are ready to move to the next iteration
+            // Will be set to true when all processes are ready to move on to the next iteration
+            instance.getAtomicLong("iterationFinished").set(0L);
 
+            // Add local delta to the global data structure
             instance.getList("deltaList").add(delta);
 
-            if (localCount == 1){
+            if (localCount == 1){   // Only one process will reduce the global data structures (In this case process 1)
                 int acc;
                 double[] accPoint;
 
@@ -96,6 +98,8 @@ public class KMeans {
                     acc=0;
                     accPoint=new double[2];
                     for (int k = 0; k < instance.getMap("globalCentroids").size(); k++) {
+
+                        // Accumulate all data from global data structures
 
                         acc += (int)((ArrayList) instance.getMap("globalClusterSize").get(k) ).get(i);
 
@@ -121,7 +125,7 @@ public class KMeans {
                     deltaTmp += (double) instance.getList("deltaList").get(m);
                     instance.getList("deltaList").remove(m);
                 }
-                delta=deltaTmp/membership.length;
+                delta=deltaTmp/membership.length;   // num of modifications / num points
 
                 System.out.println("********** DELTA UPDATED: "+delta+" ***************");
                 if (delta<0.001) {
@@ -171,7 +175,6 @@ public class KMeans {
             for (int j = 0; j < instance.getMap(centroids).size(); j++) {     // assign to the closest cluster
 
                 distance = distance( localPoints.get(i), (double[]) instance.getMap(centroids).get(j));
-
                 if (distance < min) {
                     min = distance;
                     cluster = j;

@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -67,6 +68,16 @@ public class KMeans {
         List<Point> localCentroids = new ArrayList<>(instance.getMap(centroids).size());
         Point initPoint = new Point();
 
+        HashMap localPoints = new HashMap<Integer, Point>();
+
+        int module=0;
+        if (localCount == numNodes) { // if it's last node
+            module = membership.length % numNodes;
+        }
+        for (int i = (int) ((localCount - 1) * pointsPart); i < (localCount - 1) * pointsPart + pointsPart + module; i++) {     // for each point
+            localPoints.put(i,instance.getMap(points).get(i));
+        }
+
         for (int i = 0; i < instance.getMap(centroids).size() ; i++) {
             localClustersSize.add(i,0);
             localCentroids.add(i,initPoint);
@@ -80,7 +91,7 @@ public class KMeans {
 
 
             // Assign points to the closest cluster
-            delta = assignCluster(centroids, clusterPoints, points, pointsPart, localCount, numNodes, iteration, clearIter, instance, localCentroids, localClustersSize, membership);
+            delta = assignCluster(centroids, clusterPoints, points, pointsPart, localCount, numNodes, iteration, clearIter, instance, localCentroids, localClustersSize, membership, localPoints);
 
 /*
             System.out.println("localClustersSize before: "+localClustersSize);
@@ -133,7 +144,7 @@ public class KMeans {
                 Point accPoint;
 /*                System.out.println("clusterSize before: "+instance.getMap(clusterSize).entrySet() );
                 System.out.println("centroids before: "+instance.getMap(centroids).entrySet() );*/
-                ArrayList<Integer> auxArray;
+                //ArrayList<Integer> auxArray;
                 Point auxPoint;
                 for (int i = 0; i < instance.getMap(clusterSize).size() ; i++) {
                     acc=0;
@@ -142,8 +153,8 @@ public class KMeans {
 
 /*                        System.out.println("k: "+k);
                         System.out.println("    globalClusterSize: "+instance.getMap("globalClusterSize").get(k));  */
-                        auxArray= (ArrayList) instance.getMap("globalClusterSize").get(k);
-                        acc += auxArray.get(i);
+                        acc += (int)((ArrayList) instance.getMap("globalClusterSize").get(k) ).get(i);
+                        //acc += auxArray.get(i);
 
 //                        System.out.println("    globalCentroids: "+instance.getMap("globalCentroids").get(k));
                         auxPoint=(Point) ((ArrayList) instance.getMap("globalCentroids").get(k)).get(i);
@@ -172,9 +183,9 @@ public class KMeans {
                     instance.getList("deltaList").remove(m);
                 }
                 delta=deltaTmp/membership.length;
- /*               System.out.println("deltaTmp: "+deltaTmp);
-                System.out.println("membership.length: "+membership.length);
-                System.out.println("********** DELTA UPDATED: "+delta+" ***************");*/
+    //            System.out.println("deltaTmp: "+deltaTmp);
+    //            System.out.println("membership.length: "+membership.length);
+                System.out.println("********** DELTA UPDATED: "+delta+" ***************");
                 if (delta<0.001) {
                     finish = true;
                     instance.getAtomicLong("iterationFinished").set(-1L);
@@ -205,7 +216,7 @@ public class KMeans {
     }
 
 
-    private static double assignCluster(String centroids, String clusterPoints, String points, int pointsPart, long localCount, int numNodes, long iteration, String clearIter, HazelcastInstance instance, List<Point> localCentroids, List<Integer> localClustersSize, int[] membership) {
+    private static double assignCluster(String centroids, String clusterPoints, String points, int pointsPart, long localCount, int numNodes, long iteration, String clearIter, HazelcastInstance instance, List<Point> localCentroids, List<Integer> localClustersSize, int[] membership, HashMap<Integer, Point> localPoints) {
         double max = Double.MAX_VALUE;
         double min = max;
         int cluster = 0;
@@ -228,48 +239,23 @@ public class KMeans {
             min = max;
 
             for (int j = 0; j < instance.getMap(centroids).size(); j++) {     // assign to the closest cluster
-                if ((int) instance.getMap(clearIter).get(j) == iteration || iteration==1 || instance.getMultiMap(clusterPoints).containsKey(j) == false ) {    // if cluster has been cleared (first iter doesn't clear)
-                    distance = Point.distance((Point) instance.getMap(points).get(i), (Point) instance.getMap(centroids).get(j));
 
-                    if (distance < min) {
-                        min = distance;
-                        cluster = j;
-                    }
-                } else {    // add to delayed list, and rerun
-                    delays.add(j);
+                distance = Point.distance( localPoints.get(i), (Point) instance.getMap(centroids).get(j));
+
+                if (distance < min) {
+                    min = distance;
+                    cluster = j;
                 }
+
             }
 
-            repetitionMax = REPETITION_LIMIT;
 
-            for (int j = 0; j < delays.size(); j++) {
-                if (repetitionMax <= 0) {
-//                    System.out.println("    "+localCount+": WARNING: cluster " + j + " is taking too long to clear");
-                    // Todo: decide what to do when cluster takes too long to clear
-                    // Temporary debug:
-                   /* debugEnd(localCount, false, j);
-                    return 1;*/
-                }
-
-
-                if ((int) instance.getMap(clearIter).get(j) == iteration || iteration==1 || instance.getMultiMap(clusterPoints).containsKey(j) == false ) { // // if cluster has been cleared
-                    repetitionMax = REPETITION_LIMIT;
-                    distance = Point.distance((Point) instance.getMap(points).get(i), (Point) instance.getMap(centroids).get(j));
-                    if (distance < min) {
-                        min = distance;
-                        cluster = j;
-                    }
-                } else {    // retry same cluster
-                    j--;
-                    repetitionMax--;
-                }
-            }
             if (distance < max) {   // if any point is ready
                 newCentroid = new Point();
                 //instance.getMap(points).get(i).setCluster(cluster);                          // mark point as ready for next stage (calculateCentroids)
                 //clusterPoints.put(cluster, points.get(i));
                 //instance.getMultiMap(clusterPoints).put(cluster, instance.getMap(points).get(i));
-                currentCentroid = (Point) instance.getMap(points).get(i);
+                currentCentroid = localPoints.get(i);
                 newCentroid.setX(localCentroids.get(cluster).getX()+currentCentroid.getX() );
                 newCentroid.setY(localCentroids.get(cluster).getY()+currentCentroid.getY() );
                 localCentroids.set(cluster, newCentroid);

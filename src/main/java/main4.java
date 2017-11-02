@@ -15,13 +15,10 @@ public class main4 {
             //Number of Points
             final int NUM_POINTS = 1500;
             //Min and Max X and Y
-            final int MIN_COORDINATE = 0;
-            final int MAX_COORDINATE = 10000;
 
-            final int NUM_ITER = 1;
             final int NUM_NODES = firstArg;
 
-            networkImproved.KMeans.runSecondary(NUM_CLUSTERS, NUM_POINTS, MIN_COORDINATE, MAX_COORDINATE, NUM_ITER, NUM_NODES);
+            networkImproved.KMeans.runSecondary(NUM_CLUSTERS, NUM_POINTS, NUM_NODES);
 
         } else {System.out.println("not enough args");}
     }

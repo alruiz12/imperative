@@ -23,145 +23,84 @@ import java.util.concurrent.ConcurrentMap;
  */
 public class KMeans {
 
-    //public KMeans() {}
-
-    static double currentCentroidGlobalX = 0.0;
-    static double currentCentroidGlobalY = 0.0;
-    static int currentClusterSize = 0;
-
-
     // Initializes the process
-    public static void init(int numClusters, int minCoordinate, int maxCoordinate, String centroids, String clearIter, HazelcastInstance instance, String clusterSize) {
-
-        /*
-        * As the elements of a plain Java List inside a Java Object cannot be modified concurrently
-        * and the List cannot be implemented as a Hazelcast List (inside of an Object),
-        * the Object Cluster is broken into 2 Hazelcast data structures referenced by the same key
-        * ( ConcurrentMap for the field "centroid" (a Point) and MultiMap for the field "points" (a List of Points) )
-        * */
-
+    public static void init(int numClusters, int minCoordinate, int maxCoordinate, String centroids, HazelcastInstance instance, String clusterSize) {
 
         for (int i = 0; i < numClusters; i++) {
 
             // Set Random Centroids
             instance.getMap(centroids).put(i, createRandomPoint(minCoordinate,maxCoordinate));
 
-            // Fill up clearIter entry
-            instance.getMap(clearIter).put(i,0);
-
+            // Set all the cluster's size to 0
             instance.getMap(clusterSize).put(i,0);
 
+            // Initializes global data structures
             instance.getMap("globalCentroids ").put(i, new ArrayList<Integer>());
             instance.getMap("globalClusterSize").put(i, new ArrayList<Integer>());
 
         }
-
     }
 
     // The process to calculate the K Means, with iterating method.
-    public static void calculate(String centroids, String clusterPoints, String points, int clustersPart, int pointsPart, long localCount, int numNodes, String clearIter, HazelcastInstance instance, String clusterSize, int[] membership) {
+    public static void calculate(String centroids, String points,  int pointsPart, long localCount, int numNodes, HazelcastInstance instance, String clusterSize, int[] membership) {
         boolean finish = false;
-        long iteration = 1;
-        double distance;
         double[] emptyPoint = {0,0};
-
+        double delta, deltaTmp = 0.0;
         List<Integer> localClustersSize = new ArrayList<>(instance.getMap(centroids).size());
         List<double[]> localCentroids = new ArrayList<>(instance.getMap(centroids).size());
-        //Point initPoint = new Point();
-
         HashMap localPoints = new HashMap<Integer, double[]>();
-
         int module=0;
+
         if (localCount == numNodes) { // if it's last node
             module = membership.length % numNodes;
         }
-        for (int i = (int) ((localCount - 1) * pointsPart); i < (localCount - 1) * pointsPart + pointsPart + module; i++) {     // for each point
+        for (int i = (int) ((localCount - 1) * pointsPart); i < (localCount - 1) * pointsPart + pointsPart + module; i++) {
+            // For each point of the subset of the node, copy it to local
             localPoints.put(i,instance.getMap(points).get(i));
         }
 
         for (int i = 0; i < instance.getMap(centroids).size() ; i++) {
+            // Initialize local data structures
             localClustersSize.add(i,0);
             localCentroids.add(i,emptyPoint);
         }
 
-        instance.getAtomicLong("resetDone").set(0);
-
-        double delta, deltaTmp = 0.0;
-
         while(!finish) {
 
-
             // Assign points to the closest cluster
-            delta = assignCluster(centroids, clusterPoints, points, pointsPart, localCount, numNodes, iteration, clearIter, instance, localCentroids, localClustersSize, membership, localPoints);
+            delta = assignCluster(centroids, points, pointsPart, localCount, numNodes, instance, localCentroids, localClustersSize, membership, localPoints);
 
-/*
-            System.out.println("localClustersSize before: "+localClustersSize);
-            System.out.println("size: "+localClustersSize.size());
-*/
+            // Load local data structures to the global ones
             instance.getMap("globalClusterSize").put((int)localCount-1, localClustersSize);
-/*            System.out.println("globalClusterSize ("+(int)(localCount-1)+") after adding localClusterSize: "+instance.getMap("globalClusterSize").get((int)localCount-1));
-
-            System.out.println("-----------------------------");
-
-            System.out.println("localCentroids before: "+localCentroids);
-            System.out.println("size: "+localCentroids.size());
-*/
             instance.getMap("globalCentroids").put((int)localCount-1, localCentroids);
-/*            System.out.println("globalCentroids ("+(int)(localCount-1)+") after adding localCentroids: "+instance.getMap("globalCentroids").get((int)localCount-1));
 
-            System.out.println("----------GLOBAL DATA STRUCTURES UPDATED-----------");
-*/
-
-
-
+            // Empty the list of deltas
+            instance.getList("deltaList").clear();
 
             // ------------------------------------------- BARRIER START -----------------------------------------------
-
-            instance.getList("deltaList").clear();
-//           System.out.println( "assignsFinished: "+instance.getAtomicLong("assignsFinished").get()+" TIME: "+System.currentTimeMillis());
             instance.getAtomicLong("assignsFinished").incrementAndGet();
             while (instance.getAtomicLong("assignsFinished").get() != numNodes) {
-                // while "assignClusters" not finished in all processes don't start "calculateCentroids"
+                // waiting for all processes to assign clusters and update global data structures
             }
-//            System.out.println( "assignsFinished after: "+instance.getAtomicLong("assignsFinished").get()+" TIME: "+System.currentTimeMillis());
-
             // ------------------------------------------- BARRIER END -------------------------------------------------
 
-            instance.getAtomicLong("iterationFinished").set(0L);
+            instance.getAtomicLong("iterationFinished").set(0L); // will be set to true when all processes are ready to move to the next iteration
 
-
-            instance.getList("deltaList").add(delta); //.add((int )localCount-1, delta);
-        //    System.out.println("AFTER adding, delta: "+instance.getList("deltaList").get((int )localCount-1)+" ; size: "+instance.getList("deltaList").size());
-//            System.out.println("deltaList start: ");
-/*
-            for (int i = 0; i < instance.getList("deltaList").size(); i++) {
-                System.out.println("    "+instance.getList("deltaList").get(i).toString());
-            }
-            System.out.println("deltaList end");
-*/
+            instance.getList("deltaList").add(delta);
 
             if (localCount == 1){
                 int acc;
                 double[] accPoint;
-/*                System.out.println("clusterSize before: "+instance.getMap(clusterSize).entrySet() );
-                System.out.println("centroids before: "+instance.getMap(centroids).entrySet() );*/
-                //ArrayList<Integer> auxArray;
-               // double[] auxPoint;
+
                 for (int i = 0; i < instance.getMap(clusterSize).size() ; i++) {
                     acc=0;
                     accPoint=new double[2];
                     for (int k = 0; k < instance.getMap("globalCentroids").size(); k++) {
 
-/*                        System.out.println("k: "+k);
-                        System.out.println("    globalClusterSize: "+instance.getMap("globalClusterSize").get(k));  */
                         acc += (int)((ArrayList) instance.getMap("globalClusterSize").get(k) ).get(i);
-                        //acc += auxArray.get(i);
 
-//                        System.out.println("    globalCentroids: "+instance.getMap("globalCentroids").get(k));
                         accPoint[0] += ((double[]) ((ArrayList) instance.getMap("globalCentroids").get(k)).get(i))[0];
                         accPoint[1] += ((double[]) ((ArrayList) instance.getMap("globalCentroids").get(k)).get(i))[1];
-                     //   accPoint.setX(accPoint.getX()+auxPoint.getX());
-                     //   accPoint.setY(accPoint.getY()+auxPoint.getY());
 
                     }
                     if (acc>0) {    // if cluster has points
@@ -169,25 +108,21 @@ public class KMeans {
                     }
                     accPoint[0] = accPoint[0] / (int)instance.getMap(clusterSize).get(i);
                     accPoint[1] = accPoint[1] / (int)instance.getMap(clusterSize).get(i);
-                    //accPoint.setX(accPoint.getX()/(int)instance.getMap(clusterSize).get(i));
-                    //accPoint.setY(accPoint.getY()/(int)instance.getMap(clusterSize).get(i));
+
                     instance.getMap(centroids).replace(i, accPoint);
 
                     // Reset local data structures (otherwise they will be added to themselves again)
                     localCentroids.set(i,emptyPoint);
                     localClustersSize.set(i,0);
                 }
-/*                System.out.println("------ RESULTS: ------");
-                System.out.println("clusterSize after: "+instance.getMap(clusterSize).entrySet() );
-                System.out.println("centroids after: "+instance.getMap(centroids).entrySet() );*/
+
                 deltaTmp=0.0;
                 for (int m = 0; m < instance.getList("deltaList").size() ; m++) {
                     deltaTmp += (double) instance.getList("deltaList").get(m);
                     instance.getList("deltaList").remove(m);
                 }
                 delta=deltaTmp/membership.length;
-    //            System.out.println("deltaTmp: "+deltaTmp);
-    //            System.out.println("membership.length: "+membership.length);
+
                 System.out.println("********** DELTA UPDATED: "+delta+" ***************");
                 if (delta<0.001) {
                     finish = true;
@@ -204,34 +139,26 @@ public class KMeans {
                     localCentroids.set(i,emptyPoint);
                     localClustersSize.set(i,0);
                 }
-                //System.out.println("8   8   before while iterationFinished == 0");
                 while (instance.getAtomicLong("iterationFinished").get() == 0L){
 
                 }
-                //System.out.println("8   8   iterationFinished != 0");
                 if (instance.getAtomicLong("iterationFinished").get() == -1L ){
                     finish = true;
                 }
             }
 
-            }
-
+        }
     }
 
 
-    private static double assignCluster(String centroids, String clusterPoints, String points, int pointsPart, long localCount, int numNodes, long iteration, String clearIter, HazelcastInstance instance, List<double[]> localCentroids, List<Integer> localClustersSize, int[] membership, HashMap<Integer, double[]> localPoints) {
+    private static double assignCluster(String centroids, String points, int pointsPart, long localCount, int numNodes, HazelcastInstance instance, List<double[]> localCentroids, List<Integer> localClustersSize, int[] membership, HashMap<Integer, double[]> localPoints) {
         double max = Double.MAX_VALUE;
         double min = max;
         int cluster = 0;
         double distance = 0.0;
-        int repetitionMax;
-        final int REPETITION_LIMIT = 200;
         int module = 0;
         double delta = 0.0;
-        List<Integer> delays = new ArrayList<>();
-        //double[] newCentroid;
         double[] currentCentroid={0,0};
-        //System.out.println("INSIDE ASSIGN CLUSTER");
 
         if (localCount == numNodes) { // if it's last node
             module = instance.getMap(points).size() % numNodes;
@@ -249,24 +176,15 @@ public class KMeans {
                     min = distance;
                     cluster = j;
                 }
-
             }
-
 
             if (distance < max) {   // if any point is ready
 
-                //instance.getMap(points).get(i).setCluster(cluster);                          // mark point as ready for next stage (calculateCentroids)
-                //clusterPoints.put(cluster, points.get(i));
-                //instance.getMultiMap(clusterPoints).put(cluster, instance.getMap(points).get(i));
                 currentCentroid = localPoints.get(i);
                 double[] newCentroid = {(localCentroids.get(cluster)[0]+currentCentroid[0]),localCentroids.get(cluster)[1]+currentCentroid[1] };
-               // newCentroid.setX(localCentroids.get(cluster).getX()+currentCentroid.getX() );
-                //newCentroid.setY(localCentroids.get(cluster).getY()+currentCentroid.getY() );
+
                 localCentroids.set(cluster, newCentroid);
-/*                System.out.println("    Adding newCentroid "+newCentroid.toString()+" to position: "+cluster);
-                System.out.println("    Adding 1 to J: "+cluster+" which had a value of: "+localClustersSize.get(cluster));*/
                 localClustersSize.set(cluster, localClustersSize.get(cluster)+1);
-         //       System.out.println("    after adding in AssignCluster: to J: "+cluster+" which has a value of: "+localClustersSize.get(cluster));
 
                 if (membership[i] != cluster) delta += 1.0;
 
@@ -275,11 +193,10 @@ public class KMeans {
             }
 
         }
- //       System.out.println("ASSIGN CLUSTER: RETURNING BIG DELTA OF "+delta);
         return delta;
     }
 
-    public static void run(int numClusters, int num_points, int minCoordinate, int maxCoordinate, int numIter, int numNodes) {
+    public static void run(int numClusters, int num_points, int minCoordinate, int maxCoordinate,  int numNodes) {
         long startTime = System.currentTimeMillis();
         Config conf = new Config();
         conf.getGroupConfig().setName("kmeansName").setPassword("kmeansPass");
@@ -289,15 +206,12 @@ public class KMeans {
         IAtomicLong finished = instance.getAtomicLong("finished");
         finished.set(0);
         String points = "points";
-        //Point.createRandomPoints(minCoordinate, maxCoordinate, num_points, instance, points);
         createRandomPoints(minCoordinate, maxCoordinate, num_points, instance, points);
 
-        String clearIter = "clearIter";        // Keeps track of the number of "clear" iterations of each cluster
         String centroids = "centroids";
-        String clusterPoints = "clusterPoints";
         String clusterSize="clusterSize";
 
-        init(numClusters, minCoordinate, maxCoordinate, centroids, clearIter, instance, clusterSize);      // Sets random centroids and initializes clearIter
+        init(numClusters, minCoordinate, maxCoordinate, centroids, instance, clusterSize);      // Sets random centroids
 
         IAtomicLong count = instance.getAtomicLong("count");
         long localCount = count.incrementAndGet();      // As new processes run, they increment a counter and keep the local copy as their ID
@@ -308,38 +222,33 @@ public class KMeans {
         }
 
         int pointsPart = instance.getMap(points).size()/numNodes;
-        int clustersPart = instance.getMap(centroids).size()/numNodes;
         int[] membership = new int[num_points];
 
-        calculate(centroids, clusterPoints, points, clustersPart, pointsPart, localCount, numNodes, clearIter, instance, clusterSize, membership); // main call
+        calculate(centroids, points, pointsPart, localCount, numNodes, instance, clusterSize, membership); // main call
 
         finished.incrementAndGet(); // Counts finished processes
         while (finished.get() != numNodes){
             // Waits for all processes to finish before obtaining elapsed time
         }
 
-
         long finalTime = System.currentTimeMillis();            // When all process finish, time elapsed time
         debugEnd((finalTime-startTime)/1000, true, -1);    // Create a file with info about time (avoids busy st out)
         debugEnd(localCount, true, 0);
-        //end(clusters);
         instance.shutdown();
 
     }
 
-    public static void runSecondary(int numClusters, int num_points, int minCoordinate, int maxCoordinate, int numIter, int numNodes) {
+    public static void runSecondary(int numClusters, int num_points, int numNodes) {
         ClientConfig clientConfig = new ClientConfig();
         clientConfig.getNetworkConfig().setConnectionAttemptLimit(15);
         clientConfig.getGroupConfig().setName("kmeansName").setPassword("kmeansPass");
         HazelcastInstance client = HazelcastClient.newHazelcastClient(clientConfig);
 
         String points = "points";
-        String clearIter = "clearIter";        // Keeps track of the number of "clear" iterations of each cluster
         String centroids = "centroids";
-        String clusterPoints = "clusterPoints";
         String clusterSize="clusterSize";
 
-        while(client.getMap(points).size()!=num_points || client.getMap(centroids).size() != numClusters || client.getMap(clearIter).size() != numClusters){
+        while(client.getMap(points).size()!=num_points || client.getMap(centroids).size() != numClusters ){
             // Wait for initialization
             // Todo: could be optimized putting thread to sleep, now hazelcast exception stops execution
         }
@@ -353,10 +262,9 @@ public class KMeans {
         }
 
         int pointsPart = client.getMap(points).size()/numNodes;
-        int clustersPart = client.getMap(centroids).size()/numNodes;
         int[] membership = new int[num_points];
 
-        calculate(centroids, clusterPoints, points, clustersPart, pointsPart, localCount, numNodes, clearIter, client, clusterSize, membership); // main call
+        calculate(centroids, points, pointsPart, localCount, numNodes, client, clusterSize, membership); // main call
 
         IAtomicLong finished = client.getAtomicLong("finished");
         finished.incrementAndGet();
@@ -364,8 +272,6 @@ public class KMeans {
         debugEnd(localCount, true, 0);
 
         client.shutdown();
-        //end(clusters);
-
 
     }
 
@@ -406,7 +312,6 @@ public class KMeans {
             pointsMap.put(i,createRandomPoint(min,max));
         }
     }
-
 
 
     //Calculates the distance between two points.

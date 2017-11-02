@@ -14,6 +14,8 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
+import java.util.concurrent.ConcurrentMap;
 
 
 /**
@@ -42,8 +44,7 @@ public class KMeans {
         for (int i = 0; i < numClusters; i++) {
 
             // Set Random Centroids
-            Point centroid = Point.createRandomPoint(minCoordinate,maxCoordinate);
-            instance.getMap(centroids).put(i, centroid);
+            instance.getMap(centroids).put(i, createRandomPoint(minCoordinate,maxCoordinate));
 
             // Fill up clearIter entry
             instance.getMap(clearIter).put(i,0);
@@ -62,13 +63,13 @@ public class KMeans {
         boolean finish = false;
         long iteration = 1;
         double distance;
-        Point emptyPoint = new Point();
+        double[] emptyPoint = {0,0};
 
         List<Integer> localClustersSize = new ArrayList<>(instance.getMap(centroids).size());
-        List<Point> localCentroids = new ArrayList<>(instance.getMap(centroids).size());
-        Point initPoint = new Point();
+        List<double[]> localCentroids = new ArrayList<>(instance.getMap(centroids).size());
+        //Point initPoint = new Point();
 
-        HashMap localPoints = new HashMap<Integer, Point>();
+        HashMap localPoints = new HashMap<Integer, double[]>();
 
         int module=0;
         if (localCount == numNodes) { // if it's last node
@@ -80,7 +81,7 @@ public class KMeans {
 
         for (int i = 0; i < instance.getMap(centroids).size() ; i++) {
             localClustersSize.add(i,0);
-            localCentroids.add(i,initPoint);
+            localCentroids.add(i,emptyPoint);
         }
 
         instance.getAtomicLong("resetDone").set(0);
@@ -141,14 +142,14 @@ public class KMeans {
 
             if (localCount == 1){
                 int acc;
-                Point accPoint;
+                double[] accPoint;
 /*                System.out.println("clusterSize before: "+instance.getMap(clusterSize).entrySet() );
                 System.out.println("centroids before: "+instance.getMap(centroids).entrySet() );*/
                 //ArrayList<Integer> auxArray;
-                Point auxPoint;
+               // double[] auxPoint;
                 for (int i = 0; i < instance.getMap(clusterSize).size() ; i++) {
                     acc=0;
-                    accPoint=new Point();
+                    accPoint=new double[2];
                     for (int k = 0; k < instance.getMap("globalCentroids").size(); k++) {
 
 /*                        System.out.println("k: "+k);
@@ -157,17 +158,19 @@ public class KMeans {
                         //acc += auxArray.get(i);
 
 //                        System.out.println("    globalCentroids: "+instance.getMap("globalCentroids").get(k));
-                        auxPoint=(Point) ((ArrayList) instance.getMap("globalCentroids").get(k)).get(i);
-                        accPoint.setX(accPoint.getX()+auxPoint.getX());
-                        accPoint.setY(accPoint.getY()+auxPoint.getY());
+                        accPoint[0] += ((double[]) ((ArrayList) instance.getMap("globalCentroids").get(k)).get(i))[0];
+                        accPoint[1] += ((double[]) ((ArrayList) instance.getMap("globalCentroids").get(k)).get(i))[1];
+                     //   accPoint.setX(accPoint.getX()+auxPoint.getX());
+                     //   accPoint.setY(accPoint.getY()+auxPoint.getY());
 
                     }
                     if (acc>0) {    // if cluster has points
                         instance.getMap(clusterSize).replace(i,  ((int) instance.getMap(clusterSize).get(i) ) + acc );
                     }
-
-                    accPoint.setX(accPoint.getX()/(int)instance.getMap(clusterSize).get(i));
-                    accPoint.setY(accPoint.getY()/(int)instance.getMap(clusterSize).get(i));
+                    accPoint[0] = accPoint[0] / (int)instance.getMap(clusterSize).get(i);
+                    accPoint[1] = accPoint[1] / (int)instance.getMap(clusterSize).get(i);
+                    //accPoint.setX(accPoint.getX()/(int)instance.getMap(clusterSize).get(i));
+                    //accPoint.setY(accPoint.getY()/(int)instance.getMap(clusterSize).get(i));
                     instance.getMap(centroids).replace(i, accPoint);
 
                     // Reset local data structures (otherwise they will be added to themselves again)
@@ -216,7 +219,7 @@ public class KMeans {
     }
 
 
-    private static double assignCluster(String centroids, String clusterPoints, String points, int pointsPart, long localCount, int numNodes, long iteration, String clearIter, HazelcastInstance instance, List<Point> localCentroids, List<Integer> localClustersSize, int[] membership, HashMap<Integer, Point> localPoints) {
+    private static double assignCluster(String centroids, String clusterPoints, String points, int pointsPart, long localCount, int numNodes, long iteration, String clearIter, HazelcastInstance instance, List<double[]> localCentroids, List<Integer> localClustersSize, int[] membership, HashMap<Integer, double[]> localPoints) {
         double max = Double.MAX_VALUE;
         double min = max;
         int cluster = 0;
@@ -226,8 +229,8 @@ public class KMeans {
         int module = 0;
         double delta = 0.0;
         List<Integer> delays = new ArrayList<>();
-        Point newCentroid;
-        Point currentCentroid = new Point();
+        //double[] newCentroid;
+        double[] currentCentroid={0,0};
         //System.out.println("INSIDE ASSIGN CLUSTER");
 
         if (localCount == numNodes) { // if it's last node
@@ -240,7 +243,7 @@ public class KMeans {
 
             for (int j = 0; j < instance.getMap(centroids).size(); j++) {     // assign to the closest cluster
 
-                distance = Point.distance( localPoints.get(i), (Point) instance.getMap(centroids).get(j));
+                distance = distance( localPoints.get(i), (double[]) instance.getMap(centroids).get(j));
 
                 if (distance < min) {
                     min = distance;
@@ -251,13 +254,14 @@ public class KMeans {
 
 
             if (distance < max) {   // if any point is ready
-                newCentroid = new Point();
+
                 //instance.getMap(points).get(i).setCluster(cluster);                          // mark point as ready for next stage (calculateCentroids)
                 //clusterPoints.put(cluster, points.get(i));
                 //instance.getMultiMap(clusterPoints).put(cluster, instance.getMap(points).get(i));
                 currentCentroid = localPoints.get(i);
-                newCentroid.setX(localCentroids.get(cluster).getX()+currentCentroid.getX() );
-                newCentroid.setY(localCentroids.get(cluster).getY()+currentCentroid.getY() );
+                double[] newCentroid = {(localCentroids.get(cluster)[0]+currentCentroid[0]),localCentroids.get(cluster)[1]+currentCentroid[1] };
+               // newCentroid.setX(localCentroids.get(cluster).getX()+currentCentroid.getX() );
+                //newCentroid.setY(localCentroids.get(cluster).getY()+currentCentroid.getY() );
                 localCentroids.set(cluster, newCentroid);
 /*                System.out.println("    Adding newCentroid "+newCentroid.toString()+" to position: "+cluster);
                 System.out.println("    Adding 1 to J: "+cluster+" which had a value of: "+localClustersSize.get(cluster));*/
@@ -285,7 +289,8 @@ public class KMeans {
         IAtomicLong finished = instance.getAtomicLong("finished");
         finished.set(0);
         String points = "points";
-        Point.createRandomPoints(minCoordinate, maxCoordinate, num_points, instance, points);
+        //Point.createRandomPoints(minCoordinate, maxCoordinate, num_points, instance, points);
+        createRandomPoints(minCoordinate, maxCoordinate, num_points, instance, points);
 
         String clearIter = "clearIter";        // Keeps track of the number of "clear" iterations of each cluster
         String centroids = "centroids";
@@ -385,6 +390,28 @@ public class KMeans {
                 e.printStackTrace();
             }
 
+    }
+
+
+
+    private static double[] createRandomPoint(int min, int max){
+        Random r = new Random();
+        double[] aux = {min + (max - min) * r.nextDouble(), min + (max - min) * r.nextDouble()};
+        return aux;
+    }
+
+    private static void createRandomPoints(int min, int max, int number, HazelcastInstance instance, String points){
+        ConcurrentMap<Integer, double[]> pointsMap = instance.getMap(points);
+        for(int i = 0; i<number; i++) {
+            pointsMap.put(i,createRandomPoint(min,max));
+        }
+    }
+
+
+
+    //Calculates the distance between two points.
+    protected static double distance(double[] p, double[] centroid) {
+        return Math.sqrt(Math.pow((centroid[1] - p[1]), 2) + Math.pow((centroid[0] - p[0]), 2));
     }
 
 }

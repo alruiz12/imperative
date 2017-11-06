@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c2fc32f-86ad-4454-9718-b712f1b37b8c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EC2netImproved.sh" afterPath="$PROJECT_DIR$/EC2netImproved.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/splitDataset.sh" afterPath="$PROJECT_DIR$/splitDataset.sh" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,13 +18,13 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.43567133">
+    <splitter split-orientation="horizontal" split-proportion="0.6370192">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="KMeans.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/networkImproved/KMeans.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-2556">
+                <state relative-caret-position="1008">
                   <caret line="65" column="0" lean-forward="false" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
                   <folding>
                     <element signature="imports" expanded="true" />
@@ -52,21 +53,21 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="netImplocalParallelize.sh" pinned="false" current-in-tab="false">
+          <file leaf-file-name="netImplocalParallelize.sh" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/netImplocalParallelize.sh">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="126">
-                  <caret line="7" column="20" lean-forward="true" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
+                <state relative-caret-position="18">
+                  <caret line="1" column="45" lean-forward="false" selection-start-line="1" selection-start-column="45" selection-end-line="1" selection-end-column="45" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="splitDataset.sh" pinned="false" current-in-tab="true">
+          <file leaf-file-name="splitDataset.sh" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/splitDataset.sh">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="108">
-                  <caret line="6" column="58" lean-forward="true" selection-start-line="5" selection-start-column="1" selection-end-line="6" selection-end-column="58" />
+                <state relative-caret-position="360">
+                  <caret line="20" column="11" lean-forward="true" selection-start-line="20" selection-start-column="11" selection-end-line="20" selection-end-column="11" />
                   <folding />
                 </state>
               </provider>
@@ -75,12 +76,12 @@
         </leaf>
       </split-first>
       <split-second>
-        <leaf>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="EC2netImproved.sh" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/EC2netImproved.sh">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="216">
-                  <caret line="12" column="10" lean-forward="true" selection-start-line="12" selection-start-column="10" selection-end-line="12" selection-end-column="10" />
+                <state relative-caret-position="162">
+                  <caret line="9" column="39" lean-forward="false" selection-start-line="9" selection-start-column="39" selection-end-line="9" selection-end-column="39" />
                   <folding />
                 </state>
               </provider>
@@ -136,9 +137,9 @@
         <option value="$PROJECT_DIR$/src/main/java/main4.java" />
         <option value="$PROJECT_DIR$/src/main/java/main3.java" />
         <option value="$PROJECT_DIR$/src/main/java/networkImproved/KMeans.java" />
-        <option value="$PROJECT_DIR$/netImplocalParallelize.sh" />
-        <option value="$PROJECT_DIR$/splitDataset.sh" />
         <option value="$PROJECT_DIR$/EC2netImproved.sh" />
+        <option value="$PROJECT_DIR$/splitDataset.sh" />
+        <option value="$PROJECT_DIR$/netImplocalParallelize.sh" />
       </list>
     </option>
   </component>
@@ -157,9 +158,9 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="65" />
-    <option name="y" value="24" />
-    <option name="width" value="2495" />
-    <option name="height" value="1056" />
+    <option name="y" value="52" />
+    <option name="width" value="1248" />
+    <option name="height" value="1028" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -1231,21 +1232,21 @@
       <workItem from="1510004219271" duration="1125000" />
       <workItem from="1510005779122" duration="971000" />
       <workItem from="1510006811022" duration="69000" />
-      <workItem from="1510006931117" duration="2743000" />
+      <workItem from="1510006931117" duration="3102000" />
+      <workItem from="1510010163022" duration="375000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="220347000" />
+    <option name="totallyTimeSpent" value="221081000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="24" width="2495" height="1056" extended-state="7" />
+    <frame x="65" y="52" width="1248" height="1028" extended-state="4" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32753327" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1269,6 +1270,7 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32753327" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout>
@@ -1570,7 +1572,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/networkImproved/KMeans.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2556">
+        <state relative-caret-position="1008">
           <caret line="65" column="0" lean-forward="false" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1578,26 +1580,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/netImplocalParallelize.sh">
+    <entry file="file://$PROJECT_DIR$/EC2netImproved.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="7" column="20" lean-forward="true" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
+        <state relative-caret-position="162">
+          <caret line="9" column="39" lean-forward="false" selection-start-line="9" selection-start-column="39" selection-end-line="9" selection-end-column="39" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/splitDataset.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="6" column="58" lean-forward="true" selection-start-line="5" selection-start-column="1" selection-end-line="6" selection-end-column="58" />
+        <state relative-caret-position="360">
+          <caret line="20" column="11" lean-forward="true" selection-start-line="20" selection-start-column="11" selection-end-line="20" selection-end-column="11" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/EC2netImproved.sh">
+    <entry file="file://$PROJECT_DIR$/netImplocalParallelize.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="12" column="10" lean-forward="true" selection-start-line="12" selection-start-column="10" selection-end-line="12" selection-end-column="10" />
+        <state relative-caret-position="18">
+          <caret line="1" column="45" lean-forward="false" selection-start-line="1" selection-start-column="45" selection-end-line="1" selection-end-column="45" />
           <folding />
         </state>
       </provider>

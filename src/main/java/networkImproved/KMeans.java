@@ -8,13 +8,8 @@ import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.IAtomicLong;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
+import java.io.*;
+import java.util.*;
 import java.util.concurrent.ConcurrentMap;
 
 
@@ -35,7 +30,7 @@ public class KMeans {
             instance.getMap(clusterSize).put(i,0);
 
             // Initializes global data structures
-            instance.getMap("globalCentroids ").put(i, new ArrayList<Integer>());
+            instance.getMap("glo1balCentroids ").put(i, new ArrayList<Integer>());
             instance.getMap("globalClusterSize").put(i, new ArrayList<Integer>());
 
         }
@@ -44,20 +39,72 @@ public class KMeans {
     // The process to calculate the K Means, with iterating method.
     public static void calculate(String centroids, String points,  int pointsPart, long localCount, int numNodes, HazelcastInstance instance, String clusterSize, int[] membership) {
         boolean finish = false;
-        double[] emptyPoint = {0,0};
+        String fileName;
         double delta, deltaTmp = 0.0;
         List<Integer> localClustersSize = new ArrayList<>(instance.getMap(centroids).size());
         List<double[]> localCentroids = new ArrayList<>(instance.getMap(centroids).size());
         HashMap localPoints = new HashMap<Integer, double[]>();
         int module=0;
+        int nlines=0;
+        String line;
+        double[] pointLine;
 
         if (localCount == numNodes) { // if it's last node
             module = membership.length % numNodes;
+        }
+        if (localCount-1 < 10) {
+            fileName = "/home/alvaro/imperative/input/x0"+(localCount-1);
+        } else{
+            fileName = "/home/alvaro/imperative/input/x"+(localCount-1);
+        }
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));
+            for (int i = (int) ((localCount - 1) * pointsPart); i < (localCount - 1) * pointsPart + pointsPart + module; i++) {
+                line= bufferedReader.readLine();
+
+                    if (line==null){
+                        if (nlines < (pointsPart+module)){                                  // still lines to be read
+                            if (localCount-1 < 10) {
+                                fileName = "/home/alvaro/imperative/input/x0"+(localCount); // leftover file
+                            } else{
+                                fileName = "/home/alvaro/imperative/input/x"+(localCount);
+                            }
+                            bufferedReader = new BufferedReader(new FileReader(fileName));
+                            System.out.println("line is null OK");
+                            System.out.println("    fileName: "+fileName);
+                            System.out.println("    i: "+i);
+                            System.out.println("    nlines: "+nlines+" ;  pointsPart + module: "+ (pointsPart + module));
+                            System.out.println("    module: "+module);
+                            i--; // retry iteration
+                        } else{
+                            System.out.println("ERROR: line is null");
+                            System.out.println("fileName: "+fileName);
+                            System.out.println("i: "+i);
+                            System.out.println("nlines: "+nlines+" ;  pointsPart + module: "+ (pointsPart + module));
+                            System.out.println("module: "+module);
+                            return;
+                        }
+                    } else {
+                        pointLine = Arrays.asList(line.split(",")).stream().mapToDouble(Double::parseDouble).toArray();
+                        localPoints.put(i, pointLine);
+                        nlines++;
+                    }
+            }
+
+            System.out.println("nlines: "+nlines+" ;  pointsPart + module: "+ (pointsPart + module));
+            System.out.println("module: "+module);
+            return;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         for (int i = (int) ((localCount - 1) * pointsPart); i < (localCount - 1) * pointsPart + pointsPart + module; i++) {
             // For each point of the subset of the node, copy it to local
             localPoints.put(i,instance.getMap(points).get(i));
         }
+
+        double[] emptyPoint = {0,0};
 
         for (int i = 0; i < instance.getMap(centroids).size() ; i++) {
             // Initialize local data structures
@@ -223,7 +270,7 @@ public class KMeans {
             System.out.println("number of nodes increased");
             return;
         }
-
+        System.out.println("+++++++++++++++++++++++++++++++++++ "+instance.getMap(points).size());
         int pointsPart = instance.getMap(points).size()/numNodes;
         int[] membership = new int[num_points];
 

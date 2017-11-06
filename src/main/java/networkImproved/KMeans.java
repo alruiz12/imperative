@@ -47,64 +47,14 @@ public class KMeans {
         int module=0;
         int nlines=0;
         String line;
-        double[] pointLine;
 
         if (localCount == numNodes) { // if it's last node
             module = membership.length % numNodes;
         }
-        if (localCount-1 < 10) {
-            fileName = "/home/alvaro/imperative/input/x0"+(localCount-1);
-        } else{
-            fileName = "/home/alvaro/imperative/input/x"+(localCount-1);
-        }
-        try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));
-            for (int i = (int) ((localCount - 1) * pointsPart); i < (localCount - 1) * pointsPart + pointsPart + module; i++) {
-                line= bufferedReader.readLine();
+        if (!loadDataset(localCount, pointsPart, localPoints, module))return;
+        System.out.println("load ok ");
 
-                    if (line==null){
-                        if (nlines < (pointsPart+module)){                                  // still lines to be read
-                            if (localCount-1 < 10) {
-                                fileName = "/home/alvaro/imperative/input/x0"+(localCount); // leftover file
-                            } else{
-                                fileName = "/home/alvaro/imperative/input/x"+(localCount);
-                            }
-                            bufferedReader = new BufferedReader(new FileReader(fileName));
-                            System.out.println("line is null OK");
-                            System.out.println("    fileName: "+fileName);
-                            System.out.println("    i: "+i);
-                            System.out.println("    nlines: "+nlines+" ;  pointsPart + module: "+ (pointsPart + module));
-                            System.out.println("    module: "+module);
-                            i--; // retry iteration
-                        } else{
-                            System.out.println("ERROR: line is null");
-                            System.out.println("fileName: "+fileName);
-                            System.out.println("i: "+i);
-                            System.out.println("nlines: "+nlines+" ;  pointsPart + module: "+ (pointsPart + module));
-                            System.out.println("module: "+module);
-                            return;
-                        }
-                    } else {
-                        pointLine = Arrays.asList(line.split(",")).stream().mapToDouble(Double::parseDouble).toArray();
-                        localPoints.put(i, pointLine);
-                        nlines++;
-                    }
-            }
-
-            System.out.println("nlines: "+nlines+" ;  pointsPart + module: "+ (pointsPart + module));
-            System.out.println("module: "+module);
-            return;
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        for (int i = (int) ((localCount - 1) * pointsPart); i < (localCount - 1) * pointsPart + pointsPart + module; i++) {
-            // For each point of the subset of the node, copy it to local
-            localPoints.put(i,instance.getMap(points).get(i));
-        }
-
-        double[] emptyPoint = {0,0};
+        double[] emptyPoint = {0,0};    // Todo: make it n dimension
 
         for (int i = 0; i < instance.getMap(centroids).size() ; i++) {
             // Initialize local data structures
@@ -369,6 +319,60 @@ public class KMeans {
         return Math.sqrt(Math.pow((centroid[1] - p[1]), 2) + Math.pow((centroid[0] - p[0]), 2));
     }
 
+    private static boolean loadDataset(long localCount, int pointsPart, HashMap localPoints, int module){
+        String fileName, line;
+        int nlines=0;
+        double[] pointLine;
+
+        if (localCount-1 < 10) {
+            fileName = "/home/alvaro/imperative/input/x0"+(localCount-1);
+        } else{
+            fileName = "/home/alvaro/imperative/input/x"+(localCount-1);
+        }
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));
+            for (int i = (int) ((localCount - 1) * pointsPart); i < (localCount - 1) * pointsPart + pointsPart + module; i++) {
+                line= bufferedReader.readLine();
+
+                if (line==null){
+                    if (nlines < (pointsPart+module)){                                  // still lines to be read
+                        if (localCount-1 < 10) {
+                            fileName = "/home/alvaro/imperative/input/x0"+(localCount); // leftover file
+                        } else{
+                            fileName = "/home/alvaro/imperative/input/x"+(localCount);
+                        }
+                        bufferedReader = new BufferedReader(new FileReader(fileName));
+                        System.out.println("line is null OK");
+                        System.out.println("    fileName: "+fileName);
+                        System.out.println("    i: "+i);
+                        System.out.println("    nlines: "+nlines+" ;  pointsPart + module: "+ (pointsPart + module));
+                        System.out.println("    module: "+module);
+                        i--; // retry iteration
+                    } else{
+                        System.out.println("ERROR: line is null");
+                        System.out.println("fileName: "+fileName);
+                        System.out.println("i: "+i);
+                        System.out.println("nlines: "+nlines+" ;  pointsPart + module: "+ (pointsPart + module));
+                        System.out.println("module: "+module);
+                        return false;
+                    }
+                } else {
+                    pointLine = Arrays.asList(line.split(",")).stream().mapToDouble(Double::parseDouble).toArray();
+                    localPoints.put(i, pointLine);
+                    nlines++;
+                }
+            }
+
+            System.out.println("nlines: "+nlines+" ;  pointsPart + module: "+ (pointsPart + module));
+            System.out.println("module: "+module);
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
 }
 
 

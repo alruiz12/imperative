@@ -2,15 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c2fc32f-86ad-4454-9718-b712f1b37b8c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/splitDataset.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/main3.class" afterPath="$PROJECT_DIR$/target/classes/main3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/main4.class" afterPath="$PROJECT_DIR$/target/classes/main4.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/networkImproved/KMeans.class" afterPath="$PROJECT_DIR$/target/classes/networkImproved/KMeans.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/netImplocalParallelize.sh" afterPath="$PROJECT_DIR$/netImplocalParallelize.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/main3.java" afterPath="$PROJECT_DIR$/src/main/java/main3.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/main4.java" afterPath="$PROJECT_DIR$/src/main/java/main4.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/networkImproved/KMeans.java" afterPath="$PROJECT_DIR$/src/main/java/networkImproved/KMeans.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/logs/1/1" afterPath="$PROJECT_DIR$/target/classes/logs/1/1" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/logs/1/2" afterPath="$PROJECT_DIR$/target/classes/logs/1/2" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/logs/1/3" afterPath="$PROJECT_DIR$/target/classes/logs/1/3" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/logs/1/A" afterPath="$PROJECT_DIR$/target/classes/logs/1/A" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -29,8 +27,8 @@
       <file leaf-file-name="KMeans.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/networkImproved/KMeans.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="77" column="51" lean-forward="false" selection-start-line="77" selection-start-column="51" selection-end-line="77" selection-end-column="51" />
+            <state relative-caret-position="432">
+              <caret line="54" column="36" lean-forward="false" selection-start-line="54" selection-start-column="36" selection-end-line="54" selection-end-column="36" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -143,9 +141,9 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="65" />
-    <option name="y" value="52" />
-    <option name="width" value="1248" />
-    <option name="height" value="1028" />
+    <option name="y" value="24" />
+    <option name="width" value="2495" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -1192,15 +1190,16 @@
       <workItem from="1509962906205" duration="366000" />
       <workItem from="1509963355252" duration="528000" />
       <workItem from="1509963920031" duration="6287000" />
-      <workItem from="1509972431443" duration="3092000" />
+      <workItem from="1509972431443" duration="4240000" />
+      <workItem from="1509976779548" duration="53000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="200669000" />
+    <option name="totallyTimeSpent" value="201870000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="52" width="1248" height="1028" extended-state="4" />
+    <frame x="65" y="24" width="2495" height="1056" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1574,8 +1573,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/networkImproved/KMeans.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="77" column="51" lean-forward="false" selection-start-line="77" selection-start-column="51" selection-end-line="77" selection-end-column="51" />
+        <state relative-caret-position="432">
+          <caret line="54" column="36" lean-forward="false" selection-start-line="54" selection-start-column="36" selection-end-line="54" selection-end-column="36" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

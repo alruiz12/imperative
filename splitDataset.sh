@@ -2,8 +2,10 @@
 rm ~/imperative/input -dfr
 mkdir ~/imperative/input
 cd ~/imperative/input
-#DATASET=~/Downloads/spambase.data
-DATASET=~/Downloads/split/xaa
+#DATASET=~/imperative/datasets/spambase.data
+ if [ -d /home/alvaro ]; then DATASET=~/imperative/datasets/xaa;
+ else DATASET=~/java/imperative/datasets/spambase.data; fi
+echo $DATASET
 lines=$(wc -l $DATASET )
 lines=${lines%$DATASET}
 linesPerFile=$(($lines / $1))

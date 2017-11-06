@@ -63,7 +63,7 @@ public class KMeans {
 
             // Assign points to the closest cluster
             delta = assignCluster(centroids, points, pointsPart, localCount, numNodes, instance, localCentroids, localClustersSize, membership, localPoints, emptyPoint);
-            
+
             // Load local data structures to the global ones
             instance.getMap("globalClusterSize").put((int)localCount-1, localClustersSize);
             instance.getMap("globalCentroids").put((int)localCount-1, localCentroids);

@@ -1,7 +1,5 @@
 #!/bin/bash
 lines=$(bash ~/imperative/splitDataset.sh $1)
-echo $lines
-echo $lines
 rm -dfr logs
 mkdir logs
 for j in $(seq 1 $2); do

@@ -2,18 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c2fc32f-86ad-4454-9718-b712f1b37b8c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/main3.class" afterPath="$PROJECT_DIR$/target/classes/main3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/main4.class" afterPath="$PROJECT_DIR$/target/classes/main4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/networkImproved/KMeans.class" afterPath="$PROJECT_DIR$/target/classes/networkImproved/KMeans.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/input/x00" afterPath="$PROJECT_DIR$/input/x00" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/input/x01" afterPath="$PROJECT_DIR$/input/x01" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/input/x02" afterPath="$PROJECT_DIR$/input/x02" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/input/x03" afterPath="$PROJECT_DIR$/input/x03" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/input/x04" afterPath="$PROJECT_DIR$/input/x04" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EC2netImproved.sh" afterPath="$PROJECT_DIR$/EC2netImproved.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/netImplocalParallelize.sh" afterPath="$PROJECT_DIR$/netImplocalParallelize.sh" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/splitDataset.sh" afterPath="$PROJECT_DIR$/splitDataset.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/main3.java" afterPath="$PROJECT_DIR$/src/main/java/main3.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/main4.java" afterPath="$PROJECT_DIR$/src/main/java/main4.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/networkImproved/KMeans.java" afterPath="$PROJECT_DIR$/src/main/java/networkImproved/KMeans.java" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
@@ -29,60 +21,78 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="KMeans.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/networkImproved/KMeans.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2556">
-              <caret line="65" column="12" lean-forward="false" selection-start-line="65" selection-start-column="12" selection-end-line="65" selection-end-column="12" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="main3.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/main3.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="15" column="38" lean-forward="false" selection-start-line="15" selection-start-column="38" selection-end-line="15" selection-end-column="38" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="main4.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/main4.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="15" column="38" lean-forward="false" selection-start-line="15" selection-start-column="38" selection-end-line="15" selection-end-column="38" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="netImplocalParallelize.sh" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/netImplocalParallelize.sh">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="splitDataset.sh" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/splitDataset.sh">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="5" column="29" lean-forward="false" selection-start-line="5" selection-start-column="29" selection-end-line="5" selection-end-column="29" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="horizontal" split-proportion="0.43887776">
+      <split-first>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file leaf-file-name="KMeans.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main/java/networkImproved/KMeans.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="-2556">
+                  <caret line="65" column="0" lean-forward="false" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="main3.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main/java/main3.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="270">
+                  <caret line="15" column="38" lean-forward="false" selection-start-line="15" selection-start-column="38" selection-end-line="15" selection-end-column="38" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="main4.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main/java/main4.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="270">
+                  <caret line="15" column="38" lean-forward="false" selection-start-line="15" selection-start-column="38" selection-end-line="15" selection-end-column="38" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="netImplocalParallelize.sh" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/netImplocalParallelize.sh">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="126">
+                  <caret line="7" column="20" lean-forward="true" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="splitDataset.sh" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/splitDataset.sh">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="234">
+                  <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file leaf-file-name="EC2netImproved.sh" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/EC2netImproved.sh">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="288">
+                  <caret line="16" column="8" lean-forward="true" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -126,13 +136,13 @@
         <option value="$PROJECT_DIR$/src/main/java/networkImproved/Point.java" />
         <option value="$PROJECT_DIR$/src/main/java/cleanLogs.sh" />
         <option value="$PROJECT_DIR$/EC2netImproved" />
-        <option value="$PROJECT_DIR$/EC2netImproved.sh" />
         <option value="$PROJECT_DIR$/parallelize.sh" />
-        <option value="$PROJECT_DIR$/netImplocalParallelize.sh" />
         <option value="$PROJECT_DIR$/src/main/java/main4.java" />
         <option value="$PROJECT_DIR$/src/main/java/main3.java" />
-        <option value="$PROJECT_DIR$/splitDataset.sh" />
         <option value="$PROJECT_DIR$/src/main/java/networkImproved/KMeans.java" />
+        <option value="$PROJECT_DIR$/netImplocalParallelize.sh" />
+        <option value="$PROJECT_DIR$/splitDataset.sh" />
+        <option value="$PROJECT_DIR$/EC2netImproved.sh" />
       </list>
     </option>
   </component>
@@ -171,6 +181,8 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -297,8 +309,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1225,12 +1235,12 @@
       <workItem from="1510004219271" duration="1125000" />
       <workItem from="1510005779122" duration="971000" />
       <workItem from="1510006811022" duration="69000" />
-      <workItem from="1510006931117" duration="950000" />
+      <workItem from="1510006931117" duration="2105000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="218554000" />
+    <option name="totallyTimeSpent" value="219709000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="24" width="2495" height="1056" extended-state="7" />
@@ -1497,13 +1507,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/parallelize.sh" />
-    <entry file="file://$PROJECT_DIR$/EC2netImproved.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="13" column="17" lean-forward="false" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/main2.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="396">
@@ -1553,14 +1556,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/netImplocalParallelize.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/main4.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
@@ -1577,21 +1572,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/networkImproved/KMeans.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2556">
+          <caret line="65" column="0" lean-forward="false" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/splitDataset.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="5" column="29" lean-forward="false" selection-start-line="5" selection-start-column="29" selection-end-line="5" selection-end-column="29" />
+        <state relative-caret-position="234">
+          <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/networkImproved/KMeans.java">
+    <entry file="file://$PROJECT_DIR$/netImplocalParallelize.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2556">
-          <caret line="65" column="12" lean-forward="false" selection-start-line="65" selection-start-column="12" selection-end-line="65" selection-end-column="12" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="126">
+          <caret line="7" column="20" lean-forward="true" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/EC2netImproved.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="16" column="8" lean-forward="true" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
+          <folding />
         </state>
       </provider>
     </entry>

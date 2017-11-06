@@ -5,10 +5,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/networkImproved/KMeans.class" afterPath="$PROJECT_DIR$/target/classes/networkImproved/KMeans.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/networkImproved/KMeans.java" afterPath="$PROJECT_DIR$/src/main/java/networkImproved/KMeans.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/logs/1/1" afterPath="$PROJECT_DIR$/target/classes/logs/1/1" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/logs/1/2" afterPath="$PROJECT_DIR$/target/classes/logs/1/2" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/logs/1/3" afterPath="$PROJECT_DIR$/target/classes/logs/1/3" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/logs/1/A" afterPath="$PROJECT_DIR$/target/classes/logs/1/A" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -27,8 +23,8 @@
       <file leaf-file-name="KMeans.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/networkImproved/KMeans.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="54" column="36" lean-forward="false" selection-start-line="54" selection-start-column="36" selection-end-line="54" selection-end-column="36" />
+            <state relative-caret-position="586">
+              <caret line="71" column="26" lean-forward="false" selection-start-line="71" selection-start-column="26" selection-end-line="71" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -1191,12 +1187,16 @@
       <workItem from="1509963355252" duration="528000" />
       <workItem from="1509963920031" duration="6287000" />
       <workItem from="1509972431443" duration="4240000" />
-      <workItem from="1509976779548" duration="53000" />
+      <workItem from="1509976779548" duration="1363000" />
+      <workItem from="1509981295238" duration="217000" />
+      <workItem from="1509981590932" duration="550000" />
+      <workItem from="1509982249352" duration="77000" />
+      <workItem from="1509982481023" duration="1023000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="201870000" />
+    <option name="totallyTimeSpent" value="205047000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="24" width="2495" height="1056" extended-state="7" />
@@ -1573,8 +1573,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/networkImproved/KMeans.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="54" column="36" lean-forward="false" selection-start-line="54" selection-start-column="36" selection-end-line="54" selection-end-column="36" />
+        <state relative-caret-position="586">
+          <caret line="71" column="26" lean-forward="false" selection-start-line="71" selection-start-column="26" selection-end-line="71" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

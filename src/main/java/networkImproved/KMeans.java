@@ -47,14 +47,18 @@ public class KMeans {
         int module=0;
         int nlines=0;
         String line;
-
+        int maxDimension = -1;
         if (localCount == numNodes) { // if it's last node
             module = membership.length % numNodes;
         }
-        if (!loadDataset(localCount, pointsPart, localPoints, module))return;
-        System.out.println("load ok ");
+        maxDimension = loadDataset(localCount, pointsPart, localPoints, module, maxDimension);
+        if (maxDimension == -1)return;
+        System.out.println("load ok "+maxDimension+" , localPoints: "+localPoints.size());
 
-        double[] emptyPoint = {0,0};    // Todo: make it n dimension
+        double[] emptyPoint = {0,0};
+        for (int i = 0; i < maxDimension; i++) {
+            emptyPoint[i]=0;
+        }
 
         for (int i = 0; i < instance.getMap(centroids).size() ; i++) {
             // Initialize local data structures
@@ -319,11 +323,10 @@ public class KMeans {
         return Math.sqrt(Math.pow((centroid[1] - p[1]), 2) + Math.pow((centroid[0] - p[0]), 2));
     }
 
-    private static boolean loadDataset(long localCount, int pointsPart, HashMap localPoints, int module){
+    private static int loadDataset(long localCount, int pointsPart, HashMap localPoints, int module, int maxDimension){
         String fileName, line;
         int nlines=0;
         double[] pointLine;
-
         if (localCount-1 < 10) {
             fileName = "/home/alvaro/imperative/input/x0"+(localCount-1);
         } else{
@@ -354,10 +357,13 @@ public class KMeans {
                         System.out.println("i: "+i);
                         System.out.println("nlines: "+nlines+" ;  pointsPart + module: "+ (pointsPart + module));
                         System.out.println("module: "+module);
-                        return false;
+                        return -1;
                     }
                 } else {
                     pointLine = Arrays.asList(line.split(",")).stream().mapToDouble(Double::parseDouble).toArray();
+                    if (pointLine.length > maxDimension){
+                        maxDimension=pointLine.length;       // max num of dimensions
+                    }
                     localPoints.put(i, pointLine);
                     nlines++;
                 }
@@ -371,7 +377,8 @@ public class KMeans {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return true;
+
+        return maxDimension;
     }
 }
 

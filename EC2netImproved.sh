@@ -1,5 +1,5 @@
 #!/bin/bash
-lines=$(bash ~/imperative/splitDataset.sh $1)
+lines=$(bash ~/java/imperative/splitDataset.sh $1)
 rm -dfr logs
 mkdir logs
 for j in $(seq 1 $2); do

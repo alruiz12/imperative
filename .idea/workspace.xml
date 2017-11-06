@@ -23,8 +23,8 @@
           <file leaf-file-name="KMeans.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main/java/networkImproved/KMeans.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-66">
-                  <caret line="352" column="58" lean-forward="false" selection-start-line="352" selection-start-column="58" selection-end-line="352" selection-end-column="58" />
+                <state relative-caret-position="60">
+                  <caret line="338" column="36" lean-forward="false" selection-start-line="338" selection-start-column="36" selection-end-line="338" selection-end-column="36" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -1232,12 +1232,12 @@
       <workItem from="1510005779122" duration="971000" />
       <workItem from="1510006811022" duration="69000" />
       <workItem from="1510006931117" duration="3102000" />
-      <workItem from="1510010163022" duration="1450000" />
+      <workItem from="1510010163022" duration="1763000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="222156000" />
+    <option name="totallyTimeSpent" value="222469000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="40" y="52" width="2485" height="1028" extended-state="5" />
@@ -1595,8 +1595,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/networkImproved/KMeans.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-66">
-          <caret line="352" column="58" lean-forward="false" selection-start-line="352" selection-start-column="58" selection-end-line="352" selection-end-column="58" />
+        <state relative-caret-position="60">
+          <caret line="338" column="36" lean-forward="false" selection-start-line="338" selection-start-column="36" selection-end-line="338" selection-end-column="36" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

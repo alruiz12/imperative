@@ -336,9 +336,9 @@ public class KMeans {
         int nlines=0;
         double[] pointLine;
         if (localCount-1 < 10) {
-            fileName = "/home/alvaro/imperative/input/x0"+(localCount-1);
+            fileName = "/home/alvaro/java/imperative/input/x0"+(localCount-1);
         } else{
-            fileName = "/home/alvaro/imperative/input/x"+(localCount-1);
+            fileName = "/home/alvaro/java/imperative/input/x"+(localCount-1);
         }
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));
@@ -348,9 +348,9 @@ public class KMeans {
                 if (line==null){
                     if (nlines < (pointsPart+module)){                                  // still lines to be read
                         if (localCount-1 < 10) {
-                            fileName = "/home/alvaro/imperative/input/x0"+(localCount); // leftover file
+                            fileName = "/home/alvaro/java/imperative/input/x0"+(localCount); // leftover file
                         } else{
-                            fileName = "/home/alvaro/imperative/input/x"+(localCount);
+                            fileName = "/home/alvaro/java/imperative/input/x"+(localCount);
                         }
                         bufferedReader = new BufferedReader(new FileReader(fileName));
                         System.out.println("line is null OK");

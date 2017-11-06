@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c2fc32f-86ad-4454-9718-b712f1b37b8c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/splitDataset.sh" afterPath="$PROJECT_DIR$/splitDataset.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/networkImproved/KMeans.java" afterPath="$PROJECT_DIR$/src/main/java/networkImproved/KMeans.java" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -21,11 +20,11 @@
     <splitter split-orientation="horizontal" split-proportion="0.6370192">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="KMeans.java" pinned="false" current-in-tab="false">
+          <file leaf-file-name="KMeans.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main/java/networkImproved/KMeans.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1008">
-                  <caret line="65" column="0" lean-forward="false" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+                <state relative-caret-position="-66">
+                  <caret line="352" column="58" lean-forward="false" selection-start-line="352" selection-start-column="58" selection-end-line="352" selection-end-column="58" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -53,7 +52,7 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="netImplocalParallelize.sh" pinned="false" current-in-tab="true">
+          <file leaf-file-name="netImplocalParallelize.sh" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/netImplocalParallelize.sh">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="18">
@@ -80,8 +79,8 @@
           <file leaf-file-name="EC2netImproved.sh" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/EC2netImproved.sh">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="162">
-                  <caret line="9" column="39" lean-forward="false" selection-start-line="9" selection-start-column="39" selection-end-line="9" selection-end-column="39" />
+                <state relative-caret-position="198">
+                  <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -136,10 +135,10 @@
         <option value="$PROJECT_DIR$/parallelize.sh" />
         <option value="$PROJECT_DIR$/src/main/java/main4.java" />
         <option value="$PROJECT_DIR$/src/main/java/main3.java" />
-        <option value="$PROJECT_DIR$/src/main/java/networkImproved/KMeans.java" />
         <option value="$PROJECT_DIR$/EC2netImproved.sh" />
         <option value="$PROJECT_DIR$/splitDataset.sh" />
         <option value="$PROJECT_DIR$/netImplocalParallelize.sh" />
+        <option value="$PROJECT_DIR$/src/main/java/networkImproved/KMeans.java" />
       </list>
     </option>
   </component>
@@ -157,9 +156,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="65" />
+    <option name="x" value="40" />
     <option name="y" value="52" />
-    <option name="width" value="1248" />
+    <option name="width" value="2485" />
     <option name="height" value="1028" />
   </component>
   <component name="ProjectView">
@@ -1233,20 +1232,21 @@
       <workItem from="1510005779122" duration="971000" />
       <workItem from="1510006811022" duration="69000" />
       <workItem from="1510006931117" duration="3102000" />
-      <workItem from="1510010163022" duration="375000" />
+      <workItem from="1510010163022" duration="1450000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="221081000" />
+    <option name="totallyTimeSpent" value="222156000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="52" width="1248" height="1028" extended-state="4" />
+    <frame x="40" y="52" width="2485" height="1028" extended-state="5" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32753327" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1270,7 +1270,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32753327" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout>
@@ -1570,20 +1569,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/networkImproved/KMeans.java">
+    <entry file="file://$PROJECT_DIR$/netImplocalParallelize.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1008">
-          <caret line="65" column="0" lean-forward="false" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/EC2netImproved.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="9" column="39" lean-forward="false" selection-start-line="9" selection-start-column="39" selection-end-line="9" selection-end-column="39" />
+        <state relative-caret-position="18">
+          <caret line="1" column="45" lean-forward="false" selection-start-line="1" selection-start-column="45" selection-end-line="1" selection-end-column="45" />
           <folding />
         </state>
       </provider>
@@ -1596,11 +1585,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/netImplocalParallelize.sh">
+    <entry file="file://$PROJECT_DIR$/EC2netImproved.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="1" column="45" lean-forward="false" selection-start-line="1" selection-start-column="45" selection-end-line="1" selection-end-column="45" />
+        <state relative-caret-position="198">
+          <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/networkImproved/KMeans.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-66">
+          <caret line="352" column="58" lean-forward="false" selection-start-line="352" selection-start-column="58" selection-end-line="352" selection-end-column="58" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

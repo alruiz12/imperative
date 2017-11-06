@@ -13,7 +13,7 @@ public class main3 {
                 System.err.println("Argument" + args[0] + " must be an integer.");
                 System.exit(1);
             }
-            final int NUM_CLUSTERS = 150;
+            final int NUM_CLUSTERS = 5;
             //Number of Points
             final int NUM_POINTS = secondArg;
             //Min and Max X and Y

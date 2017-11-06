@@ -2,8 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c2fc32f-86ad-4454-9718-b712f1b37b8c" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/main3.class" afterPath="$PROJECT_DIR$/target/classes/main3.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/main4.class" afterPath="$PROJECT_DIR$/target/classes/main4.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/networkImproved/KMeans.class" afterPath="$PROJECT_DIR$/target/classes/networkImproved/KMeans.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/input/x00" afterPath="$PROJECT_DIR$/input/x00" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/input/x01" afterPath="$PROJECT_DIR$/input/x01" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/input/x02" afterPath="$PROJECT_DIR$/input/x02" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/input/x03" afterPath="$PROJECT_DIR$/input/x03" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/input/x04" afterPath="$PROJECT_DIR$/input/x04" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/splitDataset.sh" afterPath="$PROJECT_DIR$/splitDataset.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/main3.java" afterPath="$PROJECT_DIR$/src/main/java/main3.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/main4.java" afterPath="$PROJECT_DIR$/src/main/java/main4.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/networkImproved/KMeans.java" afterPath="$PROJECT_DIR$/src/main/java/networkImproved/KMeans.java" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
@@ -23,8 +33,8 @@
       <file leaf-file-name="KMeans.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/networkImproved/KMeans.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="586">
-              <caret line="71" column="26" lean-forward="false" selection-start-line="71" selection-start-column="26" selection-end-line="71" selection-end-column="26" />
+            <state relative-caret-position="-2556">
+              <caret line="65" column="12" lean-forward="false" selection-start-line="65" selection-start-column="12" selection-end-line="65" selection-end-column="12" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -35,8 +45,8 @@
       <file leaf-file-name="main3.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/main3.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="5" column="25" lean-forward="false" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
+            <state relative-caret-position="270">
+              <caret line="15" column="38" lean-forward="false" selection-start-line="15" selection-start-column="38" selection-end-line="15" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -45,8 +55,8 @@
       <file leaf-file-name="main4.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/main4.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="10" column="51" lean-forward="false" selection-start-line="10" selection-start-column="51" selection-end-line="10" selection-end-column="51" />
+            <state relative-caret-position="270">
+              <caret line="15" column="38" lean-forward="false" selection-start-line="15" selection-start-column="38" selection-end-line="15" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -65,8 +75,8 @@
       <file leaf-file-name="splitDataset.sh" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/splitDataset.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+            <state relative-caret-position="90">
+              <caret line="5" column="29" lean-forward="false" selection-start-line="5" selection-start-column="29" selection-end-line="5" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -86,6 +96,10 @@
       <find>clearIter</find>
       <find>clustersPart</find>
       <find>iteration</find>
+      <find>2</find>
+      <find>instance</find>
+      <find>glo1balCentroids</find>
+      <find>balCentroids</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -114,10 +128,10 @@
         <option value="$PROJECT_DIR$/EC2netImproved" />
         <option value="$PROJECT_DIR$/EC2netImproved.sh" />
         <option value="$PROJECT_DIR$/parallelize.sh" />
-        <option value="$PROJECT_DIR$/splitDataset.sh" />
         <option value="$PROJECT_DIR$/netImplocalParallelize.sh" />
-        <option value="$PROJECT_DIR$/src/main/java/main3.java" />
         <option value="$PROJECT_DIR$/src/main/java/main4.java" />
+        <option value="$PROJECT_DIR$/src/main/java/main3.java" />
+        <option value="$PROJECT_DIR$/splitDataset.sh" />
         <option value="$PROJECT_DIR$/src/main/java/networkImproved/KMeans.java" />
       </list>
     </option>
@@ -1191,12 +1205,32 @@
       <workItem from="1509981295238" duration="217000" />
       <workItem from="1509981590932" duration="550000" />
       <workItem from="1509982249352" duration="77000" />
-      <workItem from="1509982481023" duration="1023000" />
+      <workItem from="1509982481023" duration="2883000" />
+      <workItem from="1509987391625" duration="6000" />
+      <workItem from="1509987429391" duration="1346000" />
+      <workItem from="1509989662035" duration="406000" />
+      <workItem from="1509990134680" duration="71000" />
+      <workItem from="1509990283497" duration="497000" />
+      <workItem from="1509990834895" duration="588000" />
+      <workItem from="1509991468638" duration="283000" />
+      <workItem from="1509991826109" duration="360000" />
+      <workItem from="1509992242815" duration="266000" />
+      <workItem from="1509992593807" duration="2105000" />
+      <workItem from="1509997326636" duration="150000" />
+      <workItem from="1509997553505" duration="142000" />
+      <workItem from="1509997788195" duration="213000" />
+      <workItem from="1509998089338" duration="356000" />
+      <workItem from="1509998546471" duration="355000" />
+      <workItem from="1509998986904" duration="1388000" />
+      <workItem from="1510004219271" duration="1125000" />
+      <workItem from="1510005779122" duration="971000" />
+      <workItem from="1510006811022" duration="69000" />
+      <workItem from="1510006931117" duration="950000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="205047000" />
+    <option name="totallyTimeSpent" value="218554000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="24" width="2495" height="1056" extended-state="7" />
@@ -1205,7 +1239,7 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3283582" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32753327" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1474,7 +1508,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="396">
           <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1496,23 +1529,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="486">
           <caret line="43" column="1" lean-forward="false" selection-start-line="43" selection-start-column="1" selection-end-line="46" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#433#434#0" expanded="false" />
-            <element signature="e#459#460#0" expanded="false" />
-            <element signature="e#488#489#0" expanded="false" />
-            <element signature="e#517#518#0" expanded="false" />
-            <element signature="e#551#552#0" expanded="false" />
-            <element signature="e#577#578#0" expanded="false" />
-            <element signature="e#605#606#0" expanded="false" />
-            <element signature="e#634#635#0" expanded="false" />
-            <element signature="e#671#672#0" expanded="false" />
-            <element signature="e#710#711#0" expanded="false" />
-            <element signature="e#741#742#0" expanded="false" />
-            <element signature="e#783#784#0" expanded="false" />
-            <element signature="e#1741#1742#0" expanded="false" />
-            <element signature="e#1779#1780#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1527,7 +1543,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="215">
           <caret line="23" column="41" lean-forward="false" selection-start-line="23" selection-start-column="41" selection-end-line="23" selection-end-column="41" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1535,31 +1550,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="404">
           <caret line="359" column="14" lean-forward="false" selection-start-line="359" selection-start-column="14" selection-end-line="359" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/splitDataset.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/main3.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="5" column="25" lean-forward="false" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/main4.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="10" column="51" lean-forward="false" selection-start-line="10" selection-start-column="51" selection-end-line="10" selection-end-column="51" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1571,10 +1561,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/main4.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="15" column="38" lean-forward="false" selection-start-line="15" selection-start-column="38" selection-end-line="15" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/main3.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="15" column="38" lean-forward="false" selection-start-line="15" selection-start-column="38" selection-end-line="15" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/splitDataset.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="5" column="29" lean-forward="false" selection-start-line="5" selection-start-column="29" selection-end-line="5" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/networkImproved/KMeans.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="586">
-          <caret line="71" column="26" lean-forward="false" selection-start-line="71" selection-start-column="26" selection-end-line="71" selection-end-column="26" />
+        <state relative-caret-position="-2556">
+          <caret line="65" column="12" lean-forward="false" selection-start-line="65" selection-start-column="12" selection-end-line="65" selection-end-column="12" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

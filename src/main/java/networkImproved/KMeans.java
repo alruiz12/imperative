@@ -23,15 +23,12 @@ public class KMeans {
 
         for (int i = 0; i < numClusters; i++) {
 
-            // Set Random Centroids
-            instance.getMap(centroids).put(i, createRandomPoint(minCoordinate,maxCoordinate));
-
             // Set all the cluster's size to 0
             instance.getMap(clusterSize).put(i,0);
 
             // Initializes global data structures
             instance.getMap("glo1balCentroids ").put(i, new ArrayList<Integer>());
-            instance.getMap("globalClusterSize").put(i, new ArrayList<Integer>());
+            //instance.getMap("globalClusterSize").put(i, new ArrayList<Integer>());
 
         }
     }
@@ -39,26 +36,22 @@ public class KMeans {
     // The process to calculate the K Means, with iterating method.
     public static void calculate(String centroids, String points,  int pointsPart, long localCount, int numNodes, HazelcastInstance instance, String clusterSize, int[] membership) {
         boolean finish = false;
-        String fileName;
         double delta, deltaTmp = 0.0;
         List<Integer> localClustersSize = new ArrayList<>(instance.getMap(centroids).size());
         List<double[]> localCentroids = new ArrayList<>(instance.getMap(centroids).size());
         HashMap localPoints = new HashMap<Integer, double[]>();
+        int numClusters=instance.getMap(clusterSize).size();
         int module=0;
-        int nlines=0;
-        String line;
         int maxDimension = -1;
         if (localCount == numNodes) { // if it's last node
             module = membership.length % numNodes;
         }
-        maxDimension = loadDataset(localCount, pointsPart, localPoints, module, maxDimension);
-        if (maxDimension == -1)return;
-        System.out.println("load ok "+maxDimension+" , localPoints: "+localPoints.size());
 
-        double[] emptyPoint = {0,0};
-        for (int i = 0; i < maxDimension; i++) {
-            emptyPoint[i]=0;
-        }
+        maxDimension = loadDataset(localCount, pointsPart, localPoints, module, maxDimension, numClusters, instance, centroids);
+        if (maxDimension == -1)return;
+        double[] emptyPoint= new double[maxDimension];
+
+        System.out.println("load ok "+maxDimension+" , localPoints: "+localPoints.size()+" ; empty point: "+emptyPoint.length);
 
         for (int i = 0; i < instance.getMap(centroids).size() ; i++) {
             // Initialize local data structures
@@ -69,8 +62,8 @@ public class KMeans {
         while(!finish) {
 
             // Assign points to the closest cluster
-            delta = assignCluster(centroids, points, pointsPart, localCount, numNodes, instance, localCentroids, localClustersSize, membership, localPoints);
-
+            delta = assignCluster(centroids, points, pointsPart, localCount, numNodes, instance, localCentroids, localClustersSize, membership, localPoints, emptyPoint);
+            
             // Load local data structures to the global ones
             instance.getMap("globalClusterSize").put((int)localCount-1, localClustersSize);
             instance.getMap("globalCentroids").put((int)localCount-1, localCentroids);
@@ -97,22 +90,27 @@ public class KMeans {
 
                 for (int i = 0; i < instance.getMap(clusterSize).size() ; i++) {
                     acc=0;
-                    accPoint=new double[2];
+                    accPoint=new double[maxDimension];
                     for (int k = 0; k < instance.getMap("globalCentroids").size(); k++) {
 
                         // Accumulate all data from global data structures
 
                         acc += (int)((ArrayList) instance.getMap("globalClusterSize").get(k) ).get(i);
 
-                        accPoint[0] += ((double[]) ((ArrayList) instance.getMap("globalCentroids").get(k)).get(i))[0];
-                        accPoint[1] += ((double[]) ((ArrayList) instance.getMap("globalCentroids").get(k)).get(i))[1];
+                        for (int j = 0; j < ((double[]) ((ArrayList) instance.getMap("globalCentroids").get(k)).get(i)).length; j++) {
+                            accPoint[j] += ((double[]) ((ArrayList) instance.getMap("globalCentroids").get(k)).get(i))[j];
+                        }
 
                     }
+
                     if (acc>0) {    // if cluster has points
                         instance.getMap(clusterSize).replace(i,  ((int) instance.getMap(clusterSize).get(i) ) + acc );
                     }
-                    accPoint[0] = accPoint[0] / (int)instance.getMap(clusterSize).get(i);
-                    accPoint[1] = accPoint[1] / (int)instance.getMap(clusterSize).get(i);
+
+                    for (int j = 0; j < accPoint.length; j++) {
+                        accPoint[j] = accPoint[j] / (int)instance.getMap(clusterSize).get(i);
+
+                    }
 
                     instance.getMap(centroids).replace(i, accPoint);
 
@@ -139,8 +137,12 @@ public class KMeans {
                 }
 
             } else {
+                emptyPoint=new double[maxDimension];
+
                 for (int i = 0; i < instance.getMap(clusterSize).size() ; i++) {
                     // Reset local data structures (otherwise they will be added to themselves again)
+
+
                     localCentroids.set(i,emptyPoint);
                     localClustersSize.set(i,0);
                 }
@@ -156,14 +158,14 @@ public class KMeans {
     }
 
 
-    private static double assignCluster(String centroids, String points, int pointsPart, long localCount, int numNodes, HazelcastInstance instance, List<double[]> localCentroids, List<Integer> localClustersSize, int[] membership, HashMap<Integer, double[]> localPoints) {
+    private static double assignCluster(String centroids, String points, int pointsPart, long localCount, int numNodes, HazelcastInstance instance, List<double[]> localCentroids, List<Integer> localClustersSize, int[] membership, HashMap<Integer, double[]> localPoints, double[] emptyPoint) {
         double max = Double.MAX_VALUE;
         double min = max;
         int cluster = 0;
         double distance = 0.0;
         int module = 0;
         double delta = 0.0;
-        double[] currentCentroid={0,0};
+        double[] currentCentroid;
 
         if (localCount == numNodes) { // if it's last node
             module = instance.getMap(points).size() % numNodes;
@@ -185,9 +187,11 @@ public class KMeans {
             if (distance < max) {   // if any point is ready
 
                 currentCentroid = localPoints.get(i);
-                double[] newCentroid = {(localCentroids.get(cluster)[0]+currentCentroid[0]),localCentroids.get(cluster)[1]+currentCentroid[1] };
+                for (int j = 0; j < localCentroids.get(cluster).length ; j++) {
+                    emptyPoint[j] = localCentroids.get(cluster)[j] + currentCentroid[j];
+                }
 
-                localCentroids.set(cluster, newCentroid);
+                localCentroids.set(cluster, emptyPoint);
                 localClustersSize.set(cluster, localClustersSize.get(cluster)+1);
 
                 if (membership[i] != cluster) delta += 1.0;
@@ -197,6 +201,7 @@ public class KMeans {
             }
 
         }
+        emptyPoint=new double[emptyPoint.length];
         return delta;
     }
 
@@ -224,7 +229,6 @@ public class KMeans {
             System.out.println("number of nodes increased");
             return;
         }
-        System.out.println("+++++++++++++++++++++++++++++++++++ "+instance.getMap(points).size());
         int pointsPart = instance.getMap(points).size()/numNodes;
         int[] membership = new int[num_points];
 
@@ -320,10 +324,14 @@ public class KMeans {
 
     //Calculates the distance between two points.
     protected static double distance(double[] p, double[] centroid) {
-        return Math.sqrt(Math.pow((centroid[1] - p[1]), 2) + Math.pow((centroid[0] - p[0]), 2));
+        double distance=0.0;
+        for (int i = 0; i < p.length; i++) {
+            distance += (p[i] - centroid[i]) * (p[i] - centroid[i]);
+        }
+        return distance;
     }
 
-    private static int loadDataset(long localCount, int pointsPart, HashMap localPoints, int module, int maxDimension){
+    private static int loadDataset(long localCount, int pointsPart, HashMap localPoints, int module, int maxDimension, int numClusters, HazelcastInstance instance, String centroids){
         String fileName, line;
         int nlines=0;
         double[] pointLine;
@@ -364,8 +372,12 @@ public class KMeans {
                     if (pointLine.length > maxDimension){
                         maxDimension=pointLine.length;       // max num of dimensions
                     }
+                    if (localCount == 1 && nlines<numClusters){             // Execute only once
+                        instance.getMap(centroids).put(nlines,pointLine);   // Initialize centroids with k first points
+                    }
                     localPoints.put(i, pointLine);
                     nlines++;
+
                 }
             }
 

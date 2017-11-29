@@ -1,3 +1,3 @@
 # imperative
 
-Kmeans parallelized imperative implementation using Java and [Hazelcast] IMDG (https://hazelcast.org/) 
+Kmeans parallelized imperative implementation using Java and [Hazelcast](https://hazelcast.org/) IMDG

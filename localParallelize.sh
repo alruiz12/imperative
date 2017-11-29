@@ -16,7 +16,7 @@ for j in $(seq 1 $2); do
 
 done
 
-target="/home/alvaro/imperative/target/classes"
+target="/home/alvaro/IdeaProjects/imperative/target/classes"
 acc=0
 n_times=0
 for j in "$target"/*

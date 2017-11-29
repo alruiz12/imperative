@@ -11,6 +11,7 @@ import com.hazelcast.core.IAtomicLong;
 import java.io.*;
 import java.util.*;
 import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -19,7 +20,7 @@ import java.util.concurrent.ConcurrentMap;
 public class KMeans {
 
     // Initializes the process
-    public static void init(int numClusters, int minCoordinate, int maxCoordinate, String centroids, HazelcastInstance instance, String clusterSize) {
+    public static void init(int numClusters, int minCoordinate, int maxCoordinate, String centroids, HazelcastInstance instance, String clusterSize, int numNodes) {
 
         for (int i = 0; i < numClusters; i++) {
 
@@ -29,6 +30,8 @@ public class KMeans {
             // Initializes global data structures
             instance.getMap("glo1balCentroids ").put(i, new ArrayList<Integer>());
             //instance.getMap("globalClusterSize").put(i, new ArrayList<Integer>());
+
+            instance.getCountDownLatch("assignsFinished").trySetCount(numNodes);
 
         }
     }
@@ -71,11 +74,20 @@ public class KMeans {
             // Empty the list of deltas
             instance.getList("deltaList").clear();
 
+            // ----------------------------------------- IMPROVED BARRIER ----------------------------------------------
+
+            instance.getCountDownLatch("assignsFinished").countDown();
+            try {
+                instance.getCountDownLatch("assignsFinished").await(4, TimeUnit.MINUTES);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
             // ------------------------------------------- BARRIER START -----------------------------------------------
-            instance.getAtomicLong("assignsFinished").incrementAndGet();
+         /*   instance.getAtomicLong("assignsFinished").incrementAndGet();
             while (instance.getAtomicLong("assignsFinished").get() != numNodes) {
                 // waiting for all processes to assign clusters and update global data structures
-            }
+            }*/
             // ------------------------------------------- BARRIER END -------------------------------------------------
 
             // Will be set to true when all processes are ready to move on to the next iteration
@@ -132,6 +144,9 @@ public class KMeans {
                     instance.getAtomicLong("iterationFinished").set(-1L);
 
                 } else {
+
+                    instance.getCountDownLatch("assignsFinished").trySetCount(numNodes);
+                    
                     instance.getAtomicLong("assignsFinished").compareAndSet(numNodes, 0L);  // reset assignsFinished for next iteration
                     instance.getAtomicLong("iterationFinished").set(1L);
                 }
@@ -220,7 +235,7 @@ public class KMeans {
         String centroids = "centroids";
         String clusterSize="clusterSize";
 
-        init(numClusters, minCoordinate, maxCoordinate, centroids, instance, clusterSize);      // Sets random centroids
+        init(numClusters, minCoordinate, maxCoordinate, centroids, instance, clusterSize, numNodes);      // Sets random centroids
 
         IAtomicLong count = instance.getAtomicLong("count");
         long localCount = count.incrementAndGet();      // As new processes run, they increment a counter and keep the local copy as their ID
@@ -230,7 +245,7 @@ public class KMeans {
             return;
         }
         int pointsPart = instance.getMap(points).size()/numNodes;
-        int[] membership = new int[num_points];
+        int[]   membership = new int[num_points];
 
         calculate(centroids, points, pointsPart, localCount, numNodes, instance, clusterSize, membership); // main call
 
@@ -336,9 +351,9 @@ public class KMeans {
         int nlines=0;
         double[] pointLine;
         if (localCount-1 < 10) {
-            fileName = "/home/ubuntu/java/imperative/input/x0"+(localCount-1);
+            fileName = "/home/alvaro/IdeaProjects/imperative/imperative/input/x0"+(localCount-1);
         } else{
-            fileName = "/home/ubuntu/java/imperative/input/x"+(localCount-1);
+            fileName = "/home/alvaro/IdeaProjects/imperative/imperative/input/x"+(localCount-1);
         }
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));
@@ -348,9 +363,9 @@ public class KMeans {
                 if (line==null){
                     if (nlines < (pointsPart+module)){                                  // still lines to be read
                         if (localCount-1 < 10) {
-                            fileName = "/home/ubuntu/java/imperative/input/x0"+(localCount); // leftover file
+                            fileName = "/home/alvaro/IdeaProjects/imperative/imperative/input/x0"+(localCount); // leftover file
                         } else{
-                            fileName = "/home/ubuntu/java/imperative/input/x"+(localCount);
+                            fileName = "/home/alvaro/IdeaProjects/imperative/imperative/input/x"+(localCount);
                         }
                         bufferedReader = new BufferedReader(new FileReader(fileName));
                         System.out.println("line is null OK");

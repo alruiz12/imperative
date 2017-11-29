@@ -315,7 +315,7 @@ public class KMeans {
         String[] cmd = {
                 "/bin/bash",
                 "-c",
-                "python /home/alvaro/imperative/src/main/java/kmeansOO/script.py "+clusters.size()
+                "python /home/alvaro/IdeaProjects/imperative/src/main/java/kmeansOO/script.py "+clusters.size()
         };
         try {
             Process p = Runtime.getRuntime().exec(cmd);

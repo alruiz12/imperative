@@ -1,18 +1,18 @@
 #!/bin/bash
-rm ~/imperative/input -dfr
+rm ~/IdeaProjects/imperative/imperative/input -dfr
 if [ -d /home/alvaro ]; then
-    DATASET=~/imperative/datasets/xaa
-    rm ~/imperative/input -dfr
-    mkdir ~/imperative/input
-    cd ~/imperative/input
+    DATASET=~/IdeaProjects/imperative/imperative/datasets/xaa
+    rm ~/IdeaProjects/imperative/imperative/input -dfr
+    mkdir ~/IdeaProjects/imperative/imperative/input
+    cd ~/IdeaProjects/imperative/imperative/input
 else
     DATASET=~/java/imperative/datasets/spambase.data
     rm ~/java/imperative/input -dfr
     mkdir ~/java/imperative/input
     cd ~/java/imperative/input
 fi
-mkdir ~/imperative/input
-cd ~/imperative/input
+#mkdir ~/IdeaProjects/imperative/imperative/input
+cd ~/IdeaProjects/imperative/imperative/input
 
 lines=$(wc -l $DATASET )
 lines=${lines%$DATASET}

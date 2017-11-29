@@ -33,6 +33,8 @@ public class KMeans {
 
             instance.getCountDownLatch("assignsFinished").trySetCount(numNodes);
 
+            instance.getAtomicLong("iterationFinished").set(0L);
+
         }
     }
 
@@ -74,24 +76,21 @@ public class KMeans {
             // Empty the list of deltas
             instance.getList("deltaList").clear();
 
-            // ----------------------------------------- IMPROVED BARRIER ----------------------------------------------
 
+            // ------------------------------------------- BARRIER START -----------------------------------------------
             instance.getCountDownLatch("assignsFinished").countDown();
             try {
-                instance.getCountDownLatch("assignsFinished").await(4, TimeUnit.MINUTES);
+                // waiting for all processes to assign clusters and update global data structures
+                instance.getCountDownLatch("assignsFinished").await(40, TimeUnit.MINUTES);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
-            // ------------------------------------------- BARRIER START -----------------------------------------------
-         /*   instance.getAtomicLong("assignsFinished").incrementAndGet();
-            while (instance.getAtomicLong("assignsFinished").get() != numNodes) {
-                // waiting for all processes to assign clusters and update global data structures
-            }*/
             // ------------------------------------------- BARRIER END -------------------------------------------------
 
-            // Will be set to true when all processes are ready to move on to the next iteration
-            instance.getAtomicLong("iterationFinished").set(0L);
+
+            // Will be set to 1 when all processes are ready to move on to the next iteration
+            instance.getCountDownLatch("iterationFinished").trySetCount(1);
+
 
             // Add local delta to the global data structure
             instance.getList("deltaList").add(delta);
@@ -143,12 +142,14 @@ public class KMeans {
                     finish = true;
                     instance.getAtomicLong("iterationFinished").set(-1L);
 
+
                 } else {
 
+                    // reset assignsFinished for next iteration
                     instance.getCountDownLatch("assignsFinished").trySetCount(numNodes);
                     
-                    instance.getAtomicLong("assignsFinished").compareAndSet(numNodes, 0L);  // reset assignsFinished for next iteration
-                    instance.getAtomicLong("iterationFinished").set(1L);
+                    // unlock partial barrier
+                    instance.getCountDownLatch("iterationFinished").trySetCount(0);
                 }
 
             } else {
@@ -161,9 +162,15 @@ public class KMeans {
                     localCentroids.set(i,emptyPoint);
                     localClustersSize.set(i,0);
                 }
-                while (instance.getAtomicLong("iterationFinished").get() == 0L){
 
+                // --------------------------- PARTIAL BARRIER START ---------------------------------------------------
+                try {
+                    instance.getCountDownLatch("iterationFinished").await(40, TimeUnit.MINUTES);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
+                // --------------------------- PARTIAL BARRIER END -----------------------------------------------------
+
                 if (instance.getAtomicLong("iterationFinished").get() == -1L ){
                     finish = true;
                 }

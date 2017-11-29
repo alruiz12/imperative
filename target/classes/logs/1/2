@@ -1,19 +1,19 @@
-Nov 29, 2017 11:33:46 AM com.hazelcast.core.LifecycleService
+Nov 29, 2017 12:49:31 PM com.hazelcast.core.LifecycleService
 INFO: hz.client_0 [kmeansName] [3.8.6] HazelcastClient 3.8.6 (20170921 - b1aa90b) is STARTING
-Nov 29, 2017 11:33:48 AM com.hazelcast.core.LifecycleService
+Nov 29, 2017 12:49:32 PM com.hazelcast.core.LifecycleService
 INFO: hz.client_0 [kmeansName] [3.8.6] HazelcastClient 3.8.6 (20170921 - b1aa90b) is STARTED
-Nov 29, 2017 11:33:48 AM com.hazelcast.client.spi.impl.ClusterListenerSupport
+Nov 29, 2017 12:49:32 PM com.hazelcast.client.spi.impl.ClusterListenerSupport
 INFO: hz.client_0 [kmeansName] [3.8.6] Trying to connect to [127.0.0.1]:5703 as owner member
-Nov 29, 2017 11:33:48 AM com.hazelcast.client.spi.impl.ClusterListenerSupport
+Nov 29, 2017 12:49:33 PM com.hazelcast.client.spi.impl.ClusterListenerSupport
 WARNING: hz.client_0 [kmeansName] [3.8.6] Exception during initial connection to [127.0.0.1]:5703, exception com.hazelcast.core.HazelcastException: java.net.ConnectException: Connection refused
-Nov 29, 2017 11:33:48 AM com.hazelcast.client.spi.impl.ClusterListenerSupport
+Nov 29, 2017 12:49:33 PM com.hazelcast.client.spi.impl.ClusterListenerSupport
 INFO: hz.client_0 [kmeansName] [3.8.6] Trying to connect to [127.0.0.1]:5702 as owner member
-Nov 29, 2017 11:33:48 AM com.hazelcast.client.spi.impl.ClusterListenerSupport
+Nov 29, 2017 12:49:33 PM com.hazelcast.client.spi.impl.ClusterListenerSupport
 WARNING: hz.client_0 [kmeansName] [3.8.6] Exception during initial connection to [127.0.0.1]:5702, exception com.hazelcast.core.HazelcastException: java.net.ConnectException: Connection refused
-Nov 29, 2017 11:33:48 AM com.hazelcast.client.spi.impl.ClusterListenerSupport
+Nov 29, 2017 12:49:33 PM com.hazelcast.client.spi.impl.ClusterListenerSupport
 INFO: hz.client_0 [kmeansName] [3.8.6] Trying to connect to [127.0.0.1]:5701 as owner member
-Nov 29, 2017 11:33:53 AM com.hazelcast.client.connection.nio.ClientConnection
-WARNING: hz.client_0 [kmeansName] [3.8.6] ClientConnection{alive=false, connectionId=1, socketChannel=DefaultSocketChannelWrapper{socketChannel=java.nio.channels.SocketChannel[connected local=/127.0.0.1:41326 remote=/127.0.0.1:5701]}, remoteEndpoint=[10.0.2.15]:5701, lastReadTime=2017-11-29 11:33:53.111, lastWriteTime=2017-11-29 11:33:53.087, closedTime=2017-11-29 11:33:53.125, lastHeartbeatRequested=never, lastHeartbeatReceived=never, connected server version=3.8.6} closed. Reason: com.hazelcast.client.AuthenticationException[Owner authentication response from address [127.0.0.1]:5701 is late. Dropping the response. Principal : null]
+Nov 29, 2017 12:49:36 PM com.hazelcast.client.connection.nio.ClientConnection
+WARNING: hz.client_0 [kmeansName] [3.8.6] ClientConnection{alive=false, connectionId=1, socketChannel=DefaultSocketChannelWrapper{socketChannel=java.nio.channels.SocketChannel[connected local=/127.0.0.1:43620 remote=/127.0.0.1:5701]}, remoteEndpoint=[10.0.2.15]:5701, lastReadTime=2017-11-29 12:49:36.834, lastWriteTime=2017-11-29 12:49:36.779, closedTime=2017-11-29 12:49:36.851, lastHeartbeatRequested=never, lastHeartbeatReceived=never, connected server version=3.8.6} closed. Reason: com.hazelcast.client.AuthenticationException[Owner authentication response from address [127.0.0.1]:5701 is late. Dropping the response. Principal : null]
 com.hazelcast.client.AuthenticationException: Owner authentication response from address [127.0.0.1]:5701 is late. Dropping the response. Principal : null
 	at com.hazelcast.client.connection.nio.ClientConnectionManagerImpl$2.onResponse(ClientConnectionManagerImpl.java:576)
 	at com.hazelcast.client.connection.nio.ClientConnectionManagerImpl$2.onResponse(ClientConnectionManagerImpl.java:558)
@@ -33,30 +33,25 @@ com.hazelcast.client.AuthenticationException: Owner authentication response from
 	at com.hazelcast.util.executor.HazelcastManagedThread.executeRun(HazelcastManagedThread.java:64)
 	at com.hazelcast.util.executor.HazelcastManagedThread.run(HazelcastManagedThread.java:80)
 
-Nov 29, 2017 11:33:53 AM com.hazelcast.client.spi.impl.ClusterListenerSupport
+Nov 29, 2017 12:49:36 PM com.hazelcast.client.spi.impl.ClusterListenerSupport
 WARNING: hz.client_0 [kmeansName] [3.8.6] Exception during initial connection to [127.0.0.1]:5701, exception com.hazelcast.client.AuthenticationException: Owner authentication response from address [127.0.0.1]:5701 is late. Dropping the response. Principal : null
-Nov 29, 2017 11:33:53 AM com.hazelcast.client.spi.impl.ClusterListenerSupport
+Nov 29, 2017 12:49:36 PM com.hazelcast.client.spi.impl.ClusterListenerSupport
 WARNING: hz.client_0 [kmeansName] [3.8.6] Unable to get alive cluster connection, try in 0 ms later, attempt 1 of 15.
-Nov 29, 2017 11:33:53 AM com.hazelcast.client.spi.impl.ClusterListenerSupport
+Nov 29, 2017 12:49:36 PM com.hazelcast.client.spi.impl.ClusterListenerSupport
 INFO: hz.client_0 [kmeansName] [3.8.6] Trying to connect to [127.0.0.1]:5701 as owner member
-Nov 29, 2017 11:33:53 AM com.hazelcast.client.connection.ClientConnectionManager
-INFO: hz.client_0 [kmeansName] [3.8.6] Setting ClientConnection{alive=true, connectionId=2, socketChannel=DefaultSocketChannelWrapper{socketChannel=java.nio.channels.SocketChannel[connected local=/127.0.0.1:41330 remote=/127.0.0.1:5701]}, remoteEndpoint=[10.0.2.15]:5701, lastReadTime=2017-11-29 11:33:53.202, lastWriteTime=2017-11-29 11:33:53.185, closedTime=never, lastHeartbeatRequested=never, lastHeartbeatReceived=never, connected server version=3.8.6} as owner  with principal ClientPrincipal{uuid='38374814-d30b-43e9-82d2-4c91b7eb410b', ownerUuid='53d12a6b-d684-46fd-b11c-cd9f21b8a728'}
-Nov 29, 2017 11:33:53 AM com.hazelcast.client.connection.ClientConnectionManager
-INFO: hz.client_0 [kmeansName] [3.8.6] Authenticated with server [10.0.2.15]:5701, server version:3.8.6 Local address: /127.0.0.1:41330
-Nov 29, 2017 11:33:53 AM com.hazelcast.client.spi.impl.ClientMembershipListener
+Nov 29, 2017 12:49:37 PM com.hazelcast.client.connection.ClientConnectionManager
+INFO: hz.client_0 [kmeansName] [3.8.6] Setting ClientConnection{alive=true, connectionId=2, socketChannel=DefaultSocketChannelWrapper{socketChannel=java.nio.channels.SocketChannel[connected local=/127.0.0.1:43644 remote=/127.0.0.1:5701]}, remoteEndpoint=[10.0.2.15]:5701, lastReadTime=2017-11-29 12:49:37.003, lastWriteTime=2017-11-29 12:49:36.952, closedTime=never, lastHeartbeatRequested=never, lastHeartbeatReceived=never, connected server version=3.8.6} as owner  with principal ClientPrincipal{uuid='065c7235-61c7-4cc7-8364-7c92e311016e', ownerUuid='0ebaf02d-0bf3-41b1-a56c-2dcc9ef5a8f1'}
+Nov 29, 2017 12:49:37 PM com.hazelcast.client.connection.ClientConnectionManager
+INFO: hz.client_0 [kmeansName] [3.8.6] Authenticated with server [10.0.2.15]:5701, server version:3.8.6 Local address: /127.0.0.1:43644
+Nov 29, 2017 12:49:37 PM com.hazelcast.client.spi.impl.ClientMembershipListener
 INFO: hz.client_0 [kmeansName] [3.8.6] 
 
 Members [1] {
-	Member [10.0.2.15]:5701 - 53d12a6b-d684-46fd-b11c-cd9f21b8a728
+	Member [10.0.2.15]:5701 - 0ebaf02d-0bf3-41b1-a56c-2dcc9ef5a8f1
 }
 
-Nov 29, 2017 11:33:53 AM com.hazelcast.core.LifecycleService
+Nov 29, 2017 12:49:37 PM com.hazelcast.core.LifecycleService
 INFO: hz.client_0 [kmeansName] [3.8.6] HazelcastClient 3.8.6 (20170921 - b1aa90b) is CLIENT_CONNECTED
-line is null OK
-    fileName: /home/alvaro/IdeaProjects/imperative/imperative/input/x05
-    i: 860
-    nlines: 172 ;  pointsPart + module: 175
-    module: 3
-nlines: 175 ;  pointsPart + module: 175
-module: 3
-load ok 58 , localPoints: 175 ; empty point: 58
+nlines: 172 ;  pointsPart + module: 172
+module: 0
+load ok 58 , localPoints: 172 ; empty point: 58

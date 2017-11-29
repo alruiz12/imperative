@@ -149,7 +149,7 @@ public class KMeans {
                     instance.getCountDownLatch("assignsFinished").trySetCount(numNodes);
                     
                     // unlock partial barrier
-                    instance.getCountDownLatch("iterationFinished").trySetCount(0);
+                    instance.getCountDownLatch("iterationFinished").countDown();
                 }
 
             } else {

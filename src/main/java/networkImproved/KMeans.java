@@ -29,13 +29,12 @@ public class KMeans {
 
             // Initializes global data structures
             instance.getMap("glo1balCentroids ").put(i, new ArrayList<Integer>());
-            //instance.getMap("globalClusterSize").put(i, new ArrayList<Integer>());
-
-            instance.getCountDownLatch("assignsFinished").trySetCount(numNodes);
-
-            instance.getAtomicLong("iterationFinished").set(0L);
 
         }
+
+        instance.getCountDownLatch("assignsFinished").trySetCount(numNodes);
+
+        instance.getAtomicLong("iterationFinished").set(0L);
     }
 
     // The process to calculate the K Means, with iterating method.
@@ -88,7 +87,7 @@ public class KMeans {
             // ------------------------------------------- BARRIER END -------------------------------------------------
 
 
-            // Will be set to 1 when all processes are ready to move on to the next iteration
+            // Will be set to 0 when all processes are ready to move on to the next iteration
             instance.getCountDownLatch("iterationFinished").trySetCount(1);
 
 

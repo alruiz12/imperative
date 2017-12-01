@@ -145,3 +145,12 @@ INFO: [10.0.2.15]:5701 [kmeansName] [3.8.6] Committing/rolling-back alive transa
 ********** DELTA UPDATED: 0.0034762456546929316 ***************
 ********** DELTA UPDATED: 0.004634994206257242 ***************
 ********** DELTA UPDATED: 0.0 ***************
+Exception in thread "main" com.hazelcast.core.HazelcastInstanceNotActiveException: Hazelcast instance is not active!
+	at com.hazelcast.spi.AbstractDistributedObject.throwNotActiveException(AbstractDistributedObject.java:104)
+	at com.hazelcast.spi.AbstractDistributedObject.lifecycleCheck(AbstractDistributedObject.java:99)
+	at com.hazelcast.spi.AbstractDistributedObject.getNodeEngine(AbstractDistributedObject.java:93)
+	at com.hazelcast.spi.AbstractDistributedObject.invokeOnPartition(AbstractDistributedObject.java:71)
+	at com.hazelcast.concurrent.atomiclong.AtomicLongProxy.getAsync(AtomicLongProxy.java:171)
+	at com.hazelcast.concurrent.atomiclong.AtomicLongProxy.get(AtomicLongProxy.java:164)
+	at networkImproved.KMeans.run(KMeans.java:260)
+	at main3.main(main3.java:25)
